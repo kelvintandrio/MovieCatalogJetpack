@@ -1,5 +1,9 @@
 package com.algovin373.project.moviecatalog.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Movie(
     val image: Int,
     val title: String,
@@ -8,4 +12,4 @@ data class Movie(
     val overview: String,
     val director: String,
     val screenplay: String
-)
+) : Parcelable

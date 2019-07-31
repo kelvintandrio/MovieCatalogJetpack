@@ -6,9 +6,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.model.Movie
+import com.algovin373.project.moviecatalog.ui.activity.DetailMovieActivity
+import com.algovin373.project.moviecatalog.util.DATA_MOVIE_CATALOG
 import com.algovin373.project.moviecatalog.viewholder.MovieCatalogViewHolder
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_movie_catalog.view.*
+import org.jetbrains.anko.startActivity
 
 class MovieAdapter(private val dataMovie: ArrayList<Movie>, private val fragmentActivity: FragmentActivity?) :
     RecyclerView.Adapter<MovieCatalogViewHolder>() {
@@ -20,6 +23,10 @@ class MovieAdapter(private val dataMovie: ArrayList<Movie>, private val fragment
         Glide.with(fragmentActivity!!).load(dataMovie[position].image).into(holder.itemView.image_movie_catalog)
         holder.itemView.title_movie_catalog.text = dataMovie[position].title
         holder.itemView.date_movie_catalog.text = dataMovie[position].date_release
+
+        holder.itemView.setOnClickListener {
+            fragmentActivity.startActivity<DetailMovieActivity>(DATA_MOVIE_CATALOG to dataMovie[position])
+        }
     }
 
     override fun getItemCount(): Int = dataMovie.size
