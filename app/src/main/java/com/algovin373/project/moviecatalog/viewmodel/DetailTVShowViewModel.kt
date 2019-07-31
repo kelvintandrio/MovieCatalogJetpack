@@ -4,17 +4,17 @@ import androidx.lifecycle.ViewModel
 import com.algovin373.project.moviecatalog.model.TVShow
 
 class DetailTVShowViewModel : ViewModel() {
-    private lateinit var dataMovie : TVShow
+    private lateinit var dataTVShow : TVShow
 
-    fun setDataMovie(data: TVShow) {
-        this.dataMovie = data
+    fun setDataTVShow(data: TVShow) {
+        this.dataTVShow = data
     }
 
-    fun getImage() : Int = dataMovie.image
-    fun getTitle() : String = dataMovie.title
-    fun getDateRelease() : String = dataMovie.date_release
-    fun getYear() : Int = dataMovie.year_release
-    fun getOverview() : String = dataMovie.overview
-    fun getDirector() : String = dataMovie.director
-    fun getScreenplay() : String = dataMovie.screenplay
+    fun getImage() : Int = dataTVShow.image
+    fun getTitle() : String = dataTVShow.title
+    fun getDateRelease() : String = dataTVShow.date_release
+    fun getYear() : Int = dataTVShow.year_release
+    fun getOverview() : String = dataTVShow.overview
+    fun getDirector() : String = dataTVShow.director
+    fun getScreenplay() : String = dataTVShow.screenplay
 }

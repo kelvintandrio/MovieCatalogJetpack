@@ -18,7 +18,7 @@ class DetailTVShowActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        detailMovieViewModel.setDataMovie(intent.getParcelableExtra(DATA_MOVIE_CATALOG))
+        detailMovieViewModel.setDataTVShow(intent.getParcelableExtra(DATA_MOVIE_CATALOG))
 
         Glide.with(this).load(detailMovieViewModel.getImage()).into(image_poster_catalog_movie)
         Glide.with(this).load(detailMovieViewModel.getImage()).into(image_movie_catalog)
