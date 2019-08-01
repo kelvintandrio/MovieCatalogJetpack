@@ -14,24 +14,25 @@ import org.junit.Test
 
 /*
 Scenario Instrumentation Testing :
-1. Testing to can display data Movie in RecyclerView ( complete )
-2. Testing to check that the Data Movie is 10 in RecyclerView ( complete )
+1. Testing to can display data TVShow in RecyclerView ( complete )
+2. Testing to check that the Data TVShow is 10 in RecyclerView ( complete )
  */
 
-class MovieFragmentTest {
-    @Rule @JvmField
-    var fragmentMovieRule: ActivityTestRule<AlternativeFragmentActivity> = ActivityTestRule(AlternativeFragmentActivity::class.java)
+class TVShowFragmentTest {
+    @Rule
+    @JvmField
+    var fragmentTVShowRule: ActivityTestRule<AlternativeFragmentActivity> = ActivityTestRule(AlternativeFragmentActivity::class.java)
 
-    private val movieFragment = MovieFragment()
+    private val tvShowFragment = TVShowFragment()
 
     @Before
     fun setUp() {
-        fragmentMovieRule.activity.setFragment(movieFragment)
+        fragmentTVShowRule.activity.setFragment(tvShowFragment)
     }
 
     @Test
     fun loadCourses() {
-        onView(withId(R.id.rv_movie)).check(matches(isDisplayed())) // Point No. 1
-        onView(withId(R.id.rv_movie)).check(RVItemCountAssertion(10)) // Point No. 2
+        onView(withId(R.id.rv_tvshow)).check(matches(isDisplayed())) // Point No. 1
+        onView(withId(R.id.rv_tvshow)).check(RVItemCountAssertion(10)) // Point No. 2
     }
 }

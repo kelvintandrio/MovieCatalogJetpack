@@ -6,7 +6,7 @@ import com.algovin373.project.moviecatalog.model.TVShow
 
 const val DATA_MOVIE_CATALOG = "MOVIE_CATALOG"
 
-fun dataVideo(): ArrayList<Movie> {
+fun dataMovie(): ArrayList<Movie> {
     val arrayDataVideo = ArrayList<Movie>()
     // 1
     arrayDataVideo.add(
