@@ -1,10 +1,9 @@
 package com.algovin373.project.moviecatalog.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.algovin373.project.moviecatalog.model.Movie
 
 class DetailMovieViewModel : ViewModel() {
-    private lateinit var dataMovie : Movie
+    /*private lateinit var dataMovie : Movie
 
     fun setDataMovie(data: Movie) {
         this.dataMovie = data
@@ -16,5 +15,5 @@ class DetailMovieViewModel : ViewModel() {
     fun getYear() : Int = dataMovie.year_release
     fun getOverview() : String = dataMovie.overview
     fun getDirector() : String = dataMovie.director
-    fun getScreenplay() : String = dataMovie.screenplay
+    fun getScreenplay() : String = dataMovie.screenplay*/
 }

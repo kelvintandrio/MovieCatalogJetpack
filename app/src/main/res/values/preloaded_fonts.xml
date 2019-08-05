@@ -2,6 +2,8 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/averia_libre</item>
+        <item>@font/cherry_swash_bold</item>
         <item>@font/delius</item>
+        <item>@font/hind_madurai_medium</item>
     </array>
 </resources>

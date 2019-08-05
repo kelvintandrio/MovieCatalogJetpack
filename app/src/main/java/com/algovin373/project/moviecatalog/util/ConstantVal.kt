@@ -1,12 +1,8 @@
 package com.algovin373.project.moviecatalog.util
 
-import com.algovin373.project.moviecatalog.R
-import com.algovin373.project.moviecatalog.model.Movie
-import com.algovin373.project.moviecatalog.model.TVShow
-
 const val DATA_MOVIE_CATALOG = "MOVIE_CATALOG"
 
-fun dataMovie(): ArrayList<Movie> {
+/*fun dataMovie(): ArrayList<Movie> {
     val arrayDataVideo = ArrayList<Movie>()
     // 1
     arrayDataVideo.add(
@@ -109,9 +105,9 @@ fun dataMovie(): ArrayList<Movie> {
     )
 
     return arrayDataVideo
-}
+}*/
 
-fun dataTVShow(): ArrayList<TVShow> {
+/*fun dataTVShow(): ArrayList<TVShow> {
     val arrayDataTVShow = ArrayList<TVShow>()
     // 1
     arrayDataTVShow.add(
@@ -216,4 +212,4 @@ fun dataTVShow(): ArrayList<TVShow> {
 
 
     return arrayDataTVShow
-}
+}*/

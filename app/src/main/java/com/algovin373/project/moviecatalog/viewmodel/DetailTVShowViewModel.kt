@@ -1,10 +1,9 @@
 package com.algovin373.project.moviecatalog.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.algovin373.project.moviecatalog.model.TVShow
 
 class DetailTVShowViewModel : ViewModel() {
-    private lateinit var dataTVShow : TVShow
+    /*private lateinit var dataTVShow : TVShow
 
     fun setDataTVShow(data: TVShow) {
         this.dataTVShow = data
@@ -16,5 +15,5 @@ class DetailTVShowViewModel : ViewModel() {
     fun getYear() : Int = dataTVShow.year_release
     fun getOverview() : String = dataTVShow.overview
     fun getDirector() : String = dataTVShow.director
-    fun getScreenplay() : String = dataTVShow.screenplay
+    fun getScreenplay() : String = dataTVShow.screenplay*/
 }

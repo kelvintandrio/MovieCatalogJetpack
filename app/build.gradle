@@ -7,6 +7,9 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
+        buildConfigField "String", "URL_MOVIE_CATALOG", "\"https://api.themoviedb.org\""
+        buildConfigField "String", "API_KEY", "\"19978af3bb16e019522fd5077f3018f2\""
+        buildConfigField "String", "URL_IMAGE", "\"https://image.tmdb.org/t/p/w185\""
         applicationId "com.algovin373.project.moviecatalog"
         minSdkVersion 24
         targetSdkVersion 28
@@ -55,9 +58,15 @@ dependencies {
     // RxJava + RxAndroid
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
+    implementation 'com.jakewharton.rxbinding:rxbinding:0.3.0'
 
     // Scalable Density Pixel
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+    // Retrofit and GSON
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
     // Testing Rules for Instrumental Testing
     androidTestImplementation "androidx.test.ext:junit:1.1.1"
