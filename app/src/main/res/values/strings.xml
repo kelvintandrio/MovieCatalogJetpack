@@ -20,4 +20,12 @@
     <string name="movie_top_related">TOP RELATED</string>
     <string name="movie_upcoming">UPCOMING</string>
     <string name="now_playing">Now Playing</string>
+    <string name="runtime">Runtime :</string>
+    <string name="vote_averange">Vote Averange :</string>
+    <string name="vote_count">Vote Count :</string>
+    <string name="status">Status :</string>
+    <string name="keywords">Keywords :</string>
+    <string name="cast">Cast :</string>
+    <string name="similar_movie">Similar Movie :</string>
+    <string name="recommendation">Recommendation :</string>
 </resources>

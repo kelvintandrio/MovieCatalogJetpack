@@ -2,6 +2,4 @@ package com.algovin373.project.moviecatalog.viewmodel
 
 import androidx.lifecycle.ViewModel
 
-class TVShowViewModel : ViewModel() {
-
-}
+class TVShowViewModel : ViewModel()

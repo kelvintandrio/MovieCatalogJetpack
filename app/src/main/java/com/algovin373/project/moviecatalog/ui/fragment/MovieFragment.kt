@@ -13,6 +13,7 @@ import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.MovieAdapter
 import com.algovin373.project.moviecatalog.injection.MovieCatalogInjector
 import com.algovin373.project.moviecatalog.model.DataMovie
+import com.algovin373.project.moviecatalog.util.dataMovieNowPlaying
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_movie.*
 
@@ -30,6 +31,8 @@ class MovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.i("SAMPELMOVIE", dataMovieNowPlaying().toString())
 
         movieViewModel.getDataMovieNowPlaying().observe(this, Observer {
             progress_content_movie_now_playing.visibility = statusGone
@@ -56,11 +59,10 @@ class MovieFragment : Fragment() {
     }
 
     private fun setMovie(type: String) {
-        movieViewModel.getDataMovie(type).observe(this, Observer {
-            progress_content_movie.visibility = statusVisible
-            setRecyclerViewMovie(rv_movie, 1, it)
+        /*movieViewModel.getDataMovie(type).observe(this, Observer {
             progress_content_movie.visibility = statusGone
-        })
+            setRecyclerViewMovie(rv_movie, 1, it)
+        })*/
     }
 
     private fun setRecyclerViewMovie(recyclerMovie: RecyclerView, type: Int, list: List<DataMovie>) {

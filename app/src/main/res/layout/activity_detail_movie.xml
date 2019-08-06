@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -101,7 +101,7 @@
 
                 <TextView
                         android:layout_marginTop="@dimen/_4sdp"
-                        android:text="@string/year"
+                        android:text="@string/runtime"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:textColor="@android:color/black"
@@ -110,7 +110,7 @@
 
                 <TextView
                         android:id="@+id/year_release_catalog_movie"
-                        android:text="@string/year"
+                        android:text="@string/runtime"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:layout_width="match_parent"
@@ -119,7 +119,7 @@
 
                 <TextView
                         android:layout_marginTop="@dimen/_4sdp"
-                        android:text="@string/director"
+                        android:text="@string/vote_averange"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:textColor="@android:color/black"
@@ -128,7 +128,7 @@
 
                 <TextView
                         android:id="@+id/director_catalog_movie"
-                        android:text="@string/director"
+                        android:text="@string/vote_averange"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:layout_width="match_parent"
@@ -137,7 +137,7 @@
 
                 <TextView
                         android:layout_marginTop="@dimen/_4sdp"
-                        android:text="@string/screenplay"
+                        android:text="@string/vote_count"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:textColor="@android:color/black"
@@ -146,7 +146,25 @@
 
                 <TextView
                         android:id="@+id/screenplay_catalog_movie"
-                        android:text="@string/screenplay"
+                        android:text="@string/vote_count"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/delius"/>
+
+                <TextView
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:text="@string/keywords"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:id="@+id/keyword_catalog_movie"
+                        android:text="@string/keywords"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:layout_width="match_parent"
@@ -163,6 +181,23 @@
                 android:layout_marginRight="@dimen/_4sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+            <TextView
+                    android:text="@string/status"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/status_catalog_movie"
+                    android:text="@string/status"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/delius"/>
 
             <TextView
                     android:text="@string/overview"
@@ -183,6 +218,61 @@
 
         </LinearLayout>
 
+        <TextView
+                android:text="@string/cast"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_cast_movie"
+                android:background="@drawable/bg_border"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+                android:text="@string/similar_movie"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_similar_movie"
+                android:background="@drawable/bg_border"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+                android:text="@string/recommendation"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recommendation_movie"
+                android:background="@drawable/bg_border"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_16sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

@@ -17,8 +17,4 @@ class TVShowFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_tvshow, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
 }

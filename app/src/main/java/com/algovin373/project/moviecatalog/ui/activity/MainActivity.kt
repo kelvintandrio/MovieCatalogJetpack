@@ -1,6 +1,7 @@
 package com.algovin373.project.moviecatalog.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.MainPageAdapter
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val start = System.currentTimeMillis()
+
         val mainPageAdapter = MainPageAdapter(supportFragmentManager)
         mainPageAdapter.addPageMenu(movie, tvShow)
         main_viewpager.adapter = mainPageAdapter
@@ -24,5 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         tab_layout_main.getTabAt(0)?.setText(R.string.movie)
         tab_layout_main.getTabAt(1)?.setText(R.string.tvshow)
+
+        val finish = System.currentTimeMillis()
+        Log.i("RUNNINGTIME", (finish-start).toString())
     }
 }
