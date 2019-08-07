@@ -10,11 +10,11 @@ class DetailTVShowViewModel : ViewModel() {
         this.dataTVShow = data
     }
 
-    fun getImage() : Int = dataTVShow.image
+    /*fun getImage() : Int = dataTVShow.image
     fun getTitle() : String = dataTVShow.title
     fun getDateRelease() : String = dataTVShow.date_release
     fun getYear() : Int = dataTVShow.year_release
     fun getOverview() : String = dataTVShow.overview
     fun getDirector() : String = dataTVShow.director
-    fun getScreenplay() : String = dataTVShow.screenplay
+    fun getScreenplay() : String = dataTVShow.screenplay*/
 }

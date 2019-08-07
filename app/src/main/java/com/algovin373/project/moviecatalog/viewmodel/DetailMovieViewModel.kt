@@ -10,11 +10,11 @@ class DetailMovieViewModel : ViewModel() {
         this.dataMovie = data
     }
 
-    fun getImage() : Int = dataMovie.image
+    /*fun getImage() : Int = dataMovie.image
     fun getTitle() : String = dataMovie.title
     fun getDateRelease() : String = dataMovie.date_release
     fun getYear() : Int = dataMovie.year_release
     fun getOverview() : String = dataMovie.overview
     fun getDirector() : String = dataMovie.director
-    fun getScreenplay() : String = dataMovie.screenplay
+    fun getScreenplay() : String = dataMovie.screenplay*/
 }

@@ -14,4 +14,10 @@
     <string name="screenplay">Screenplay :</string>
     <string name="creator">Creator :</string>
     <string name="overview">Overview :</string>
+
+    <string name="movie_now_playing">NOW PLAYING</string>
+    <string name="movie_popular">POPULAR</string>
+    <string name="movie_top_related">TOP RELATED</string>
+    <string name="movie_upcoming">UPCOMING</string>
+    <string name="now_playing">Now Playing</string>
 </resources>
