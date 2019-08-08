@@ -1,23 +1,52 @@
 package com.algovin373.project.moviecatalog.viewmodel
 
+import com.algovin373.project.moviecatalog.retrofit.MyRetrofit
+import com.algovin373.project.moviecatalog.retrofit.movie.RestApiMovie
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
+import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
+import java.net.HttpURLConnection
 
 class MovieViewModelTest {
-    private lateinit var movieViewMode: MovieViewModel
+    private lateinit var movieViewModel: MovieViewModel
+    private lateinit var apiServiceMovie: RestApiMovie
+//    private var movieRepository: MovieRepository = mock(MovieRepository::class.java)
+    private var mockWebServer = MockWebServer()
 
     @Before
     fun setUp() {
-        movieViewMode = MovieViewModel()
+        movieViewModel = MovieViewModel()
+        mockWebServer.start()
+        apiServiceMovie = MyRetrofit.iniRetrofitMovie()
+    }
+
+    @After
+    fun tearDown() {
+        mockWebServer.shutdown()
     }
 
     @Test
     fun getDataMovie() {
-        val dataMovie = movieViewMode.getDataMovie()
-        assertNotNull(dataMovie) /* To check condition null data Movie */
-        assertEquals(10, dataMovie.size) /* To check that data Movie is 10 data */
-        assertEquals("A Star is Born", dataMovie[0].title) /* To check that the title "A Star is Born" in index 0 */
+
+        // Assign
+        val response = MockResponse().setResponseCode(HttpURLConnection.HTTP_OK)
+        mockWebServer.enqueue(response)
+
+        // Act
+        val data = apiServiceMovie.getDataMovieNowPlaying()
+
+        // Assert
+        data.map { it.dataMovie?.get(1)?.titleMovie }
+            .subscribe(
+                {
+                    assertEquals("The Lion King", it)
+                },
+                {
+
+                }
+            )
     }
 }

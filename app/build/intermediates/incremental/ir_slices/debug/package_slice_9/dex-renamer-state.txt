@@ -1,0 +1,4 @@
+#Thu Aug 08 00:45:04 WIB 2019
+base.0=/Users/mbp/Kelvin/ProjectKU/Android/Jetpack Dicoding/MovieCatalog02/app/build/intermediates/transforms/dexMerger/debug/9
+path.0=classes.dex
+renamed.0=classes.dex
