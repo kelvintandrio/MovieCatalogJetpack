@@ -1,7 +1,6 @@
 package com.algovin373.project.moviecatalog.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +12,23 @@ import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.MovieAdapter
 import com.algovin373.project.moviecatalog.injection.MovieCatalogInjector
 import com.algovin373.project.moviecatalog.model.DataMovie
+import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
+import com.algovin373.project.moviecatalog.ui.activity.DetailMovieActivity
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_movie.*
+import org.jetbrains.anko.startActivity
 
 class MovieFragment : Fragment() {
     private val statusGone = View.GONE
 
     private val movieViewModel by lazy {
         MovieCatalogInjector.movieViewModel(this)
+    }
+
+    private val catalogClickListener = object : CatalogClickListener {
+        override fun itemCatalogClick(id: Int?) {
+            requireContext().startActivity<DetailMovieActivity>("ID" to id)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,6 +42,7 @@ class MovieFragment : Fragment() {
             progress_content_movie_now_playing.visibility = statusGone
             setRecyclerViewMovie(rv_movie_now_playing, 2, it)
         })
+
         setMovie(getString(R.string.now_playing).toLowerCase())
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_now_playing))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_popular))
@@ -47,7 +56,6 @@ class MovieFragment : Fragment() {
             override fun onTabReselected(p0: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                Log.i("TABLAYOUT", "You choose ${tab?.text}")
                 setMovie(tab?.text.toString().toLowerCase())
             }
         })
@@ -66,7 +74,7 @@ class MovieFragment : Fragment() {
             2 -> recyclerMovie.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
         recyclerMovie.setHasFixedSize(true)
-        recyclerMovie.adapter = MovieAdapter(list, requireActivity(), type)
+        recyclerMovie.adapter = MovieAdapter(list, requireActivity(), type, catalogClickListener)
         recyclerMovie.adapter?.notifyDataSetChanged()
     }
 }

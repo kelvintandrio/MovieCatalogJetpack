@@ -19,7 +19,6 @@
 
             <ImageView
                     android:id="@+id/image_poster_catalog_movie"
-                    android:src="@drawable/movie_poster_a_start_is_born"
                     android:background="@android:color/black"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -49,7 +48,6 @@
 
             <ImageView
                     android:id="@+id/image_movie_catalog"
-                    android:src="@drawable/movie_poster_a_start_is_born"
                     android:layout_marginTop="@dimen/_4sdp"
                     android:layout_marginBottom="@dimen/_4sdp"
                     android:layout_width="@dimen/_150sdp"
@@ -99,9 +97,109 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/delius"/>
 
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="@string/status"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/black"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="wrap_content"/>
+
+                    <TextView
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="@string/runtime"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:id="@+id/status_release_catalog_movie"
+                            android:text="@string/status"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/delius"/>
+
+                    <TextView
+                            android:id="@+id/runtime_release_catalog_movie"
+                            android:text="@string/runtime"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/delius"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="@string/vote_average"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/black"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="wrap_content"/>
+
+                    <TextView
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:text="@string/vote_count"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:id="@+id/vote_average_release_catalog_movie"
+                            android:text="@string/vote_average"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/delius"/>
+
+                    <TextView
+                            android:id="@+id/vote_count_release_catalog_movie"
+                            android:text="@string/vote_count"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/delius"/>
+
+                </LinearLayout>
+
                 <TextView
                         android:layout_marginTop="@dimen/_4sdp"
-                        android:text="@string/year"
+                        android:text="@string/keywords"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:textColor="@android:color/black"
@@ -109,44 +207,8 @@
                         android:layout_height="wrap_content"/>
 
                 <TextView
-                        android:id="@+id/year_release_catalog_movie"
-                        android:text="@string/year"
-                        android:textStyle="bold"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/delius"/>
-
-                <TextView
-                        android:layout_marginTop="@dimen/_4sdp"
-                        android:text="@string/director"
-                        android:textStyle="bold"
-                        android:textSize="12sp"
-                        android:textColor="@android:color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                <TextView
-                        android:id="@+id/director_catalog_movie"
-                        android:text="@string/director"
-                        android:textStyle="bold"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/delius"/>
-
-                <TextView
-                        android:layout_marginTop="@dimen/_4sdp"
-                        android:text="@string/screenplay"
-                        android:textStyle="bold"
-                        android:textSize="12sp"
-                        android:textColor="@android:color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                <TextView
-                        android:id="@+id/screenplay_catalog_movie"
-                        android:text="@string/screenplay"
+                        android:id="@+id/keyword_catalog_movie"
+                        android:text="@string/keywords"
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:layout_width="match_parent"
@@ -182,6 +244,13 @@
                     android:fontFamily="@font/delius"/>
 
         </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

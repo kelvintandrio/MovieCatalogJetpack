@@ -1,20 +1,16 @@
 package com.algovin373.project.moviecatalog.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.algovin373.project.moviecatalog.model.Movie
+import com.algovin373.project.moviecatalog.model.DetailMovie
+import com.algovin373.project.moviecatalog.model.Keyword
+import com.algovin373.project.moviecatalog.repository.MovieRepository
+import io.reactivex.disposables.CompositeDisposable
 
 class DetailMovieViewModel : ViewModel() {
-    private lateinit var dataMovie : Movie
+    private val compositeDisposable = CompositeDisposable()
+    private val movieRepository = MovieRepository()
 
-    fun setDataMovie(data: Movie) {
-        this.dataMovie = data
-    }
-
-    /*fun getImage() : Int = dataMovie.image
-    fun getTitle() : String = dataMovie.title
-    fun getDateRelease() : String = dataMovie.date_release
-    fun getYear() : Int = dataMovie.year_release
-    fun getOverview() : String = dataMovie.overview
-    fun getDirector() : String = dataMovie.director
-    fun getScreenplay() : String = dataMovie.screenplay*/
+    fun setDetailMovie(id: Int?) : LiveData<DetailMovie> = movieRepository.getDetailMovie(id, compositeDisposable)
+    fun setKeywordMovie(id: Int?) : LiveData<ArrayList<Keyword>> = movieRepository.getKeywordMovie(id, compositeDisposable)
 }

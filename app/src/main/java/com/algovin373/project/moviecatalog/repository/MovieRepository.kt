@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.algovin373.project.moviecatalog.model.DataMovie
+import com.algovin373.project.moviecatalog.model.DetailMovie
+import com.algovin373.project.moviecatalog.model.Keyword
 import com.algovin373.project.moviecatalog.model.Movie
 import com.algovin373.project.moviecatalog.retrofit.MyRetrofit
 import io.reactivex.Observable
@@ -55,5 +57,43 @@ class MovieRepository : MovieInter {
                 }
             ))
         return myDataMovie
+    }
+
+    override fun getDetailMovie(idMovie: Int?, disposable: CompositeDisposable): LiveData<DetailMovie> {
+        val myDetailMovie: MutableLiveData<DetailMovie> = MutableLiveData()
+
+        disposable.add(apiService.getDetailMovie(idMovie.toString())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    myDetailMovie.postValue(it)
+                },
+                {
+                    Log.e("ERRORGETDATA", it.message)
+                }
+            ))
+
+        return myDetailMovie
+    }
+
+    override fun getKeywordMovie(idMovie: Int?, disposable: CompositeDisposable): LiveData<ArrayList<Keyword>> {
+        val myKeywordMovie: MutableLiveData<ArrayList<Keyword>> = MutableLiveData()
+
+        disposable.add(apiService.getKeywordMovie(idMovie.toString())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { it.keywordMovie }
+            .subscribe(
+                {
+                    myKeywordMovie.postValue(it)
+                },
+                {
+                    Log.e("ERRORGETDATA", it.message)
+                }
+            )
+        )
+
+        return myKeywordMovie
     }
 }

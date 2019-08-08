@@ -14,4 +14,5 @@ public final class BuildConfig {
   public static final String API_KEY = "19978af3bb16e019522fd5077f3018f2";
   public static final String URL_IMAGE = "https://image.tmdb.org/t/p/w185";
   public static final String URL_MOVIE_CATALOG = "https://api.themoviedb.org";
+  public static final String URL_POSTER = "https://image.tmdb.org/t/p/w780";
 }

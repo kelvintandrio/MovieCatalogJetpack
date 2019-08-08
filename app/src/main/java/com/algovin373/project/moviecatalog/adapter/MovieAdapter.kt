@@ -7,13 +7,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.BuildConfig
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.model.DataMovie
+import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.viewholder.MovieCatalogViewHolder
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_detail_movie.view.*
 import kotlinx.android.synthetic.main.item_movie_catalog.view.*
+import kotlinx.android.synthetic.main.item_movie_catalog.view.image_movie_catalog
 import kotlinx.android.synthetic.main.item_movie_now_playing.view.*
 
-class MovieAdapter(private val dataMovie: List<DataMovie>, private val fragmentActivity: FragmentActivity?, private val type: Int)
-    : RecyclerView.Adapter<MovieCatalogViewHolder>() {
+class MovieAdapter(private val dataMovie: List<DataMovie>,
+                   private val fragmentActivity: FragmentActivity?,
+                   private val type: Int,
+                   private val catalogClickListener: CatalogClickListener) : RecyclerView.Adapter<MovieCatalogViewHolder>() {
 
     private var typeLayout = 0
 
@@ -42,6 +47,9 @@ class MovieAdapter(private val dataMovie: List<DataMovie>, private val fragmentA
                 }
                 holder.itemView.title_movie_now_playing.text = dataMovie[position].titleMovie
             }
+        }
+        holder.itemView.setOnClickListener {
+            catalogClickListener.itemCatalogClick(dataMovie[position].idMovie)
         }
     }
 

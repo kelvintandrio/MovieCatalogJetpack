@@ -10,6 +10,7 @@ android {
         buildConfigField "String", "URL_MOVIE_CATALOG", "\"https://api.themoviedb.org\""
         buildConfigField "String", "API_KEY", "\"19978af3bb16e019522fd5077f3018f2\""
         buildConfigField "String", "URL_IMAGE", "\"https://image.tmdb.org/t/p/w185\""
+        buildConfigField "String", "URL_POSTER", "\"https://image.tmdb.org/t/p/w780\""
         applicationId "com.algovin373.project.moviecatalog"
         minSdkVersion 24
         targetSdkVersion 28

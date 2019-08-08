@@ -1,9 +1,14 @@
 package com.algovin373.project.moviecatalog.retrofit.movie
 
+import androidx.lifecycle.Observer
 import com.algovin373.project.moviecatalog.BuildConfig
+import com.algovin373.project.moviecatalog.model.DetailMovie
+import com.algovin373.project.moviecatalog.model.Keyword
+import com.algovin373.project.moviecatalog.model.KeywordMovie
 import com.algovin373.project.moviecatalog.model.Movie
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface RestApiMovie {
 
@@ -18,4 +23,10 @@ interface RestApiMovie {
 
     @GET("/3/movie/upcoming?api_key=${BuildConfig.API_KEY}&language=en-US ")
     fun getDataMovieUpComing() : Observable<Movie>
+
+    @GET("/3/movie/{movie_id}?api_key=${BuildConfig.API_KEY}&language=en-US")
+    fun getDetailMovie(@Path("movie_id") id : String) : Observable<DetailMovie>
+
+    @GET("/3/movie/{movie_id}/keywords?api_key=${BuildConfig.API_KEY}")
+    fun getKeywordMovie(@Path("movie_id") id : String) : Observable<KeywordMovie>
 }
