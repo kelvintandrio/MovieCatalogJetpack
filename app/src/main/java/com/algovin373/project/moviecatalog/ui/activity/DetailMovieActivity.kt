@@ -36,8 +36,7 @@ class DetailMovieActivity : AppCompatActivity() {
         detailMovieViewModel.setKeywordMovie(id).observe(this, Observer {
             var keyword = ""
             for (i in 0 until it.size) {
-                keyword += if (i == it.size-1) "${it[i].keyword}"
-                           else "${it[i].keyword}, "
+                keyword += if (i == it.size-1) "${it[i].keyword}" else "${it[i].keyword}, "
             }
             keyword_catalog_movie.text = keyword
         })

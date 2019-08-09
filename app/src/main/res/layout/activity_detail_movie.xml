@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -197,24 +197,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                        android:layout_marginTop="@dimen/_4sdp"
-                        android:text="@string/keywords"
-                        android:textStyle="bold"
-                        android:textSize="12sp"
-                        android:textColor="@android:color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-                <TextView
-                        android:id="@+id/keyword_catalog_movie"
-                        android:text="@string/keywords"
-                        android:textStyle="bold"
-                        android:textSize="12sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/delius"/>
-
             </LinearLayout>
 
         </LinearLayout>
@@ -245,6 +227,28 @@
 
         </LinearLayout>
 
+        <TextView
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="@string/keywords"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/keyword_catalog_movie"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:text="@string/keywords"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/delius"/>
+
         <androidx.cardview.widget.CardView
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_width="match_parent"
@@ -254,4 +258,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
