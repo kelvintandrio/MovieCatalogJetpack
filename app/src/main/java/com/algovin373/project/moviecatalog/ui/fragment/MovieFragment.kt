@@ -15,12 +15,13 @@ import com.algovin373.project.moviecatalog.injection.MovieCatalogInjector
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.ui.activity.DetailMovieActivity
+import com.algovin373.project.moviecatalog.util.statusGone
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_movie.*
 import org.jetbrains.anko.startActivity
 
 class MovieFragment : Fragment() {
-    private val statusGone = View.GONE
+
     private val idlingResource = EspressoIdlingResource()
 
     private val movieViewModel by lazy {

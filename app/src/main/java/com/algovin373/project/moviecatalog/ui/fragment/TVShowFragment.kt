@@ -13,12 +13,11 @@ import com.algovin373.project.moviecatalog.adapter.BannerTVShowAdapter
 import com.algovin373.project.moviecatalog.adapter.TVShowAdapter
 import com.algovin373.project.moviecatalog.injection.MovieCatalogInjector
 import com.algovin373.project.moviecatalog.model.DataTVShow
+import com.algovin373.project.moviecatalog.util.statusGone
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_tvshow.*
 
 class TVShowFragment : Fragment() {
-    private val statusGone = View.GONE
-
     private val tvShowViewModel by lazy {
         MovieCatalogInjector.tvshowViewModel(this)
     }
