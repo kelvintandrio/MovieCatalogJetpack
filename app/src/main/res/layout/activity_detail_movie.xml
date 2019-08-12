@@ -43,6 +43,7 @@
 
         <LinearLayout
                 android:orientation="horizontal"
+                android:background="#E7E5E5"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_200sdp">
 
@@ -203,8 +204,7 @@
 
         <LinearLayout
                 android:orientation="vertical"
-                android:layout_marginLeft="@dimen/_4sdp"
-                android:layout_marginRight="@dimen/_4sdp"
+                android:background="#E7E5E5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -212,6 +212,8 @@
                     android:text="@string/overview"
                     android:textStyle="bold"
                     android:textSize="12sp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
                     android:textColor="@android:color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -221,38 +223,95 @@
                     android:text="@string/overview"
                     android:textStyle="bold"
                     android:textSize="12sp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/delius"/>
+
+            <TextView
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="@string/keywords"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:textColor="@android:color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/keyword_catalog_movie"
+                    android:text="@string/keywords"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/delius"/>
 
         </LinearLayout>
 
-        <TextView
-                android:layout_marginTop="@dimen/_4sdp"
-                android:text="@string/keywords"
-                android:layout_marginLeft="@dimen/_4sdp"
-                android:layout_marginRight="@dimen/_4sdp"
-                android:textStyle="bold"
-                android:textSize="12sp"
-                android:textColor="@android:color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        <TextView
-                android:id="@+id/keyword_catalog_movie"
-                android:layout_marginLeft="@dimen/_4sdp"
-                android:layout_marginRight="@dimen/_4sdp"
-                android:text="@string/keywords"
-                android:textStyle="bold"
-                android:textSize="12sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/delius"/>
-
         <androidx.cardview.widget.CardView
-                android:layout_marginTop="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:text="@string/cast"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_cast_movie"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                        android:text="@string/similar_movie"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_similar_movie"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                        android:text="@string/recommendation_movie"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_recommendation_movie"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 

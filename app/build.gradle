@@ -35,6 +35,9 @@ android {
     androidExtensions {
         experimental = true
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -67,6 +70,12 @@ dependencies {
 
     // Scalable Density Pixel
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+    // Shape Image View
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
+
+    // Idle Resource
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
 
     // Testing Rules for Instrumental Testing
     androidTestImplementation "androidx.test.ext:junit:1.1.1"

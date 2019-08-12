@@ -8,12 +8,11 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.util.DATA_MOVIE_CATALOG
-import com.algovin373.project.moviecatalog.util.dataTVShow
 import org.junit.Rule
 import org.junit.Test
 
 class DetailTVShowActivityTest {
-    private val dummyDataTVShow = dataTVShow()[1]
+    /*private val dummyDataTVShow = dataTVShow()[1]
 
     @Rule
     @JvmField
@@ -55,5 +54,5 @@ class DetailTVShowActivityTest {
         // Screenplay
         onView(withId(R.id.screenplay_catalog_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.screenplay_catalog_movie)).check(matches(withText(dummyDataTVShow.screenplay)))
-    }
+    }*/
 }

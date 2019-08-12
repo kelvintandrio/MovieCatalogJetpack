@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.MovieAdapter
+import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.injection.MovieCatalogInjector
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
@@ -20,6 +21,7 @@ import org.jetbrains.anko.startActivity
 
 class MovieFragment : Fragment() {
     private val statusGone = View.GONE
+    private val idlingResource = EspressoIdlingResource()
 
     private val movieViewModel by lazy {
         MovieCatalogInjector.movieViewModel(this)

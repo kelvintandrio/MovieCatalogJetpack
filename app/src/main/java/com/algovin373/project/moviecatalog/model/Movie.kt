@@ -18,7 +18,10 @@ data class DataMovie(
     val posterMovie: String? = null,
 
     @field:SerializedName("release_date")
-    val releaseDateMovie: String? = null
+    val releaseDateMovie: String? = null,
+
+    @field:SerializedName("backdrop_path")
+    val backgroundDateMovie: String? = null
 )
 
 data class DetailMovie(

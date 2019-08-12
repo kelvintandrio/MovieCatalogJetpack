@@ -25,4 +25,7 @@
     <string name="vote_average">Vote Average :</string>
     <string name="vote_count">Vote Count :</string>
     <string name="keywords">Keywords :</string>
+    <string name="cast">Cast :</string>
+    <string name="similar_movie">Similar Movie :</string>
+    <string name="recommendation_movie">Recommendation Movie :</string>
 </resources>

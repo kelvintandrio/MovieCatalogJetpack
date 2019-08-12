@@ -1,9 +1,8 @@
 package com.algovin373.project.moviecatalog.retrofit.movie
 
-import androidx.lifecycle.Observer
 import com.algovin373.project.moviecatalog.BuildConfig
+import com.algovin373.project.moviecatalog.model.Cast
 import com.algovin373.project.moviecatalog.model.DetailMovie
-import com.algovin373.project.moviecatalog.model.Keyword
 import com.algovin373.project.moviecatalog.model.KeywordMovie
 import com.algovin373.project.moviecatalog.model.Movie
 import io.reactivex.Observable
@@ -29,4 +28,13 @@ interface RestApiMovie {
 
     @GET("/3/movie/{movie_id}/keywords?api_key=${BuildConfig.API_KEY}")
     fun getKeywordMovie(@Path("movie_id") id : String) : Observable<KeywordMovie>
+
+    @GET("/3/movie/{movie_id}/credits?api_key=${BuildConfig.API_KEY}")
+    fun getCastMovie(@Path("movie_id") id : String) : Observable<Cast>
+
+    @GET("/3/movie/{movie_id}/similar?api_key=${BuildConfig.API_KEY}&language=en-US")
+    fun getSimilarMovie(@Path("movie_id") id : String) : Observable<Movie>
+
+    @GET("/3/movie/{movie_id}/recommendations?api_key=${BuildConfig.API_KEY}&language=en-US")
+    fun getRecommendtionMovie(@Path("movie_id") id : String) : Observable<Movie>
 }

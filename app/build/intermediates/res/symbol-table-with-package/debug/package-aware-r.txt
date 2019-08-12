@@ -434,6 +434,19 @@ attr showDividers
 attr showMotionSpec
 attr showText
 attr showTitle
+attr siArrowPosition
+attr siBorderAlpha
+attr siBorderColor
+attr siBorderType
+attr siBorderWidth
+attr siForeground
+attr siRadius
+attr siShape
+attr siSquare
+attr siStrokeCap
+attr siStrokeJoin
+attr siStrokeMiter
+attr siTriangleHeight
 attr singleChoiceItemLayout
 attr singleLine
 attr singleSelection
@@ -1732,15 +1745,18 @@ id async
 id auto
 id barrier
 id beginning
+id bevel
 id blocking
 id bottom
 id btn_back_to_menu
+id butt
 id buttonPanel
 id cancel_action
 id center
 id center_horizontal
 id center_vertical
 id chains
+id character_cast
 id checkbox
 id chronometer
 id clip_horizontal
@@ -1755,6 +1771,7 @@ id coordinator
 id custom
 id customPanel
 id date_movie_catalog
+id date_release
 id date_release_catalog_movie
 id decor_content_parent
 id default_activity_button
@@ -1795,7 +1812,9 @@ id icon
 id icon_group
 id ifRoom
 id image
+id image_cast
 id image_movie_catalog
+id image_other_movie
 id image_poster_catalog_movie
 id info
 id invisible
@@ -1815,9 +1834,11 @@ id media_actions
 id message
 id middle
 id mini
+id miter
 id mtrl_child_content_container
 id mtrl_internal_children_alpha_tag
 id multiply
+id name_cast
 id navigation_header_container
 id never
 id none
@@ -1844,9 +1865,13 @@ id radio
 id right
 id right_icon
 id right_side
+id round
 id runtime_release_catalog_movie
+id rv_cast_movie
 id rv_movie
 id rv_movie_now_playing
+id rv_recommendation_movie
+id rv_similar_movie
 id rv_tvshow
 id save_image_matrix
 id save_non_transition_alpha
@@ -1882,6 +1907,7 @@ id spacer
 id split_action_bar
 id spread
 id spread_inside
+id square
 id src_atop
 id src_in
 id src_over
@@ -1890,6 +1916,7 @@ id start
 id status_bar_latest_event_content
 id status_release_catalog_movie
 id stretch
+id stroke
 id submenuarrow
 id submit_area
 id tabMode
@@ -2027,6 +2054,12 @@ layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 mipmap ic_launcher
 mipmap ic_launcher_round
+raw imgview_diamond
+raw imgview_heart
+raw imgview_hexagon
+raw imgview_octogon
+raw imgview_pentagon
+raw imgview_star
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -2069,6 +2102,7 @@ string abc_toolbar_collapse_description
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
+string cast
 string character_counter_content_description
 string character_counter_pattern
 string creator
@@ -2093,9 +2127,11 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string recommendation_movie
 string runtime
 string screenplay
 string search_menu_title
+string similar_movie
 string status
 string status_bar_notification_info_overflow
 string title
@@ -2667,6 +2703,7 @@ styleable RecyclerView android_orientation android_descendantFocusability fastSc
 styleable ScrimInsetsFrameLayout insetForeground
 styleable ScrollingViewBehavior_Layout behavior_overlapTop
 styleable SearchView android_focusable android_maxWidth android_inputType android_imeOptions closeIcon commitIcon defaultQueryHint goIcon iconifiedByDefault layout queryBackground queryHint searchHintIcon searchIcon submitBackground suggestionRowLayout voiceIcon
+styleable ShaderImageView siArrowPosition siBorderAlpha siBorderColor siBorderType siBorderWidth siForeground siRadius siShape siSquare siStrokeCap siStrokeJoin siStrokeMiter siTriangleHeight
 styleable Snackbar snackbarButtonStyle snackbarStyle
 styleable SnackbarLayout android_maxWidth elevation maxActionInlineWidth
 styleable Spinner android_entries android_popupBackground android_prompt android_dropDownWidth popupTheme

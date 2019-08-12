@@ -39,7 +39,6 @@ class MovieViewModelTest {
 
     @Test
     fun getDataMovie() {
-
         // Assign
         val response = MockResponse().setResponseCode(HttpURLConnection.HTTP_OK)
         mockWebServer.enqueue(response)
@@ -56,7 +55,7 @@ class MovieViewModelTest {
                     `when` (movieRepository.getMovieNowPlaying(compositeDisposable)).thenReturn(dummyDataMovieNowPlaying)
                     val observer = mock(Observer::class.java) as Observer<List<DataMovie>>
                     movieViewModel.getDataMovieNowPlaying().observeForever(observer)
-                    verify<Any>(movieRepository.getMovieNowPlaying(compositeDisposable))
+                    verify(movieRepository).getMovieNowPlaying(compositeDisposable)
                 },
                 { }
             )

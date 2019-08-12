@@ -3,16 +3,29 @@ package com.algovin373.project.moviecatalog.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.BuildConfig
 import com.algovin373.project.moviecatalog.R
+import com.algovin373.project.moviecatalog.adapter.CastAdapter
+import com.algovin373.project.moviecatalog.adapter.OtherAdapter
 import com.algovin373.project.moviecatalog.injection.MovieCatalogInjector
+import com.algovin373.project.moviecatalog.model.DataCast
+import com.algovin373.project.moviecatalog.model.DataMovie
+import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_detail_movie.*
+import org.jetbrains.anko.startActivity
 
 class DetailMovieActivity : AppCompatActivity() {
-
     private val detailMovieViewModel by lazy {
         MovieCatalogInjector.detailMovieViewModel(this)
+    }
+
+    private val catalogClickListener = object : CatalogClickListener {
+        override fun itemCatalogClick(id: Int?) {
+            startActivity<DetailMovieActivity>("ID" to id)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,5 +54,37 @@ class DetailMovieActivity : AppCompatActivity() {
             keyword_catalog_movie.text = keyword
         })
 
+        detailMovieViewModel.setCastMovie(id).observe(this, Observer {
+            setMovieRecyclerView(rv_cast_movie, 1, it, emptyList())
+        })
+
+        detailMovieViewModel.setSimilarMovie(id).observe(this, Observer {
+            setMovieRecyclerView(rv_similar_movie, 2, emptyList(), it)
+        })
+
+        detailMovieViewModel.setRecommendationMovie(id).observe(this, Observer {
+            setMovieRecyclerView(rv_recommendation_movie, 2, emptyList(), it)
+        })
+
+        btn_back_to_menu.setOnClickListener {
+            super.onBackPressed()
+        }
+    }
+
+    private fun setMovieRecyclerView(rv: RecyclerView, type: Int, listCast: List<DataCast>, listMovie: List<DataMovie>) {
+        rv.apply {
+            setHasFixedSize(true)
+            when(type) {
+                1 -> {
+                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    adapter = CastAdapter(listCast, context)
+                }
+                2 -> {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = OtherAdapter(listMovie, context, catalogClickListener)
+                }
+            }
+            adapter?.notifyDataSetChanged()
+        }
     }
 }
