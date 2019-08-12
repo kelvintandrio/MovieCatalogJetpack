@@ -200,6 +200,7 @@ attr counterMaxLength
 attr counterOverflowTextAppearance
 attr counterTextAppearance
 attr customNavigationLayout
+attr dampingRatio
 attr defaultQueryHint
 attr dialogCornerRadius
 attr dialogPreferredPadding
@@ -209,6 +210,13 @@ attr divider
 attr dividerHorizontal
 attr dividerPadding
 attr dividerVertical
+attr dotsColor
+attr dotsCornerRadius
+attr dotsSize
+attr dotsSpacing
+attr dotsStrokeColor
+attr dotsStrokeWidth
+attr dotsWidthFactor
 attr drawableSize
 attr drawerArrowStyle
 attr dropDownListViewStyle
@@ -412,6 +420,7 @@ attr preserveIconSpacing
 attr pressedTranslationZ
 attr progressBarPadding
 attr progressBarStyle
+attr progressMode
 attr queryBackground
 attr queryHint
 attr radioButtonStyle
@@ -429,6 +438,7 @@ attr searchViewStyle
 attr seekBarStyle
 attr selectableItemBackground
 attr selectableItemBackgroundBorderless
+attr selectedDotColor
 attr showAsAction
 attr showDividers
 attr showMotionSpec
@@ -466,6 +476,7 @@ attr state_liftable
 attr state_lifted
 attr statusBarBackground
 attr statusBarScrim
+attr stiffness
 attr strokeColor
 attr strokeWidth
 attr subMenuArrow
@@ -1683,6 +1694,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable dot_background
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_mtrl_chip_checked_black
@@ -1705,8 +1717,12 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable spring_dot_background
+drawable spring_dot_stroke_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable worm_dot_background
+drawable worm_dot_stroke_background
 font averia_libre
 font delius
 id ALT
@@ -1773,6 +1789,7 @@ id customPanel
 id date_movie_catalog
 id date_release
 id date_release_catalog_movie
+id date_tvshow_banner
 id decor_content_parent
 id default_activity_button
 id design_bottom_sheet
@@ -1783,6 +1800,7 @@ id design_navigation_view
 id dimensions
 id direct
 id disableHome
+id dot
 id edit_query
 id end
 id end_padder
@@ -1816,6 +1834,7 @@ id image_cast
 id image_movie_catalog
 id image_other_movie
 id image_poster_catalog_movie
+id image_tvshow_banner
 id info
 id invisible
 id italic
@@ -1860,6 +1879,7 @@ id poster_movie_now_playing
 id progress_circular
 id progress_content_movie
 id progress_content_movie_now_playing
+id progress_content_tvShow
 id progress_horizontal
 id radio
 id right
@@ -1872,7 +1892,7 @@ id rv_movie
 id rv_movie_now_playing
 id rv_recommendation_movie
 id rv_similar_movie
-id rv_tvshow
+id rv_tvShow
 id save_image_matrix
 id save_non_transition_alpha
 id save_scale_type
@@ -1907,6 +1927,7 @@ id spacer
 id split_action_bar
 id spread
 id spread_inside
+id spring_dot
 id square
 id src_atop
 id src_in
@@ -1922,6 +1943,7 @@ id submit_area
 id tabMode
 id tab_layout_main
 id tab_layout_movie
+id tab_layout_tvShow
 id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
@@ -1941,6 +1963,7 @@ id title_catalog_movie
 id title_movie_catalog
 id title_movie_now_playing
 id title_template
+id title_tvshow_banner
 id top
 id topPanel
 id touch_outside
@@ -1954,10 +1977,13 @@ id unlabeled
 id up
 id useLogo
 id view_offset_helper
+id viewpager_tvshow_banner
 id visible
 id vote_average_release_catalog_movie
 id vote_count_release_catalog_movie
 id withText
+id worm_dot
+id worm_dots_indicator_tvshow
 id wrap
 id wrap_content
 integer abc_config_activityDefaultDur
@@ -2023,13 +2049,16 @@ layout design_navigation_item_subheader
 layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
+layout dot_layout
 layout dp_example
 layout fragment_movie
 layout fragment_tvshow
 layout item_cast
 layout item_catalog_other
+layout item_movie_banner
 layout item_movie_catalog
-layout item_movie_now_playing
+layout item_tvshow_banner
+layout item_tvshow_catalog
 layout mtrl_layout_snackbar
 layout mtrl_layout_snackbar_include
 layout notification_action
@@ -2051,7 +2080,9 @@ layout sdp_example
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout spring_dot_layout
 layout support_simple_spinner_dropdown_item
+layout worm_dot_layout
 mipmap ic_launcher
 mipmap ic_launcher_round
 raw imgview_diamond
@@ -2099,6 +2130,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string airing_today
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
@@ -2135,6 +2167,10 @@ string similar_movie
 string status
 string status_bar_notification_info_overflow
 string title
+string tvShow_airing_today
+string tvShow_on_the_air
+string tvShow_popular
+string tvShow_top_related
 string tvshow
 string vote_average
 string vote_count
@@ -2676,6 +2712,7 @@ styleable ConstraintSet android_orientation android_id android_visibility androi
 styleable CoordinatorLayout keylines statusBarBackground
 styleable CoordinatorLayout_Layout android_layout_gravity layout_anchor layout_anchorGravity layout_behavior layout_dodgeInsetEdges layout_insetEdge layout_keyline
 styleable DesignTheme bottomSheetDialogTheme bottomSheetStyle
+styleable DotsIndicator dotsColor dotsCornerRadius dotsSize dotsSpacing dotsWidthFactor progressMode selectedDotColor
 styleable DrawerArrowToggle arrowHeadLength arrowShaftLength barLength color drawableSize gapBetweenBars spinBars thickness
 styleable FloatingActionButton backgroundTint backgroundTintMode borderWidth elevation fabCustomSize fabSize hideMotionSpec hoveredFocusedTranslationZ maxImageSize pressedTranslationZ rippleColor showMotionSpec useCompatPadding
 styleable FloatingActionButton_Behavior_Layout behavior_autoHide
@@ -2707,6 +2744,7 @@ styleable ShaderImageView siArrowPosition siBorderAlpha siBorderColor siBorderTy
 styleable Snackbar snackbarButtonStyle snackbarStyle
 styleable SnackbarLayout android_maxWidth elevation maxActionInlineWidth
 styleable Spinner android_entries android_popupBackground android_prompt android_dropDownWidth popupTheme
+styleable SpringDotsIndicator dampingRatio dotsColor dotsCornerRadius dotsSize dotsSpacing dotsStrokeColor dotsStrokeWidth stiffness
 styleable StateListDrawable android_dither android_visible android_variablePadding android_constantSize android_enterFadeDuration android_exitFadeDuration
 styleable StateListDrawableItem android_drawable
 styleable SwitchCompat android_textOn android_textOff android_thumb showText splitTrack switchMinWidth switchPadding switchTextAppearance thumbTextPadding thumbTint thumbTintMode track trackTint trackTintMode
@@ -2719,3 +2757,4 @@ styleable Toolbar android_gravity android_minHeight buttonGravity collapseConten
 styleable View android_theme android_focusable paddingEnd paddingStart theme
 styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 styleable ViewStubCompat android_id android_layout android_inflatedId
+styleable WormDotsIndicator dotsColor dotsCornerRadius dotsSize dotsSpacing dotsStrokeColor dotsStrokeWidth
