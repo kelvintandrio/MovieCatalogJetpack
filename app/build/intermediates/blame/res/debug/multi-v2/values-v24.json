@@ -4,7 +4,7 @@
             "outputFile": "/Users/mbp/Kelvin/ProjectKU/Android/Jetpack Dicoding/MovieCatalog02/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "/Users/mbp/.gradle/caches/transforms-2/files-2.1/eaa2cb84050c6fe60378269689261513/res/values-v24/values-v24.xml",
+                    "source": "/Users/mbp/.gradle/caches/transforms-2/files-2.1/94ef39d212ad852a81506473df0d0490/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/mbp/.gradle/caches/transforms-2/files-2.1/0be92ad0f645b56ebac4c0350ce691d0/res/values-v24/values-v24.xml",
+                    "source": "/Users/mbp/.gradle/caches/transforms-2/files-2.1/22aa9e09c8bfd393d0dfa91368fb4d29/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

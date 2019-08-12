@@ -22,6 +22,7 @@ object MyRetrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.URL_MOVIE_CATALOG)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
             .create(RestApiTVShow::class.java)
     }

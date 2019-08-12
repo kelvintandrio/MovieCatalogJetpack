@@ -74,6 +74,9 @@ dependencies {
     // Shape Image View
     implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
 
+    // Indicator
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3'
+
     // Idle Resource
     implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
 

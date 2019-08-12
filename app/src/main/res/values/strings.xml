@@ -28,4 +28,9 @@
     <string name="cast">Cast :</string>
     <string name="similar_movie">Similar Movie :</string>
     <string name="recommendation_movie">Recommendation Movie :</string>
+    <string name="airing_today">Airing Today</string>
+    <string name="tvShow_on_the_air">ON THE AIR</string>
+    <string name="tvShow_popular">POPULAR</string>
+    <string name="tvShow_top_related">TOP RELATED</string>
+    <string name="tvShow_airing_today">AIRING TODAY</string>
 </resources>

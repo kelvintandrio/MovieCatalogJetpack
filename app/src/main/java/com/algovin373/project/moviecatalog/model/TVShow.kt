@@ -1,15 +1,14 @@
 package com.algovin373.project.moviecatalog.model
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
 
-@Parcelize
 data class TVShow(
-    val image: Int,
-    val title: String,
-    val date_release: String,
-    val year_release: Int,
-    val overview: String,
-    val director: String,
-    val screenplay: String
-) : Parcelable
+    @field:SerializedName("results") val dataTVShow: ArrayList<DataTVShow>? = null
+)
+
+data class DataTVShow(
+    @field:SerializedName("backdrop_path") val backgroundTVShow: String? = null,
+    @field:SerializedName("name") val titleTVShow: String? = null,
+    @field:SerializedName("first_air_date") val firstDateTVShow: String? = null,
+    @field:SerializedName("id") val idTVShow: String? = null
+)
