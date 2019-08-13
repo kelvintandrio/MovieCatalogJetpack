@@ -21,9 +21,6 @@ import kotlinx.android.synthetic.main.fragment_movie.*
 import org.jetbrains.anko.startActivity
 
 class MovieFragment : Fragment() {
-
-    private val idlingResource = EspressoIdlingResource()
-
     private val movieViewModel by lazy {
         MovieCatalogInjector.movieViewModel(this)
     }
