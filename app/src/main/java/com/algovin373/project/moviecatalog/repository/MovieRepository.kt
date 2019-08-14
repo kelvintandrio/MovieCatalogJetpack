@@ -23,6 +23,7 @@ class MovieRepository : MovieInter {
     private val idlingResource = EspressoIdlingResource()
     private val compositeDisposable = CompositeDisposable()
 
+
     private val statusResponse = object : StatusResponse {
         override fun onSuccess() {
             Log.i(TAG_SUCCESS, "Sukses Response")

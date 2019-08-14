@@ -9,9 +9,8 @@ import com.algovin373.project.moviecatalog.repository.MovieRepository
 import com.algovin373.project.moviecatalog.repository.StatusResponse
 import io.reactivex.disposables.CompositeDisposable
 
-class MovieViewModel : ViewModel() {
-    private val movieRepository = MovieRepository()
-    private val compositeDisposable = CompositeDisposable()
+class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
+    val compositeDisposable = CompositeDisposable()
     val statusResponseLiveData = MutableLiveData<String>()
 
     fun getDataMovieNowPlaying() : LiveData<List<DataMovie>> {

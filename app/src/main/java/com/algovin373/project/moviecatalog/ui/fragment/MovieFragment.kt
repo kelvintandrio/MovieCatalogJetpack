@@ -6,23 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.MovieAdapter
-import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
-import com.algovin373.project.moviecatalog.injection.MovieCatalogInjector
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
+import com.algovin373.project.moviecatalog.repository.MovieRepository
 import com.algovin373.project.moviecatalog.ui.activity.DetailMovieActivity
 import com.algovin373.project.moviecatalog.util.statusGone
+import com.algovin373.project.moviecatalog.viewmodel.MovieViewModel
+import com.algovin373.project.moviecatalog.viewmodelfactory.MovieViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_movie.*
 import org.jetbrains.anko.startActivity
 
 class MovieFragment : Fragment() {
     private val movieViewModel by lazy {
-        MovieCatalogInjector.movieViewModel(this)
+        ViewModelProviders.of(this, MovieViewModelFactory(movieRepository = MovieRepository()))
+            .get(MovieViewModel::class.java)
     }
 
     private val catalogClickListener = object : CatalogClickListener {
