@@ -65,3 +65,15 @@ data class Keyword(
     @field:SerializedName("name")
     val keyword: String? = null
 )
+
+data class SampelDataMovie(
+    val idMovie: Int,
+
+    val titleMovie: String,
+
+    val posterMovie: String,
+
+    val releaseDateMovie: String,
+
+    val backgroundDateMovie: String
+)

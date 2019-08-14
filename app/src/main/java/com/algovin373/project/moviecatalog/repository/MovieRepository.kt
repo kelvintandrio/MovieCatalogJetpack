@@ -7,7 +7,6 @@ import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.model.*
 import com.algovin373.project.moviecatalog.retrofit.MyRetrofit
 import com.algovin373.project.moviecatalog.util.BaseSchedulerProvider
-import com.algovin373.project.moviecatalog.util.SchedulerProvider
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers

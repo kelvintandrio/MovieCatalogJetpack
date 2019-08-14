@@ -10,9 +10,8 @@ import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.viewholder.MovieCatalogViewHolder
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_movie_catalog.view.*
-import kotlinx.android.synthetic.main.item_movie_catalog.view.image_movie_catalog
 import kotlinx.android.synthetic.main.item_movie_banner.view.*
+import kotlinx.android.synthetic.main.item_movie_catalog.view.*
 
 class MovieAdapter(private val dataMovie: List<DataMovie>,
                    private val fragmentActivity: FragmentActivity?,

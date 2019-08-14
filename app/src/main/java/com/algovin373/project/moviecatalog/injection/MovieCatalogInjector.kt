@@ -3,12 +3,10 @@ package com.algovin373.project.moviecatalog.injection
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
-import com.algovin373.project.moviecatalog.repository.MovieRepository
 import com.algovin373.project.moviecatalog.viewmodel.DetailMovieViewModel
 import com.algovin373.project.moviecatalog.viewmodel.DetailTVShowViewModel
 import com.algovin373.project.moviecatalog.viewmodel.MovieViewModel
 import com.algovin373.project.moviecatalog.viewmodel.TVShowViewModel
-import com.algovin373.project.moviecatalog.viewmodelfactory.MovieViewModelFactory
 
 object MovieCatalogInjector {
 

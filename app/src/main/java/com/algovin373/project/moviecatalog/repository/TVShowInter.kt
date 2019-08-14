@@ -1,7 +1,6 @@
 package com.algovin373.project.moviecatalog.repository
 
 import androidx.lifecycle.LiveData
-import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.model.DataTVShow
 import io.reactivex.disposables.CompositeDisposable
 

@@ -3,18 +3,17 @@ package com.algovin373.project.moviecatalog.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.algovin373.project.moviecatalog.model.DataMovie
-import com.algovin373.project.moviecatalog.model.Movie
 import com.algovin373.project.moviecatalog.repository.MovieRepository
 import com.algovin373.project.moviecatalog.repository.StatusResponse
+import com.algovin373.project.moviecatalog.retrofit.MyRetrofit
+import com.algovin373.project.moviecatalog.retrofit.movie.RestApiMovie
 import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 
 class MovieViewModelTest {
@@ -29,14 +28,18 @@ class MovieViewModelTest {
 
     lateinit var movieViewModel: MovieViewModel
 
+    private lateinit var apiServiceMovie: RestApiMovie
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         movieViewModel = MovieViewModel(movieRepositoryTest)
+        apiServiceMovie = MyRetrofit.iniRetrofitMovie()
     }
 
     @Test
     fun getDataMovieNowPlaying() {
+        val data = apiServiceMovie.getDataMovieNowPlaying()
         movieViewModel.getDataMovieNowPlaying()
 
         argumentCaptor<StatusResponse>().apply {
@@ -44,10 +47,17 @@ class MovieViewModelTest {
             firstValue.onSuccess()
         }
 
-        /*movieViewModel.getDataMovieNowPlaying().observeForever(observer)
-        verify(movieRepositoryTest).getMovieNowPlaying()*/
+        // This case is just to get data sample from data API
+        data.map { it.dataMovie }
+            .subscribe(
+                {
+                    // And this to verify observer in ViewModel
+                    movieViewModel.getDataMovieNowPlaying().observeForever(observer)
+                    verify(observer).onChanged(it)
+                },
+                {
 
-        /*movieViewModel.getDataMovieNowPlaying().observeForever(observer)
-        verify(observer).onChanged()*/
+                }
+            )
     }
 }

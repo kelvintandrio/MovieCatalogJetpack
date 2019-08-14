@@ -7,14 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.BuildConfig
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.model.DataTVShow
-import com.algovin373.project.moviecatalog.model.TVShow
-import com.algovin373.project.moviecatalog.ui.activity.DetailTVShowActivity
-import com.algovin373.project.moviecatalog.util.DATA_MOVIE_CATALOG
 import com.algovin373.project.moviecatalog.viewholder.MovieCatalogViewHolder
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_movie_catalog.view.*
 import kotlinx.android.synthetic.main.item_tvshow_catalog.view.*
-import org.jetbrains.anko.startActivity
 
 class TVShowAdapter(private val dataTVShow: List<DataTVShow>, private val fragmentActivity: FragmentActivity)
                     : RecyclerView.Adapter<MovieCatalogViewHolder>() {
