@@ -1,4 +1,4 @@
-package com.algovin373.project.moviecatalog.repository
+package com.algovin373.project.moviecatalog.repository.inter.movie
 
 import com.algovin373.project.moviecatalog.model.DataMovie
 

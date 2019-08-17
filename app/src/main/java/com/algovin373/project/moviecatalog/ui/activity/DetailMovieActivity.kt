@@ -3,23 +3,29 @@ package com.algovin373.project.moviecatalog.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.BuildConfig
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.CastAdapter
 import com.algovin373.project.moviecatalog.adapter.OtherAdapter
-import com.algovin373.project.moviecatalog.injection.MovieCatalogInjector
 import com.algovin373.project.moviecatalog.model.DataCast
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
+import com.algovin373.project.moviecatalog.repository.MovieRepository
+import com.algovin373.project.moviecatalog.viewmodel.DetailMovieViewModel
+import com.algovin373.project.moviecatalog.viewmodelfactory.DetailMovieViewModelFactory
 import com.bumptech.glide.Glide
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_detail_movie.*
 import org.jetbrains.anko.startActivity
 
 class DetailMovieActivity : AppCompatActivity() {
     private val detailMovieViewModel by lazy {
-        MovieCatalogInjector.detailMovieViewModel(this)
+        ViewModelProviders.of(this,
+            DetailMovieViewModelFactory(movieRepository = MovieRepository(), compositeDisposable = CompositeDisposable()))
+            .get(DetailMovieViewModel::class.java)
     }
 
     private val catalogClickListener = object : CatalogClickListener {

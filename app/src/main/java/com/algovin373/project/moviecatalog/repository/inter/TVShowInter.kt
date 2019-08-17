@@ -1,4 +1,4 @@
-package com.algovin373.project.moviecatalog.repository
+package com.algovin373.project.moviecatalog.repository.inter
 
 import androidx.lifecycle.LiveData
 import com.algovin373.project.moviecatalog.model.DataTVShow

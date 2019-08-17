@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.algovin373.project.moviecatalog.model.DataTVShow
 import com.algovin373.project.moviecatalog.model.TVShow
+import com.algovin373.project.moviecatalog.repository.inter.TVShowInter
 import com.algovin373.project.moviecatalog.retrofit.MyRetrofit
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

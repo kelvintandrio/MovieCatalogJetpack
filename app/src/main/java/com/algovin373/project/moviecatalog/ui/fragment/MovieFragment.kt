@@ -19,12 +19,14 @@ import com.algovin373.project.moviecatalog.util.statusGone
 import com.algovin373.project.moviecatalog.viewmodel.MovieViewModel
 import com.algovin373.project.moviecatalog.viewmodelfactory.MovieViewModelFactory
 import com.google.android.material.tabs.TabLayout
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_movie.*
 import org.jetbrains.anko.startActivity
 
 class MovieFragment : Fragment() {
     private val movieViewModel by lazy {
-        ViewModelProviders.of(this, MovieViewModelFactory(movieRepository = MovieRepository()))
+        ViewModelProviders.of(this,
+            MovieViewModelFactory(movieRepository = MovieRepository(), compositeDisposable = CompositeDisposable()))
             .get(MovieViewModel::class.java)
     }
 
