@@ -7,30 +7,27 @@ import androidx.lifecycle.ViewModel
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.repository.MovieRepository
 import com.algovin373.project.moviecatalog.repository.StatusResponse
-import io.reactivex.disposables.CompositeDisposable
 
 class MovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
-    val compositeDisposable = CompositeDisposable()
-    val statusResponseLiveData = MutableLiveData<String>()
+    private val myData = MutableLiveData<List<DataMovie>>()
 
     fun getDataMovieNowPlaying() : LiveData<List<DataMovie>> {
-        return movieRepository.getMovieNowPlaying(object : StatusResponse {
-            override fun onSuccess() {
-                statusResponseLiveData.postValue("Success")
-                Log.i("STATUS_RESPONSE", "Success Response")
-            }
-
+        movieRepository.getMovieNowPlaying(object : StatusResponse {
+            override fun onSuccess(list: List<DataMovie>) = myData.postValue(list)
             override fun onFailed() {
-                statusResponseLiveData.postValue("Failed")
-                Log.e("STATUS_RESPONSE", "Failed Response")
+                Log.i("TES","Failed")
             }
         })
+        return myData
     }
 
-    fun getDataMovie(type: String) : LiveData<List<DataMovie>> = movieRepository.getDataMovie(type, compositeDisposable)
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.dispose()
+    fun getDataMovie(type: String) : LiveData<List<DataMovie>> {
+        movieRepository.getDataMovie(type, object : StatusResponse {
+            override fun onSuccess(list: List<DataMovie>) = myData.postValue(list)
+            override fun onFailed() {
+                Log.i("TES","Failed")
+            }
+        })
+        return myData
     }
 }

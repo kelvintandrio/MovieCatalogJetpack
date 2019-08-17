@@ -9,7 +9,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 interface MovieInter {
     fun getMovieNowPlaying(statusResponse: StatusResponse) : LiveData<List<DataMovie>>
-    fun getDataMovie(type: String, disposable: CompositeDisposable) : LiveData<List<DataMovie>>
+    fun getDataMovie(type: String, statusResponse: StatusResponse) : LiveData<List<DataMovie>>
     fun getDetailMovie(idMovie: Int?, disposable: CompositeDisposable) : LiveData<DetailMovie>
     fun getKeywordMovie(idMovie: Int?, disposable: CompositeDisposable) :  LiveData<ArrayList<Keyword>>
     fun getCastMovie(idMovie: Int?, disposable: CompositeDisposable) : LiveData<List<DataCast>>

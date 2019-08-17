@@ -22,17 +22,6 @@ class MovieRepository : MovieInter {
     private val idlingResource = EspressoIdlingResource()
     private val compositeDisposable = CompositeDisposable()
 
-
-    private val statusResponse = object : StatusResponse {
-        override fun onSuccess() {
-            Log.i(TAG_SUCCESS, "Sukses Response")
-        }
-
-        override fun onFailed() {
-            Log.e(TAG_FAILED, "Gagal Response")
-        }
-    }
-
     private val schedulerProvider = object : BaseSchedulerProvider {
         override fun io(): Scheduler = Schedulers.io()
         override fun computation(): Scheduler = Schedulers.computation()
@@ -49,7 +38,7 @@ class MovieRepository : MovieInter {
             .map { it.dataMovie?.take(7) }
             .subscribe(
                 {
-                    statusResponse.onSuccess()
+                    statusResponse.onSuccess(it!!)
                     myDataMovieNowPlaying.postValue(it)
                 },
                 {
@@ -60,7 +49,7 @@ class MovieRepository : MovieInter {
         return myDataMovieNowPlaying
     }
 
-    override fun getDataMovie(type: String, disposable: CompositeDisposable) : LiveData<List<DataMovie>> {
+    override fun getDataMovie(type: String, statusResponse: StatusResponse) : LiveData<List<DataMovie>> {
         val myDataMovie : MutableLiveData<List<DataMovie>> = MutableLiveData()
         var observable : Observable<Movie> = apiService.getDataMovieNowPlaying()
         when(type) {
@@ -70,21 +59,18 @@ class MovieRepository : MovieInter {
             "upcoming" -> observable = apiService.getDataMovieUpComing()
         }
 
-        idlingResource.increment()
-        disposable.add(observable.subscribeOn(Schedulers.io())
+        compositeDisposable.add(observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { it.dataMovie }
             .subscribe(
                 {
+                    statusResponse.onSuccess(it!!)
                     myDataMovie.postValue(it)
                 },
                 {
-                    Log.e("ERRORGETDATA", it.message)
+                    statusResponse.onFailed()
                 }
             ))
-        if (!idlingResource.getEspressoIdlingResource().isIdleNow) {
-            idlingResource.decrement()
-        }
 
         return myDataMovie
     }

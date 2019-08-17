@@ -6,7 +6,6 @@ import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.repository.MovieRepository
 import com.algovin373.project.moviecatalog.repository.StatusResponse
 import com.algovin373.project.moviecatalog.retrofit.MyRetrofit
-import com.algovin373.project.moviecatalog.retrofit.movie.RestApiMovie
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Before
@@ -24,35 +23,124 @@ class MovieViewModelTest {
     lateinit var observer: Observer<List<DataMovie>>
 
     @Mock
-    lateinit var movieRepositoryTest: MovieRepository
+    lateinit var movieRepository: MovieRepository
 
     lateinit var movieViewModel: MovieViewModel
-
-    private lateinit var apiServiceMovie: RestApiMovie
+    private var apiService = MyRetrofit.iniRetrofitMovie()
+    private val movieNowPlaying = "now playing"
+    private val moviePopular = "popular"
+    private val movieTopRelated = "top related"
+    private val movieUpcoming = "upcoming"
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        movieViewModel = MovieViewModel(movieRepositoryTest)
-        apiServiceMovie = MyRetrofit.iniRetrofitMovie()
+        movieViewModel = MovieViewModel(movieRepository)
     }
 
     @Test
     fun getDataMovieNowPlaying() {
-        val data = apiServiceMovie.getDataMovieNowPlaying()
         movieViewModel.getDataMovieNowPlaying()
 
-        argumentCaptor<StatusResponse>().apply {
-            Mockito.verify(movieRepositoryTest).getMovieNowPlaying(capture())
-            firstValue.onSuccess()
-        }
-
-        // This case is just to get data sample from data API
-        data.map { it.dataMovie }
+        // For Dummy Data using ApiService
+        apiService.getDataMovieNowPlaying()
+            .map { it.dataMovie?.take(7) }
             .subscribe(
                 {
-                    // And this to verify observer in ViewModel
+                    argumentCaptor<StatusResponse>().apply {
+                        Mockito.verify(movieRepository).getMovieNowPlaying(capture())
+                        firstValue.onSuccess(it!!) // --> "it" is Dummy Data
+                    }
+
                     movieViewModel.getDataMovieNowPlaying().observeForever(observer)
+                    verify(observer).onChanged(it)
+                },
+                {
+
+                }
+            )
+    }
+
+    @Test // For Movie : Now Playing
+    fun getDataMovie01() {
+        movieViewModel.getDataMovie(movieNowPlaying)
+
+        apiService.getDataMovieNowPlaying()
+            .map { it.dataMovie }
+            .subscribe(
+                {
+                    argumentCaptor<StatusResponse>().apply {
+                        Mockito.verify(movieRepository).getDataMovie(movieNowPlaying, capture())
+                        firstValue.onSuccess(it!!) // --> "it" is Dummy Data
+                    }
+
+                    movieViewModel.getDataMovie(movieNowPlaying).observeForever(observer)
+                    verify(observer).onChanged(it)
+                },
+                {
+
+                }
+            )
+    }
+
+    @Test // For Movie : Popular
+    fun getDataMovie02() {
+        movieViewModel.getDataMovie(moviePopular)
+
+        apiService.getDataMoviePopular()
+            .map { it.dataMovie }
+            .subscribe(
+                {
+                    argumentCaptor<StatusResponse>().apply {
+                        Mockito.verify(movieRepository).getDataMovie(moviePopular, capture())
+                        firstValue.onSuccess(it!!) // --> "it" is Dummy Data
+                    }
+
+                    movieViewModel.getDataMovie(moviePopular).observeForever(observer)
+                    verify(observer).onChanged(it)
+                },
+                {
+
+                }
+            )
+    }
+
+    @Test // For Movie : Top Related
+    fun getDataMovie03() {
+        movieViewModel.getDataMovie(movieTopRelated)
+
+        apiService.getDataMovieTopRated()
+            .map { it.dataMovie }
+            .subscribe(
+                {
+                    argumentCaptor<StatusResponse>().apply {
+                        Mockito.verify(movieRepository).getDataMovie(movieTopRelated, capture())
+                        firstValue.onSuccess(it!!) // --> "it" is Dummy Data
+                    }
+
+                    movieViewModel.getDataMovie(movieTopRelated).observeForever(observer)
+                    verify(observer).onChanged(it)
+                },
+                {
+
+                }
+            )
+    }
+
+    @Test // For Movie : Upcoming
+    fun getDataMovie04() {
+        movieViewModel.getDataMovie(movieUpcoming)
+
+        apiService.getDataMovieUpComing()
+            .map { it.dataMovie }
+            .subscribe(
+                {
+                    argumentCaptor<StatusResponse>().apply {
+                        Mockito.verify(movieRepository).getDataMovie(movieUpcoming, capture())
+                        firstValue.onSuccess(it!!) // --> "it" is Dummy Data
+                    }
+
+                    movieViewModel.getDataMovie(movieUpcoming).observeForever(observer)
                     verify(observer).onChanged(it)
                 },
                 {
