@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.R
-import com.algovin373.project.moviecatalog.adapter.MovieAdapter
+import com.algovin373.project.moviecatalog.adapter.movie.MovieAdapter
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.repository.MovieRepository
@@ -79,7 +79,12 @@ class MovieFragment : Fragment() {
             2 -> recyclerMovie.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
         recyclerMovie.setHasFixedSize(true)
-        recyclerMovie.adapter = MovieAdapter(list, requireActivity(), type, catalogClickListener)
+        recyclerMovie.adapter = MovieAdapter(
+            list,
+            requireActivity(),
+            type,
+            catalogClickListener
+        )
         recyclerMovie.adapter?.notifyDataSetChanged()
     }
 }

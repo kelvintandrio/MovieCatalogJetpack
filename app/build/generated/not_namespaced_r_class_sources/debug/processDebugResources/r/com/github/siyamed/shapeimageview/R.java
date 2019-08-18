@@ -31,13 +31,13 @@ public final class R {
 
         public static final int bevel = 0x7f0a0024;
         public static final int butt = 0x7f0a0028;
-        public static final int fill = 0x7f0a0054;
-        public static final int left = 0x7f0a0075;
-        public static final int miter = 0x7f0a0080;
-        public static final int right = 0x7f0a009d;
-        public static final int round = 0x7f0a00a0;
-        public static final int square = 0x7f0a00cb;
-        public static final int stroke = 0x7f0a00d4;
+        public static final int fill = 0x7f0a0056;
+        public static final int left = 0x7f0a007a;
+        public static final int miter = 0x7f0a0085;
+        public static final int right = 0x7f0a00a3;
+        public static final int round = 0x7f0a00a6;
+        public static final int square = 0x7f0a00d5;
+        public static final int stroke = 0x7f0a00de;
     }
     public static final class raw {
         private raw() {}

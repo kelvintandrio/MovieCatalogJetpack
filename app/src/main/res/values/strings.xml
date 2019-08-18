@@ -2,17 +2,11 @@
     <string name="app_name">MovieCatalog</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="movie">MOVIE</string>
     <string name="tvshow">TV SHOW</string>
-    <string name="movie2">Movie</string>
     <string name="title">Title :</string>
     <string name="date_release">Date Release :</string>
-    <string name="year">Year :</string>
-    <string name="director">Director :</string>
-    <string name="screenplay">Screenplay :</string>
-    <string name="creator">Creator :</string>
     <string name="overview">Overview :</string>
 
     <string name="movie_now_playing">NOW PLAYING</string>
@@ -33,4 +27,8 @@
     <string name="tvShow_popular">POPULAR</string>
     <string name="tvShow_top_related">TOP RELATED</string>
     <string name="tvShow_airing_today">AIRING TODAY</string>
+    <string name="total_seasons">Total Seasons :</string>
+    <string name="total_episodes">Total Episodes :</string>
+    <string name="similar_tv_show">Similar TV Show</string>
+    <string name="recommendation_tv_show">Recommendation TV Show</string>
 </resources>

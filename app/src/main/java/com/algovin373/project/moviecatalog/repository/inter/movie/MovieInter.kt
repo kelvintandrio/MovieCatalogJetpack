@@ -5,18 +5,19 @@ import com.algovin373.project.moviecatalog.model.DataCast
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.model.DetailMovie
 import com.algovin373.project.moviecatalog.model.Keyword
+import com.algovin373.project.moviecatalog.repository.inter.StatusResponseDataCast
 import io.reactivex.disposables.CompositeDisposable
 
 interface MovieInter {
     fun getMovieNowPlaying(
         compositeDisposable: CompositeDisposable,
-        statusResponse: StatusResponse
+        statusResponseMovie: StatusResponseMovie
     ): LiveData<List<DataMovie>>
 
     fun getDataMovie(
         type: String,
         compositeDisposable: CompositeDisposable,
-        statusResponse: StatusResponse
+        statusResponseMovie: StatusResponseMovie
     ): LiveData<List<DataMovie>>
 
     fun getDetailMovie(
@@ -40,12 +41,12 @@ interface MovieInter {
     fun getSimilarMovie(
         idMovie: Int?,
         disposable: CompositeDisposable,
-        statusResponse: StatusResponse
+        statusResponseMovie: StatusResponseMovie
     ): LiveData<List<DataMovie>>
 
     fun getRecommendationMovie(
         idMovie: Int?,
         disposable: CompositeDisposable,
-        statusResponse: StatusResponse
+        statusResponseMovie: StatusResponseMovie
     ): LiveData<List<DataMovie>>
 }

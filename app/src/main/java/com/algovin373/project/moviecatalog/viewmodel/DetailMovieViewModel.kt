@@ -9,10 +9,10 @@ import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.model.DetailMovie
 import com.algovin373.project.moviecatalog.model.Keyword
 import com.algovin373.project.moviecatalog.repository.MovieRepository
-import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponse
-import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseDataCast
+import com.algovin373.project.moviecatalog.repository.inter.StatusResponseDataCast
 import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseDetailMovie
 import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseKeywordMovie
+import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseMovie
 import io.reactivex.disposables.CompositeDisposable
 
 class DetailMovieViewModel(private val movieRepository: MovieRepository,
@@ -20,7 +20,8 @@ class DetailMovieViewModel(private val movieRepository: MovieRepository,
     private val myDetailMovie = MutableLiveData<DetailMovie>()
     private val myKeywordMovie = MutableLiveData<ArrayList<Keyword>>()
     private val myCastMovie = MutableLiveData<List<DataCast>>()
-    private val myData = MutableLiveData<List<DataMovie>>()
+    private val mySimilarMovie = MutableLiveData<List<DataMovie>>()
+    private val myRecommendationMovie = MutableLiveData<List<DataMovie>>()
 
     fun setDetailMovie(id: Int?) : LiveData<DetailMovie> {
         movieRepository.getDetailMovie(id, compositeDisposable, object : StatusResponseDetailMovie {
@@ -43,7 +44,8 @@ class DetailMovieViewModel(private val movieRepository: MovieRepository,
     }
 
     fun setCastMovie(id: Int?) : LiveData<List<DataCast>> {
-        movieRepository.getCastMovie(id, compositeDisposable, object : StatusResponseDataCast {
+        movieRepository.getCastMovie(id, compositeDisposable, object :
+            StatusResponseDataCast {
             override fun onSuccess(data: List<DataCast>) = myCastMovie.postValue(data)
             override fun onFailed() {
                 Log.i("TES", "Failed")
@@ -53,22 +55,22 @@ class DetailMovieViewModel(private val movieRepository: MovieRepository,
     }
 
     fun setSimilarMovie(id: Int?) : LiveData<List<DataMovie>> {
-        movieRepository.getSimilarMovie(id, compositeDisposable, object : StatusResponse {
-            override fun onSuccess(list: List<DataMovie>) = myData.postValue(list)
+        movieRepository.getSimilarMovie(id, compositeDisposable, object : StatusResponseMovie {
+            override fun onSuccess(list: List<DataMovie>) = mySimilarMovie.postValue(list)
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return myData
+        return mySimilarMovie
     }
 
     fun setRecommendationMovie(id: Int?) : LiveData<List<DataMovie>> {
-        movieRepository.getRecommendationMovie(id, compositeDisposable, object :StatusResponse {
-            override fun onSuccess(list: List<DataMovie>) = myData.postValue(list)
+        movieRepository.getRecommendationMovie(id, compositeDisposable, object :StatusResponseMovie {
+            override fun onSuccess(list: List<DataMovie>) = myRecommendationMovie.postValue(list)
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return myData
+        return myRecommendationMovie
     }
 }

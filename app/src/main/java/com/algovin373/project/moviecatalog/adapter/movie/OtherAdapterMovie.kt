@@ -1,4 +1,4 @@
-package com.algovin373.project.moviecatalog.adapter
+package com.algovin373.project.moviecatalog.adapter.movie
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,8 +12,8 @@ import com.algovin373.project.moviecatalog.viewholder.MovieCatalogViewHolder
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_catalog_other.view.*
 
-class OtherAdapter(private val dataMovie: List<DataMovie>, private val context: Context,
-                   private val catalogClickListener: CatalogClickListener)
+class OtherAdapterMovie(private val dataMovie: List<DataMovie>, private val context: Context,
+                        private val catalogClickListener: CatalogClickListener)
     : RecyclerView.Adapter<MovieCatalogViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieCatalogViewHolder {

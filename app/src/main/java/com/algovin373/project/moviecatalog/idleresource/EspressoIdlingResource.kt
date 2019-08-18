@@ -4,8 +4,8 @@ import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.idling.CountingIdlingResource
 
 class EspressoIdlingResource {
-    private val RESOURCE = "GLOBAL"
-    private val espressoTestIdlingResource = CountingIdlingResource(RESOURCE)
+    private val resource = "GLOBAL"
+    private val espressoTestIdlingResource = CountingIdlingResource(resource)
 
     fun increment() {
         espressoTestIdlingResource.increment()

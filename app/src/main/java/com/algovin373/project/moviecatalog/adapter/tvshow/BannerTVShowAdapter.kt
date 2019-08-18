@@ -1,4 +1,4 @@
-package com.algovin373.project.moviecatalog.adapter
+package com.algovin373.project.moviecatalog.adapter.tvshow
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.repository.MovieRepository
-import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponse
+import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseMovie
 import com.algovin373.project.moviecatalog.retrofit.MyRetrofit
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
@@ -29,7 +29,7 @@ class MovieViewModelTest {
     @Mock
     lateinit var compositeDisposable: CompositeDisposable
 
-    lateinit var movieViewModel: MovieViewModel
+    private lateinit var movieViewModel: MovieViewModel
     private var apiService = MyRetrofit.iniRetrofitMovie()
     private val movieNowPlaying = "now playing"
     private val moviePopular = "popular"
@@ -51,7 +51,7 @@ class MovieViewModelTest {
             .map { it.dataMovie?.take(7) }
             .subscribe(
                 {
-                    argumentCaptor<StatusResponse>().apply {
+                    argumentCaptor<StatusResponseMovie>().apply {
                         Mockito.verify(movieRepository).getMovieNowPlaying(compositeDisposable, capture())
                         firstValue.onSuccess(it!!) // --> "it" is Dummy Data
                     }
@@ -72,7 +72,7 @@ class MovieViewModelTest {
             .map { it.dataMovie }
             .subscribe(
                 { dummyData ->
-                    argumentCaptor<StatusResponse>().apply {
+                    argumentCaptor<StatusResponseMovie>().apply {
                         Mockito.verify(movieRepository).getDataMovie(movieNowPlaying, compositeDisposable, capture())
                         firstValue.onSuccess(dummyData!!) // --> "it" is Dummy Data
                     }
@@ -93,7 +93,7 @@ class MovieViewModelTest {
             .map { it.dataMovie }
             .subscribe(
                 {
-                    argumentCaptor<StatusResponse>().apply {
+                    argumentCaptor<StatusResponseMovie>().apply {
                         Mockito.verify(movieRepository).getDataMovie(moviePopular, compositeDisposable, capture())
                         firstValue.onSuccess(it!!) // --> "it" is Dummy Data
                     }
@@ -114,7 +114,7 @@ class MovieViewModelTest {
             .map { it.dataMovie }
             .subscribe(
                 {
-                    argumentCaptor<StatusResponse>().apply {
+                    argumentCaptor<StatusResponseMovie>().apply {
                         Mockito.verify(movieRepository).getDataMovie(movieTopRelated, compositeDisposable, capture())
                         firstValue.onSuccess(it!!) // --> "it" is Dummy Data
                     }
@@ -135,7 +135,7 @@ class MovieViewModelTest {
             .map { it.dataMovie }
             .subscribe(
                 {
-                    argumentCaptor<StatusResponse>().apply {
+                    argumentCaptor<StatusResponseMovie>().apply {
                         Mockito.verify(movieRepository).getDataMovie(movieUpcoming, compositeDisposable, capture())
                         firstValue.onSuccess(it!!) // --> "it" is Dummy Data
                     }

@@ -1,4 +1,4 @@
-package com.algovin373.project.moviecatalog.adapter
+package com.algovin373.project.moviecatalog.adapter.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

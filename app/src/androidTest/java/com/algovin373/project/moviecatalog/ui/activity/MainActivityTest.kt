@@ -1,24 +1,17 @@
 package com.algovin373.project.moviecatalog.ui.activity
 
-import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.contrib.ViewPagerActions
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import com.algovin373.project.moviecatalog.R
+import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
-import androidx.test.espresso.IdlingRegistry
-import com.algovin373.project.moviecatalog.ui.fragment.MovieFragment
-import org.junit.Before
-import org.junit.After
-
-
-
 
 /*
 Scenario Instrumentation Testing :

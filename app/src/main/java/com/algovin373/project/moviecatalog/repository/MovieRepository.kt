@@ -2,8 +2,13 @@ package com.algovin373.project.moviecatalog.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.model.*
-import com.algovin373.project.moviecatalog.repository.inter.movie.*
+import com.algovin373.project.moviecatalog.repository.inter.StatusResponseDataCast
+import com.algovin373.project.moviecatalog.repository.inter.movie.MovieInter
+import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseDetailMovie
+import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseKeywordMovie
+import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseMovie
 import com.algovin373.project.moviecatalog.retrofit.MyRetrofit
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,9 +17,12 @@ import io.reactivex.schedulers.Schedulers
 
 class MovieRepository : MovieInter {
     private val apiService = MyRetrofit.iniRetrofitMovie()
+    private val idlingResource = EspressoIdlingResource()
 
-    override fun getMovieNowPlaying(compositeDisposable: CompositeDisposable, statusResponse: StatusResponse) : LiveData<List<DataMovie>> {
+    override fun getMovieNowPlaying(compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie) : LiveData<List<DataMovie>> {
         val myDataMovieNowPlaying = MutableLiveData<List<DataMovie>>()
+
+        idlingResource.increment()
         compositeDisposable.add(
             apiService.getDataMovieNowPlaying()
             .subscribeOn(Schedulers.io())
@@ -22,17 +30,18 @@ class MovieRepository : MovieInter {
             .map { it.dataMovie?.take(7) }
             .subscribe(
                 {
-                    statusResponse.onSuccess(it!!)
+                    statusResponseMovie.onSuccess(it!!)
                     myDataMovieNowPlaying.postValue(it)
+                    idlingResource.decrement()
                 },
                 {
-                    statusResponse.onFailed()
+                    statusResponseMovie.onFailed()
                 }
             ))
         return myDataMovieNowPlaying
     }
 
-    override fun getDataMovie(type: String, compositeDisposable: CompositeDisposable, statusResponse: StatusResponse) : LiveData<List<DataMovie>> {
+    override fun getDataMovie(type: String, compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie) : LiveData<List<DataMovie>> {
         val myDataMovie : MutableLiveData<List<DataMovie>> = MutableLiveData()
         var observable : Observable<Movie> = apiService.getDataMovieNowPlaying()
         when(type) {
@@ -47,11 +56,11 @@ class MovieRepository : MovieInter {
             .map { it.dataMovie }
             .subscribe(
                 {
-                    statusResponse.onSuccess(it!!)
+                    statusResponseMovie.onSuccess(it!!)
                     myDataMovie.postValue(it)
                 },
                 {
-                    statusResponse.onFailed()
+                    statusResponseMovie.onFailed()
                 }
             ))
 
@@ -113,7 +122,7 @@ class MovieRepository : MovieInter {
         return myCastMovie
     }
 
-    override fun getSimilarMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponse: StatusResponse): LiveData<List<DataMovie>> {
+    override fun getSimilarMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie): LiveData<List<DataMovie>> {
         val mySimilarMovie: MutableLiveData<List<DataMovie>> = MutableLiveData()
         disposable.add(apiService.getSimilarMovie(idMovie.toString())
             .subscribeOn(Schedulers.io())
@@ -121,18 +130,18 @@ class MovieRepository : MovieInter {
             .map { it.dataMovie?.take(8) }
             .subscribe(
                 {
-                    statusResponse.onSuccess(it!!)
+                    statusResponseMovie.onSuccess(it!!)
                     mySimilarMovie.postValue(it)
                 },
                 {
-                    statusResponse.onFailed()
+                    statusResponseMovie.onFailed()
                 }
             )
         )
         return mySimilarMovie
     }
 
-    override fun getRecommendationMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponse: StatusResponse): LiveData<List<DataMovie>> {
+    override fun getRecommendationMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie): LiveData<List<DataMovie>> {
         val mySimilarMovie: MutableLiveData<List<DataMovie>> = MutableLiveData()
         disposable.add(apiService.getRecommendtionMovie(idMovie.toString())
             .subscribeOn(Schedulers.io())
@@ -140,11 +149,11 @@ class MovieRepository : MovieInter {
             .map { it.dataMovie?.take(8) }
             .subscribe(
                 {
-                    statusResponse.onSuccess(it!!)
+                    statusResponseMovie.onSuccess(it!!)
                     mySimilarMovie.postValue(it)
                 },
                 {
-                    statusResponse.onFailed()
+                    statusResponseMovie.onFailed()
                 }
             )
         )

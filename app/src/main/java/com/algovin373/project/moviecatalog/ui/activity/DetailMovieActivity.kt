@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.BuildConfig
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.CastAdapter
-import com.algovin373.project.moviecatalog.adapter.OtherAdapter
+import com.algovin373.project.moviecatalog.adapter.movie.OtherAdapterMovie
 import com.algovin373.project.moviecatalog.model.DataCast
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
@@ -87,7 +87,11 @@ class DetailMovieActivity : AppCompatActivity() {
                 }
                 2 -> {
                     layoutManager = LinearLayoutManager(context)
-                    adapter = OtherAdapter(listMovie, context, catalogClickListener)
+                    adapter = OtherAdapterMovie(
+                        listMovie,
+                        context,
+                        catalogClickListener
+                    )
                 }
             }
             adapter?.notifyDataSetChanged()

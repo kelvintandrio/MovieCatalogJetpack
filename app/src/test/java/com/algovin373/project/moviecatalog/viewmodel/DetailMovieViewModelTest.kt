@@ -7,10 +7,10 @@ import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.model.DetailMovie
 import com.algovin373.project.moviecatalog.model.Keyword
 import com.algovin373.project.moviecatalog.repository.MovieRepository
-import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponse
-import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseDataCast
+import com.algovin373.project.moviecatalog.repository.inter.StatusResponseDataCast
 import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseDetailMovie
 import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseKeywordMovie
+import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseMovie
 import com.algovin373.project.moviecatalog.retrofit.MyRetrofit
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
@@ -45,7 +45,7 @@ class DetailMovieViewModelTest {
     @Mock
     lateinit var compositeDisposable: CompositeDisposable
 
-    lateinit var detailMovieViewModel: DetailMovieViewModel
+    private lateinit var detailMovieViewModel: DetailMovieViewModel
     private var apiService = MyRetrofit.iniRetrofitMovie()
 
     private val sampleIdMovie = 384018
@@ -130,7 +130,7 @@ class DetailMovieViewModelTest {
             .map { it.dataMovie?.take(8) }
             .subscribe(
                 {
-                    argumentCaptor<StatusResponse>().apply {
+                    argumentCaptor<StatusResponseMovie>().apply {
                         Mockito.verify(movieRepository).getSimilarMovie(sampleIdMovie, compositeDisposable, capture())
                         firstValue.onSuccess(it!!)
                     }
@@ -152,7 +152,7 @@ class DetailMovieViewModelTest {
             .map { it.dataMovie?.take(8) }
             .subscribe(
                 {
-                    argumentCaptor<StatusResponse>().apply {
+                    argumentCaptor<StatusResponseMovie>().apply {
                         Mockito.verify(movieRepository).getRecommendationMovie(sampleIdMovie, compositeDisposable, capture())
                         firstValue.onSuccess(it!!)
                     }

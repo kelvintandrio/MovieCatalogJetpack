@@ -6,18 +6,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.algovin373.project.moviecatalog.R
-import com.algovin373.project.moviecatalog.adapter.BannerTVShowAdapter
-import com.algovin373.project.moviecatalog.adapter.TVShowAdapter
-import com.algovin373.project.moviecatalog.injection.MovieCatalogInjector
+import com.algovin373.project.moviecatalog.adapter.tvshow.BannerTVShowAdapter
+import com.algovin373.project.moviecatalog.adapter.tvshow.TVShowAdapter
+import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
+import com.algovin373.project.moviecatalog.repository.TVShowRepository
+import com.algovin373.project.moviecatalog.ui.activity.DetailTVShowActivity
 import com.algovin373.project.moviecatalog.util.statusGone
+import com.algovin373.project.moviecatalog.viewmodel.TVShowViewModel
+import com.algovin373.project.moviecatalog.viewmodelfactory.TVShowViewModelFactory
 import com.google.android.material.tabs.TabLayout
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_tvshow.*
+import org.jetbrains.anko.startActivity
 
 class TVShowFragment : Fragment() {
     private val tvShowViewModel by lazy {
-        MovieCatalogInjector.tvshowViewModel(this)
+        ViewModelProviders.of(this,
+            TVShowViewModelFactory(tvShowRepository = TVShowRepository(), compositeDisposable = CompositeDisposable()))
+            .get(TVShowViewModel::class.java)
+    }
+
+    private val catalogClickListener = object : CatalogClickListener {
+        override fun itemCatalogClick(id: Int?) {
+            requireContext().startActivity<DetailTVShowActivity>("ID" to id)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,7 +43,8 @@ class TVShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tvShowViewModel.getDataTVShowAiringToday().observe(this, Observer {
-            viewpager_tvshow_banner.adapter = BannerTVShowAdapter(requireContext(), it)
+            viewpager_tvshow_banner.adapter =
+                BannerTVShowAdapter(requireContext(), it)
             worm_dots_indicator_tvshow.setViewPager(viewpager_tvshow_banner)
         })
 
@@ -56,7 +72,11 @@ class TVShowFragment : Fragment() {
             rv_tvShow.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
-                adapter = TVShowAdapter(it, requireActivity())
+                adapter = TVShowAdapter(
+                    it,
+                    requireActivity(),
+                    catalogClickListener
+                )
                 adapter?.notifyDataSetChanged()
             }
         })
