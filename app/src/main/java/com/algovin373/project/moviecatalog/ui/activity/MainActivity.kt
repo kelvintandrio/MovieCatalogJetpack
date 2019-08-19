@@ -4,12 +4,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.MainPageAdapter
+import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.ui.fragment.MovieFragment
 import com.algovin373.project.moviecatalog.ui.fragment.TVShowFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val idlingResource = EspressoIdlingResource()
     private val movie = MovieFragment()
     private val tvShow = TVShowFragment()
 

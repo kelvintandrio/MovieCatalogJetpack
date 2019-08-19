@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.algovin373.project.moviecatalog.R
-import com.algovin373.project.moviecatalog.adapter.tvshow.BannerTVShowAdapter
 import com.algovin373.project.moviecatalog.adapter.tvshow.TVShowAdapter
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.repository.TVShowRepository
@@ -42,7 +41,7 @@ class TVShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvShowViewModel.getDataTVShowAiringToday().observe(this, Observer {
+        /*tvShowViewModel.getDataTVShowAiringToday().observe(this, Observer {
             viewpager_tvshow_banner.adapter =
                 BannerTVShowAdapter(requireContext(), it)
             worm_dots_indicator_tvshow.setViewPager(viewpager_tvshow_banner)
@@ -53,7 +52,7 @@ class TVShowFragment : Fragment() {
         tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_on_the_air))
         tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_popular))
         tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_top_related))
-        tabTVShowCatalogOnClick(tab_layout_tvShow)
+        tabTVShowCatalogOnClick(tab_layout_tvShow)*/
     }
 
     private fun tabTVShowCatalogOnClick(tabLayout: TabLayout) {

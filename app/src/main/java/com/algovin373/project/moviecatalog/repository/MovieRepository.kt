@@ -22,7 +22,6 @@ class MovieRepository : MovieInter {
     override fun getMovieNowPlaying(compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie) : LiveData<List<DataMovie>> {
         val myDataMovieNowPlaying = MutableLiveData<List<DataMovie>>()
 
-        idlingResource.increment()
         compositeDisposable.add(
             apiService.getDataMovieNowPlaying()
             .subscribeOn(Schedulers.io())
@@ -32,7 +31,6 @@ class MovieRepository : MovieInter {
                 {
                     statusResponseMovie.onSuccess(it!!)
                     myDataMovieNowPlaying.postValue(it)
-                    idlingResource.decrement()
                 },
                 {
                     statusResponseMovie.onFailed()
@@ -51,6 +49,7 @@ class MovieRepository : MovieInter {
             "upcoming" -> observable = apiService.getDataMovieUpComing()
         }
 
+        idlingResource.increment()
         compositeDisposable.add(observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { it.dataMovie }
@@ -58,6 +57,7 @@ class MovieRepository : MovieInter {
                 {
                     statusResponseMovie.onSuccess(it!!)
                     myDataMovie.postValue(it)
+                    idlingResource.decrement()
                 },
                 {
                     statusResponseMovie.onFailed()

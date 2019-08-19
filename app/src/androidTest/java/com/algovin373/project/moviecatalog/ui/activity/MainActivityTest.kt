@@ -50,9 +50,10 @@ class MainActivityTest {
     @Test
     fun toMovieActivityTest() {
         // Point A1
+//        Thread.sleep(5000)
+        onView(withId(R.id.progress_content_movie_now_playing)).check(matches(isDisplayed()))
+        Thread.sleep(5000)
         onView(withId(R.id.rv_movie_now_playing)).check(matches(isDisplayed()))
-//        onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
-
         // Testing until 10 data Movie
         /*for(i in 0 until dataMovie().size) {
             // Point A2

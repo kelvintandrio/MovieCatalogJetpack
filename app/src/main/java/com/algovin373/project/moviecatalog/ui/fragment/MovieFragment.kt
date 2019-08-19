@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.movie.MovieAdapter
+import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.repository.MovieRepository
@@ -24,6 +25,8 @@ import kotlinx.android.synthetic.main.fragment_movie.*
 import org.jetbrains.anko.startActivity
 
 class MovieFragment : Fragment() {
+    private val idlingResource = EspressoIdlingResource()
+
     private val movieViewModel by lazy {
         ViewModelProviders.of(this,
             MovieViewModelFactory(movieRepository = MovieRepository(), compositeDisposable = CompositeDisposable()))
@@ -43,17 +46,19 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        idlingResource.increment()
         movieViewModel.getDataMovieNowPlaying().observe(this, Observer {
             progress_content_movie_now_playing.visibility = statusGone
             setRecyclerViewMovie(rv_movie_now_playing, 2, it)
         })
+        idlingResource.decrement()
 
-        setMovie(getString(R.string.now_playing).toLowerCase())
+        /*setMovie(getString(R.string.now_playing).toLowerCase())
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_now_playing))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_popular))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_top_related))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_upcoming))
-        tabMovieCatalogOnClick(tab_layout_movie)
+        tabMovieCatalogOnClick(tab_layout_movie)*/
     }
 
     private fun tabMovieCatalogOnClick(tabLayout: TabLayout) {
