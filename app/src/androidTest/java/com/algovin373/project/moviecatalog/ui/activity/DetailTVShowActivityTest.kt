@@ -7,12 +7,12 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.algovin373.project.moviecatalog.R
-import com.algovin373.project.moviecatalog.util.DATA_MOVIE_CATALOG
+import com.algovin373.project.moviecatalog.utils.dataTVShow
 import org.junit.Rule
 import org.junit.Test
 
 class DetailTVShowActivityTest {
-    /*private val dummyDataTVShow = dataTVShow()[1]
+    private val dummyDataTVShow = dataTVShow()[0]
 
     @Rule
     @JvmField
@@ -21,38 +21,46 @@ class DetailTVShowActivityTest {
             override fun getActivityIntent(): Intent {
                 val targetContext = InstrumentationRegistry.getInstrumentation().targetContext
                 val result = Intent(targetContext, DetailTVShowActivity::class.java)
-                result.putExtra(DATA_MOVIE_CATALOG, dummyDataTVShow)
+                result.putExtra("ID", 79340)
                 return result
             }
         }
 
     @Test
     fun loadDetailMovie() {
-        // Title
-        onView(withId(R.id.title_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.title_catalog_movie)).check(matches(withText(dummyDataTVShow.title)))
+        Thread.sleep(2000)
 
-        // Image
-        onView(withId(R.id.image_movie_catalog)).check(matches(isDisplayed()))
+        /** Title TV Show **/
+        onView(withId(R.id.title_catalog_tv_show)).check(matches(isDisplayed()))
+        onView(withId(R.id.title_catalog_tv_show)).check(matches(withText(dummyDataTVShow.titleTVShow)))
 
-        // Date Release
-        onView(withId(R.id.date_release_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.date_release_catalog_movie)).check(matches(withText(dummyDataTVShow.date_release)))
+        /** First Data TV Show **/
+        onView(withId(R.id.date_release_catalog_tv_show)).check(matches(isDisplayed()))
+        onView(withId(R.id.date_release_catalog_tv_show)).check(matches(withText(dummyDataTVShow.firstDateTVShow)))
 
-        // Year
-        onView(withId(R.id.year_release_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.year_release_catalog_movie)).check(matches(withText(dummyDataTVShow.year_release.toString())))
+        /** Total Seasons TV Show **/
+        onView(withId(R.id.seasons_catalog_tv_show)).check(matches(isDisplayed()))
+        onView(withId(R.id.seasons_catalog_tv_show)).check(matches(withText(dummyDataTVShow.seasonsTVShow)))
 
-        // Overview
-        onView(withId(R.id.overview_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.overview_catalog_movie)).check(matches(withText(dummyDataTVShow.overview)))
+        /** Total Episodes TV Show **/
+        onView(withId(R.id.episodes_release_catalog_tv_show)).check(matches(isDisplayed()))
+        onView(withId(R.id.episodes_release_catalog_tv_show)).check(matches(withText(dummyDataTVShow.episodesTVShow)))
 
-        // Director
-        onView(withId(R.id.director_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.director_catalog_movie)).check(matches(withText(dummyDataTVShow.director)))
+        /** Vote Average TV Show **/
+        onView(withId(R.id.vote_average_release_catalog_tv_show)).check(matches(isDisplayed()))
+        onView(withId(R.id.vote_average_release_catalog_tv_show)).check(matches(withText(dummyDataTVShow.voteAverageTVShow)))
 
-        // Screenplay
-        onView(withId(R.id.screenplay_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.screenplay_catalog_movie)).check(matches(withText(dummyDataTVShow.screenplay)))
-    }*/
+        /** Vote Count TV Show **/
+        onView(withId(R.id.vote_count_release_catalog_tv_show)).check(matches(isDisplayed()))
+        onView(withId(R.id.vote_count_release_catalog_tv_show)).check(matches(withText(dummyDataTVShow.voteCountTVShow)))
+
+        /** Overview TV Show **/
+        onView(withId(R.id.overview_catalog_tv_show)).check(matches(isDisplayed()))
+        onView(withId(R.id.overview_catalog_tv_show)).check(matches(withText(dummyDataTVShow.overviewTVShow)))
+
+        /** All Data RecyclerView Cast, Similar, and Recommendation TV Show **/
+        onView(withId(R.id.rv_cast_tv_show)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_similar_tv_show)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_recommendation_tv_show)).check(matches(isDisplayed()))
+    }
 }

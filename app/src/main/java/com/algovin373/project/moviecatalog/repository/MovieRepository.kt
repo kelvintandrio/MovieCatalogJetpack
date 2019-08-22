@@ -49,7 +49,6 @@ class MovieRepository : MovieInter {
             "upcoming" -> observable = apiService.getDataMovieUpComing()
         }
 
-        idlingResource.increment()
         compositeDisposable.add(observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { it.dataMovie }
@@ -57,7 +56,6 @@ class MovieRepository : MovieInter {
                 {
                     statusResponseMovie.onSuccess(it!!)
                     myDataMovie.postValue(it)
-                    idlingResource.decrement()
                 },
                 {
                     statusResponseMovie.onFailed()

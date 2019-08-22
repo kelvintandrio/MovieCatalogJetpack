@@ -53,12 +53,12 @@ class MovieFragment : Fragment() {
         })
         idlingResource.decrement()
 
-        /*setMovie(getString(R.string.now_playing).toLowerCase())
+        setMovie(getString(R.string.now_playing).toLowerCase())
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_now_playing))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_popular))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_top_related))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_upcoming))
-        tabMovieCatalogOnClick(tab_layout_movie)*/
+        tabMovieCatalogOnClick(tab_layout_movie)
     }
 
     private fun tabMovieCatalogOnClick(tabLayout: TabLayout) {
@@ -72,10 +72,12 @@ class MovieFragment : Fragment() {
     }
 
     private fun setMovie(type: String) {
+        idlingResource.increment()
         movieViewModel.getDataMovie(type).observe(this, Observer {
             progress_content_movie.visibility = statusGone
             setRecyclerViewMovie(rv_movie, 1, it)
         })
+        idlingResource.decrement()
     }
 
     private fun setRecyclerViewMovie(recyclerMovie: RecyclerView, type: Int, list: List<DataMovie>) {

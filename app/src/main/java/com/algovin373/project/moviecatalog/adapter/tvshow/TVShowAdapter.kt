@@ -21,9 +21,9 @@ class TVShowAdapter(private val dataTVShow: List<DataTVShow>, private val fragme
 
     override fun onBindViewHolder(holder: MovieCatalogViewHolder, position: Int) {
         val imageURL = "${BuildConfig.URL_POSTER}${dataTVShow[position].backgroundTVShow}"
-        Glide.with(fragmentActivity).load(imageURL).into(holder.itemView.image_tvshow_banner)
-        holder.itemView.title_tvshow_banner.text = dataTVShow[position].titleTVShow
-        holder.itemView.date_tvshow_banner.text = dataTVShow[position].firstDateTVShow
+        Glide.with(fragmentActivity).load(imageURL).into(holder.itemView.image_tvshow_catalog)
+        holder.itemView.title_tvshow_catalog.text = dataTVShow[position].titleTVShow
+        holder.itemView.date_tvshow_catalog.text = dataTVShow[position].firstDateTVShow
 
         holder.itemView.setOnClickListener {
             catalogClickListener.itemCatalogClick(dataTVShow[position].idTVShow)

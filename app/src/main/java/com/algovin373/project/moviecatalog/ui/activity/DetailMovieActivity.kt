@@ -10,6 +10,7 @@ import com.algovin373.project.moviecatalog.BuildConfig
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.CastAdapter
 import com.algovin373.project.moviecatalog.adapter.movie.OtherAdapterMovie
+import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.model.DataCast
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
@@ -22,6 +23,8 @@ import kotlinx.android.synthetic.main.activity_detail_movie.*
 import org.jetbrains.anko.startActivity
 
 class DetailMovieActivity : AppCompatActivity() {
+    private val idlingResource = EspressoIdlingResource()
+
     private val detailMovieViewModel by lazy {
         ViewModelProviders.of(this,
             DetailMovieViewModelFactory(movieRepository = MovieRepository(), compositeDisposable = CompositeDisposable()))
@@ -40,6 +43,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
         val id = intent.getIntExtra("ID", 0)
 
+        idlingResource.increment()
         detailMovieViewModel.setDetailMovie(id).observe(this, Observer {
             Glide.with(this).load("${BuildConfig.URL_POSTER}${it.backgroundMovie}").into(image_poster_catalog_movie)
             Glide.with(this).load("${BuildConfig.URL_IMAGE}${it.posterMovie}").into(image_movie_catalog)
@@ -51,7 +55,9 @@ class DetailMovieActivity : AppCompatActivity() {
             vote_count_release_catalog_movie.text = it.voteCountMovie.toString()
             overview_catalog_movie.text = it.overviewMovie
         })
+        idlingResource.decrement()
 
+        idlingResource.increment()
         detailMovieViewModel.setKeywordMovie(id).observe(this, Observer {
             var keyword = ""
             for (i in 0 until it.size) {
@@ -59,18 +65,25 @@ class DetailMovieActivity : AppCompatActivity() {
             }
             keyword_catalog_movie.text = keyword
         })
+        idlingResource.decrement()
 
+        idlingResource.increment()
         detailMovieViewModel.setCastMovie(id).observe(this, Observer {
             setMovieRecyclerView(rv_cast_movie, 1, it, emptyList())
         })
+        idlingResource.decrement()
 
+        idlingResource.increment()
         detailMovieViewModel.setSimilarMovie(id).observe(this, Observer {
             setMovieRecyclerView(rv_similar_movie, 2, emptyList(), it)
         })
+        idlingResource.decrement()
 
+        idlingResource.increment()
         detailMovieViewModel.setRecommendationMovie(id).observe(this, Observer {
             setMovieRecyclerView(rv_recommendation_movie, 2, emptyList(), it)
         })
+        idlingResource.decrement()
 
         btn_back_to_menu.setOnClickListener {
             super.onBackPressed()

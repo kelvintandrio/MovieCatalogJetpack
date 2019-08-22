@@ -1,6 +1,8 @@
 package com.algovin373.project.moviecatalog.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class Movie (
     @field:SerializedName("results")
@@ -65,3 +67,15 @@ data class Keyword(
     @field:SerializedName("name")
     val keyword: String? = null
 )
+
+@Parcelize
+data class SampleDataMovie(
+    val idMovie: String? = null,
+    val titleMovie: String? = null,
+    val dateReleaseMovie: String? = null,
+    val statusMovie: String? = null,
+    val runtimeMovie: String? = null,
+    val voteAverageMovie: String? = null,
+    val voteCountMovie: String? = null,
+    val overviewMovie: String? = null
+) : Parcelable

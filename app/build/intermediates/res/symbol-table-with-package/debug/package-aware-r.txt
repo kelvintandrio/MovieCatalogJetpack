@@ -1790,7 +1790,7 @@ id date_movie_catalog
 id date_release
 id date_release_catalog_movie
 id date_release_catalog_tv_show
-id date_tvshow_banner
+id date_tvshow_catalog
 id decor_content_parent
 id default_activity_button
 id design_bottom_sheet
@@ -1839,12 +1839,12 @@ id image_poster_catalog_movie
 id image_poster_catalog_tv_show
 id image_tv_show_catalog
 id image_tvshow_banner
+id image_tvshow_catalog
 id info
 id invisible
 id italic
 id item_touch_helper_previous_elevation
 id keyword_catalog_movie
-id keyword_catalog_tv_show
 id labeled
 id largeLabel
 id left
@@ -1864,6 +1864,7 @@ id mtrl_internal_children_alpha_tag
 id multiply
 id name_cast
 id navigation_header_container
+id nested_scrollview_tv_show
 id never
 id none
 id normal
@@ -1975,6 +1976,7 @@ id title_movie_catalog
 id title_movie_now_playing
 id title_template
 id title_tvshow_banner
+id title_tvshow_catalog
 id top
 id topPanel
 id touch_outside

@@ -7,19 +7,13 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.algovin373.project.moviecatalog.R
-import com.algovin373.project.moviecatalog.util.DATA_MOVIE_CATALOG
+import com.algovin373.project.moviecatalog.utils.dataMovie
 import org.junit.Rule
 import org.junit.Test
 
-/*
-Scenario Instrumentation Testing :
-- Testing to check match detail data movie ( title, image, date release, year, overview, director, screenplay )
-  Note : Using sample data movie index 0 -> "A Star is Born"
- */
-
 class DetailMovieActivityTest {
 
-    /*private val dummyDataMovie = dataMovie()[0]
+    private val dummyData = dataMovie()[0]
 
     @Rule @JvmField
     var activityDetailMovieRule: ActivityTestRule<DetailMovieActivity> =
@@ -27,39 +21,47 @@ class DetailMovieActivityTest {
             override fun getActivityIntent(): Intent {
                 val targetContext = InstrumentationRegistry.getInstrumentation().targetContext
                 val result = Intent(targetContext, DetailMovieActivity::class.java)
-                result.putExtra(DATA_MOVIE_CATALOG, dummyDataMovie)
+                result.putExtra("ID", 384018) /** Using sample Movie with ID = 384018 **/
                 return result
             }
     }
 
     @Test
     fun loadDetailMovie() {
-        // Title
+        Thread.sleep(2000)
+
+        /** Title Movie **/
         onView(withId(R.id.title_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.title_catalog_movie)).check(matches(withText(dummyDataMovie.title)))
+        onView(withId(R.id.title_catalog_movie)).check(matches(withText(dummyData.titleMovie)))
 
-        // Image
-        onView(withId(R.id.image_movie_catalog)).check(matches(isDisplayed()))
-//        onView(withId(R.id.image_movie_catalog)).check(matches(withText(dummyDataMovie.image.toString())))
-
-        // Date Release
+        /** Date Release Movie **/
         onView(withId(R.id.date_release_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.date_release_catalog_movie)).check(matches(withText(dummyDataMovie.date_release)))
+        onView(withId(R.id.date_release_catalog_movie)).check(matches(withText(dummyData.dateReleaseMovie)))
 
-        // Year
-        onView(withId(R.id.year_release_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.year_release_catalog_movie)).check(matches(withText(dummyDataMovie.year_release.toString())))
+        /** Status Release Movie **/
+        onView(withId(R.id.status_release_catalog_movie)).check(matches(isDisplayed()))
+        onView(withId(R.id.status_release_catalog_movie)).check(matches(withText(dummyData.statusMovie)))
 
-        // Overview
+        /** Run Time Release Movie **/
+        onView(withId(R.id.runtime_release_catalog_movie)).check(matches(isDisplayed()))
+        onView(withId(R.id.runtime_release_catalog_movie)).check(matches(withText(dummyData.runtimeMovie)))
+
+        /** Vote Average Movie **/
+        onView(withId(R.id.vote_average_release_catalog_movie)).check(matches(isDisplayed()))
+        onView(withId(R.id.vote_average_release_catalog_movie)).check(matches(withText(dummyData.voteAverageMovie)))
+
+        /** Vote Count Release Movie **/
+        onView(withId(R.id.vote_count_release_catalog_movie)).check(matches(isDisplayed()))
+        onView(withId(R.id.vote_count_release_catalog_movie)).check(matches(withText(dummyData.voteCountMovie)))
+
+        /** Overview Movie **/
         onView(withId(R.id.overview_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.overview_catalog_movie)).check(matches(withText(dummyDataMovie.overview)))
+        onView(withId(R.id.overview_catalog_movie)).check(matches(withText(dummyData.overviewMovie)))
 
-        // Director
-        onView(withId(R.id.director_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.director_catalog_movie)).check(matches(withText(dummyDataMovie.director)))
+        /** All Data RecyclerView Cast, Similar, and Recommendation Movie **/
+        onView(withId(R.id.rv_cast_movie)).check(matches(isDisplayed()))
+//        onView(withId(R.id.rv_similar_movie)).check(matches(isDisplayed()))
+//        onView(withId(R.id.rv_recommendation_movie)).check(matches(isDisplayed()))
 
-        // Screenplay
-        onView(withId(R.id.screenplay_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.screenplay_catalog_movie)).check(matches(withText(dummyDataMovie.screenplay)))
-    }*/
+    }
 }

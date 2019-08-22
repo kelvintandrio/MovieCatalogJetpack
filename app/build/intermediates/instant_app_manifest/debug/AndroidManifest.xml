@@ -43,10 +43,6 @@
             android:authorities="com.algovin373.project.moviecatalog.debug.lifecycle-process"
             android:exported="false"
             android:multiprocess="true" />
-        <provider
-            android:name="com.android.tools.ir.server.InstantRunContentProvider"
-            android:authorities="com.algovin373.project.moviecatalog.debug.com.android.tools.ir.server.InstantRunContentProvider"
-            android:multiprocess="true" />
     </application>
 
 </manifest>
