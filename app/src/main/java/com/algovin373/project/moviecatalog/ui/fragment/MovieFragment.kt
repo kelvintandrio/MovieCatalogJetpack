@@ -23,6 +23,7 @@ import com.google.android.material.tabs.TabLayout
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_movie.*
 import org.jetbrains.anko.startActivity
+import java.util.*
 
 class MovieFragment : Fragment() {
     private val idlingResource = EspressoIdlingResource()
@@ -53,7 +54,7 @@ class MovieFragment : Fragment() {
         })
         idlingResource.decrement()
 
-        setMovie(getString(R.string.now_playing).toLowerCase())
+        setMovie(getString(R.string.now_playing).toLowerCase(Locale.getDefault()))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_now_playing))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_popular))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_top_related))
@@ -66,7 +67,7 @@ class MovieFragment : Fragment() {
             override fun onTabReselected(p0: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                setMovie(tab?.text.toString().toLowerCase())
+                setMovie(tab?.text.toString().toLowerCase(Locale.getDefault()))
             }
         })
     }

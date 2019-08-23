@@ -22,6 +22,7 @@ import com.google.android.material.tabs.TabLayout
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_tvshow.*
 import org.jetbrains.anko.startActivity
+import java.util.*
 
 class TVShowFragment : Fragment() {
     private val idlingResource = EspressoIdlingResource()
@@ -52,7 +53,7 @@ class TVShowFragment : Fragment() {
         })
         idlingResource.decrement()
 
-        setTVShow(getString(R.string.tvShow_airing_today).toLowerCase())
+        setTVShow(getString(R.string.tvShow_airing_today).toLowerCase(Locale.getDefault()))
         tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_airing_today))
         tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_on_the_air))
         tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_popular))
@@ -65,7 +66,7 @@ class TVShowFragment : Fragment() {
             override fun onTabReselected(p0: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                setTVShow(tab?.text.toString().toLowerCase())
+                setTVShow(tab?.text.toString().toLowerCase(Locale.getDefault()))
             }
         })
     }

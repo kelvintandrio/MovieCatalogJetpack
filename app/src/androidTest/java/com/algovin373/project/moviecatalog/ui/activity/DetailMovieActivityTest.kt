@@ -2,17 +2,21 @@ package com.algovin373.project.moviecatalog.ui.activity
 
 import android.content.Intent
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.algovin373.project.moviecatalog.R
+import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.utils.dataMovie
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
 class DetailMovieActivityTest {
-
+    private val idlingResource = EspressoIdlingResource()
     private val dummyData = dataMovie()[0]
 
     @Rule @JvmField
@@ -24,6 +28,16 @@ class DetailMovieActivityTest {
                 result.putExtra("ID", 384018) /** Using sample Movie with ID = 384018 **/
                 return result
             }
+    }
+
+    @Before
+    fun setUp() {
+        IdlingRegistry.getInstance().register(idlingResource.getEspressoIdlingResource())
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(idlingResource.getEspressoIdlingResource())
     }
 
     @Test

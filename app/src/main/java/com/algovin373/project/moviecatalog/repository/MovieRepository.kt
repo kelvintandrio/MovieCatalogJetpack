@@ -2,7 +2,6 @@ package com.algovin373.project.moviecatalog.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.model.*
 import com.algovin373.project.moviecatalog.repository.inter.StatusResponseDataCast
 import com.algovin373.project.moviecatalog.repository.inter.movie.MovieInter
@@ -17,7 +16,6 @@ import io.reactivex.schedulers.Schedulers
 
 class MovieRepository : MovieInter {
     private val apiService = MyRetrofit.iniRetrofitMovie()
-    private val idlingResource = EspressoIdlingResource()
 
     override fun getMovieNowPlaying(compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie) : LiveData<List<DataMovie>> {
         val myDataMovieNowPlaying = MutableLiveData<List<DataMovie>>()

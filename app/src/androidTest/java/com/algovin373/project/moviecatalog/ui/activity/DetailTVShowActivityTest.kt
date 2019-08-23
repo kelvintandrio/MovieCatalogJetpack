@@ -2,17 +2,22 @@ package com.algovin373.project.moviecatalog.ui.activity
 
 import android.content.Intent
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.algovin373.project.moviecatalog.R
+import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.utils.dataTVShow
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
 class DetailTVShowActivityTest {
     private val dummyDataTVShow = dataTVShow()[0]
+    private val idlingResource = EspressoIdlingResource()
 
     @Rule
     @JvmField
@@ -21,10 +26,20 @@ class DetailTVShowActivityTest {
             override fun getActivityIntent(): Intent {
                 val targetContext = InstrumentationRegistry.getInstrumentation().targetContext
                 val result = Intent(targetContext, DetailTVShowActivity::class.java)
-                result.putExtra("ID", 79340)
+                result.putExtra("ID", 79340) /** Using sample TV Show with ID = 79340 **/
                 return result
             }
         }
+
+    @Before
+    fun setUp() {
+        IdlingRegistry.getInstance().register(idlingResource.getEspressoIdlingResource())
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(idlingResource.getEspressoIdlingResource())
+    }
 
     @Test
     fun loadDetailMovie() {
