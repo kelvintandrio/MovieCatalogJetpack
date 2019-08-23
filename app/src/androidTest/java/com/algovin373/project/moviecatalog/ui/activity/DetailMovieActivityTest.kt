@@ -43,7 +43,6 @@ class DetailMovieActivityTest {
     @Test
     fun loadDetailMovie() {
         Thread.sleep(2000)
-
         /** Title Movie **/
         onView(withId(R.id.title_catalog_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.title_catalog_movie)).check(matches(withText(dummyData.titleMovie)))

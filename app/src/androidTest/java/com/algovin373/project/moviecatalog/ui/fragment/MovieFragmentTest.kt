@@ -42,8 +42,8 @@ class MovieFragmentTest {
 
     @Test
     fun loadCourses() {
+
         /** Data Movie Now Playing in Banner Poster Movie **/
-        Thread.sleep(2500)
         onView(withId(R.id.rv_movie_now_playing)).check(matches(isDisplayed())) // Point No. 1
         onView(withId(R.id.rv_movie_now_playing)).check(RVItemCountAssertion(7)) // Point No. 2
 

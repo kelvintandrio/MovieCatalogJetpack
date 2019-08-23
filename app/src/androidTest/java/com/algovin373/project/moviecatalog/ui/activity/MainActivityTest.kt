@@ -54,7 +54,6 @@ class MainActivityTest {
         // Testing 1 :
         onView(withId(R.id.progress_content_movie_now_playing)).check(matches(isDisplayed()))
         onView(withId(R.id.progress_content_movie)).check(matches(isDisplayed()))
-        Thread.sleep(2500)
         onView(withId(R.id.rv_movie_now_playing)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
         onView(allOf(withText(R.string.movie_popular), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(click())

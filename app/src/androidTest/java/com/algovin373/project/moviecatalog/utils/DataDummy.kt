@@ -12,7 +12,7 @@ fun dataMovie() : ArrayList<SampleDataMovie> {
         "Released",
         "136",
         "6.5",
-        "723",
+        "743",
         "A spinoff of The Fate of the Furious, focusing on Johnson's US Diplomatic Security Agent Luke Hobbs forming an unlikely alliance with Statham's Deckard Shaw."
     ))
     return arrayDataMovie
