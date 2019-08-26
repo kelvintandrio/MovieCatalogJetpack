@@ -10,6 +10,7 @@ import com.algovin373.project.moviecatalog.BuildConfig
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.CastAdapter
 import com.algovin373.project.moviecatalog.adapter.movie.OtherAdapterMovie
+import com.algovin373.project.moviecatalog.db.movie.MovieEntity
 import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.model.DataCast
 import com.algovin373.project.moviecatalog.model.DataMovie
@@ -24,10 +25,13 @@ import org.jetbrains.anko.startActivity
 
 class DetailMovieActivity : AppCompatActivity() {
     private val idlingResource = EspressoIdlingResource()
+    private var imgPosterMovie = ""
+    private var statusFavorite = 0
 
     private val detailMovieViewModel by lazy {
         ViewModelProviders.of(this,
-            DetailMovieViewModelFactory(movieRepository = MovieRepository(), compositeDisposable = CompositeDisposable()))
+            DetailMovieViewModelFactory(movieRepository = MovieRepository(),
+                compositeDisposable = CompositeDisposable()))
             .get(DetailMovieViewModel::class.java)
     }
 
@@ -43,8 +47,14 @@ class DetailMovieActivity : AppCompatActivity() {
 
         val id = intent.getIntExtra("ID", 0)
 
+        if (id == detailMovieViewModel.checkDataMovieFavorite(this, id)) {
+            statusFavorite = 1
+            btn_favorite_movie.setImageDrawable(getDrawable(R.drawable.ic_added_to_favorite))
+        }
+
         idlingResource.increment()
         detailMovieViewModel.setDetailMovie(id).observe(this, Observer {
+            imgPosterMovie = "${BuildConfig.URL_IMAGE}${it.posterMovie}"
             Glide.with(this).load("${BuildConfig.URL_POSTER}${it.backgroundMovie}").into(image_poster_catalog_movie)
             Glide.with(this).load("${BuildConfig.URL_IMAGE}${it.posterMovie}").into(image_movie_catalog)
             title_catalog_movie.text = it.titleMovie
@@ -87,6 +97,27 @@ class DetailMovieActivity : AppCompatActivity() {
 
         btn_back_to_menu.setOnClickListener {
             super.onBackPressed()
+        }
+
+        btn_favorite_movie.setOnClickListener {
+            when(statusFavorite) {
+                1 -> {
+                    statusFavorite = 0
+                    detailMovieViewModel.setDeleteMovieFavorite(this, id)
+                    btn_favorite_movie.setImageDrawable(getDrawable(R.drawable.ic_add_to_favorite))
+                }
+                0 -> {
+                    statusFavorite = 1
+                    val favorite = MovieEntity(
+                        id,
+                        imgPosterMovie,
+                        title_catalog_movie.text.toString(),
+                        date_release_catalog_movie.text.toString()
+                    )
+                    detailMovieViewModel.setInsertMovieFavorite(this, favorite)
+                    btn_favorite_movie.setImageDrawable(getDrawable(R.drawable.ic_added_to_favorite))
+                }
+            }
         }
     }
 

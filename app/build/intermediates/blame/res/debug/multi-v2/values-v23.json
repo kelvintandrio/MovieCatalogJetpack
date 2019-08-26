@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/mbp/Kelvin/ProjectKU/Android/Jetpack Dicoding/MovieCatalog02/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
+            "outputFile": "/Users/mbp/Kelvin/ProjectKU/Android/Jetpack Dicoding/MovieCatalog03/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "/Users/mbp/.gradle/caches/transforms-2/files-2.1/27bc33bc5e89f584b9b261dfc907e0db/cardview-1.0.0/res/values-v23/values-v23.xml",

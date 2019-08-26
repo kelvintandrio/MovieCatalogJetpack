@@ -79,3 +79,10 @@ data class SampleDataMovie(
     val voteCountMovie: String? = null,
     val overviewMovie: String? = null
 ) : Parcelable
+
+data class FavoriteMovie(
+    val id: String? = null,
+    val poster: String? = null,
+    val title: String? = null,
+    val date: String? = null
+)

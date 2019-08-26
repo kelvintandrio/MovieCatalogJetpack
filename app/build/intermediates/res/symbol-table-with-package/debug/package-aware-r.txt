@@ -1695,6 +1695,8 @@ drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
 drawable dot_background
+drawable ic_add_to_favorite
+drawable ic_added_to_favorite
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_mtrl_chip_checked_black
@@ -1765,6 +1767,7 @@ id bevel
 id blocking
 id bottom
 id btn_back_to_menu
+id btn_favorite_movie
 id butt
 id buttonPanel
 id cancel_action
@@ -1897,6 +1900,7 @@ id runtime_release_catalog_movie
 id rv_cast_movie
 id rv_cast_tv_show
 id rv_movie
+id rv_movie_favorite
 id rv_movie_now_playing
 id rv_recommendation_movie
 id rv_recommendation_tv_show
@@ -2068,7 +2072,9 @@ layout design_text_input_password_icon
 layout dot_layout
 layout dp_example
 layout fragment_movie
+layout fragment_movie_favorite
 layout fragment_tvshow
+layout fragment_tvshow_favorite
 layout item_cast
 layout item_catalog_other
 layout item_movie_banner
@@ -2156,6 +2162,7 @@ string character_counter_pattern
 string date_release
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string keywords
 string movie

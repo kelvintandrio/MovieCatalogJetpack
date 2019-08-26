@@ -40,6 +40,17 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"/>
 
+            <ImageView
+                    android:id="@+id/btn_favorite_movie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_add_to_favorite"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
