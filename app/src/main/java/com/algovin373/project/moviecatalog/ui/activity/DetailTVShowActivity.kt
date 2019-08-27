@@ -10,6 +10,7 @@ import com.algovin373.project.moviecatalog.BuildConfig
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.CastAdapter
 import com.algovin373.project.moviecatalog.adapter.tvshow.OtherAdapterTVShow
+import com.algovin373.project.moviecatalog.db.tvshow.TVShowEntity
 import com.algovin373.project.moviecatalog.model.DataCast
 import com.algovin373.project.moviecatalog.model.DataTVShow
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
@@ -22,6 +23,9 @@ import kotlinx.android.synthetic.main.activity_detail_tvshow.*
 import org.jetbrains.anko.startActivity
 
 class DetailTVShowActivity : AppCompatActivity() {
+    private var imgPosterTVShow = ""
+    private var statusFavorite = 0
+
     private val detailTVShowViewModel by lazy {
         ViewModelProviders.of(this,
             DetailTVShowViewModelFactory(tvShowRepository = TVShowRepository(), compositeDisposable = CompositeDisposable()))
@@ -40,7 +44,13 @@ class DetailTVShowActivity : AppCompatActivity() {
 
         val id = intent.getIntExtra("ID", 0)
 
+        if (id == detailTVShowViewModel.checkDataTVShowFavorite(this, id)) {
+            statusFavorite = 1
+            btn_favorite_movie.setImageDrawable(getDrawable(R.drawable.ic_added_to_favorite))
+        }
+
         detailTVShowViewModel.setDetailTVShow(id).observe(this, Observer {
+            imgPosterTVShow = "${it.backgroundTVShow}"
             Glide.with(this).load("${BuildConfig.URL_POSTER}${it.backgroundTVShow}").into(image_poster_catalog_tv_show)
             Glide.with(this).load("${BuildConfig.URL_IMAGE}${it.posterTVShow}").into(image_tv_show_catalog)
             title_catalog_tv_show.text = it.titleTVShow
@@ -66,6 +76,27 @@ class DetailTVShowActivity : AppCompatActivity() {
 
         btn_back_to_menu.setOnClickListener {
             super.onBackPressed()
+        }
+
+        btn_favorite_movie.setOnClickListener {
+            when(statusFavorite) {
+                1 -> {
+                    statusFavorite = 0
+                    detailTVShowViewModel.setDeleteTVShowFavorite(this, id)
+                    btn_favorite_movie.setImageDrawable(getDrawable(R.drawable.ic_add_to_favorite))
+                }
+                0 -> {
+                    statusFavorite = 1
+                    val favorite = TVShowEntity(
+                        id,
+                        imgPosterTVShow,
+                        title_catalog_tv_show.text.toString(),
+                        date_release_catalog_tv_show.text.toString()
+                    )
+                    detailTVShowViewModel.setInsertTVShowFavorite(this, favorite)
+                    btn_favorite_movie.setImageDrawable(getDrawable(R.drawable.ic_added_to_favorite))
+                }
+            }
         }
     }
 

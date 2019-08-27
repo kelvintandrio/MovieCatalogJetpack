@@ -1907,6 +1907,7 @@ id rv_recommendation_tv_show
 id rv_similar_movie
 id rv_similar_tv_show
 id rv_tvShow
+id rv_tv_show_favorite
 id save_image_matrix
 id save_non_transition_alpha
 id save_scale_type
@@ -2162,10 +2163,10 @@ string character_counter_pattern
 string date_release
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
-string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string keywords
 string movie
+string movie_favorite
 string movie_now_playing
 string movie_popular
 string movie_top_related
@@ -2193,6 +2194,7 @@ string tvShow_airing_today
 string tvShow_on_the_air
 string tvShow_popular
 string tvShow_top_related
+string tv_show_favorite
 string tvshow
 string vote_average
 string vote_count

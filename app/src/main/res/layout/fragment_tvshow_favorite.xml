@@ -2,8 +2,12 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#96A4F7"
         tools:context="com.algovin373.project.moviecatalog.ui.fragment.TVShowFavoriteFragment">
 
-
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tv_show_favorite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 </FrameLayout>

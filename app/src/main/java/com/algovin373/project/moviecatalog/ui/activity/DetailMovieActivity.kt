@@ -54,7 +54,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
         idlingResource.increment()
         detailMovieViewModel.setDetailMovie(id).observe(this, Observer {
-            imgPosterMovie = "${BuildConfig.URL_IMAGE}${it.posterMovie}"
+            imgPosterMovie = "${BuildConfig.URL_POSTER}${it.posterMovie}"
             Glide.with(this).load("${BuildConfig.URL_POSTER}${it.backgroundMovie}").into(image_poster_catalog_movie)
             Glide.with(this).load("${BuildConfig.URL_IMAGE}${it.posterMovie}").into(image_movie_catalog)
             title_catalog_movie.text = it.titleMovie

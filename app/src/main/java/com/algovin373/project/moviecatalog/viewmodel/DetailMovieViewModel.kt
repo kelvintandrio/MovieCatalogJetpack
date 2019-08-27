@@ -79,6 +79,7 @@ class DetailMovieViewModel(private val movieRepository: MovieRepository,
     }
 
     fun setInsertMovieFavorite(context: Context, movieFavorite: MovieEntity) {
+        Log.i("URLIMAGE", "${movieFavorite.movieTitle} x ${movieFavorite.moviePoster}")
         val movieDatabase = MovieDatabase.getInstance(context)
         movieDatabase.movieDao().insertMovieFavorite(movieFavorite)
         context.toast("Success input to Movie Favorite")

@@ -1,6 +1,11 @@
 package com.algovin373.project.moviecatalog.db.tvshow
 
-/*
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+
+@Database(entities = [TVShowEntity::class], version = 1)
 abstract class TVShowDatabase : RoomDatabase() {
     abstract fun tvShowDao() : TVShowDao
 
@@ -14,10 +19,12 @@ abstract class TVShowDatabase : RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         TVShowDatabase::class.java, "TVShowFavorite.db"
-                    ).build()
+                    )
+                        .allowMainThreadQueries()
+                        .build()
                 }
                 return INSTANCE as TVShowDatabase
             }
         }
     }
-}*/
+}

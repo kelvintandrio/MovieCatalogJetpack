@@ -3,6 +3,7 @@ package com.algovin373.project.moviecatalog.util
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagedList
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.retrofit.MyRetrofit
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -32,3 +33,9 @@ fun loadMovie() : LiveData<List<DataMovie>> {
 
     return myDataMovieNowPlaying
 }
+
+fun configPaged(size: Int): PagedList.Config = PagedList.Config.Builder()
+    .setPageSize(size)
+    .setInitialLoadSizeHint(size)
+    .setEnablePlaceholders(true)
+    .build()

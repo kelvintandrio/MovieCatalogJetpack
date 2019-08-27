@@ -35,12 +35,17 @@ class MovieFavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adapterMovieFavorite = MovieFavoriteAdapter(requireActivity(), catalogClickListener)
+
         movieFavoriteViewModel.setMovieFavorite(requireContext()).observe(this, Observer {
-            rv_movie_favorite.apply {
-                layoutManager = LinearLayoutManager(requireContext())
-                setHasFixedSize(true)
-                adapter = MovieFavoriteAdapter(it, requireContext(), catalogClickListener)
-            }
+            adapterMovieFavorite.submitList(it)
         })
+
+        rv_movie_favorite.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+            adapter = adapterMovieFavorite
+            adapter?.notifyDataSetChanged()
+        }
     }
 }
