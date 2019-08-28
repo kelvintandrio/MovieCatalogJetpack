@@ -1,12 +1,9 @@
 package com.algovin373.project.moviecatalog.db.movie
 
 import androidx.paging.DataSource
-import androidx.paging.PagedList
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import io.reactivex.Observable
-import io.reactivex.Observer
 
 @Dao
 interface MovieDao {

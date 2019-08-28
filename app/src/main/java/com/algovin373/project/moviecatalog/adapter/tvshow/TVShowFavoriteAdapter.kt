@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.BuildConfig
 import com.algovin373.project.moviecatalog.R
-import com.algovin373.project.moviecatalog.adapter.movie.MovieFavoriteDiffUtil
-import com.algovin373.project.moviecatalog.db.movie.MovieEntity
 import com.algovin373.project.moviecatalog.db.tvshow.TVShowEntity
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.viewholder.MovieCatalogViewHolder

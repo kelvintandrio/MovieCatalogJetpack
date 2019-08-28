@@ -8,6 +8,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
+    testOptions.unitTests.includeAndroidResources = true
     defaultConfig {
         buildConfigField "String", "URL_MOVIE_CATALOG", "\"https://api.themoviedb.org\""
         buildConfigField "String", "API_KEY", "\"19978af3bb16e019522fd5077f3018f2\""
@@ -104,6 +105,7 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:2.0.1"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
     testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
+    testImplementation 'androidx.test:core:1.2.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.annotation:annotation:1.1.0"

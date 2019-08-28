@@ -4,7 +4,6 @@ import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.algovin373.project.moviecatalog.db.movie.MovieEntity
 
 @Dao
 interface TVShowDao {
