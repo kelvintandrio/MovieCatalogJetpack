@@ -17,7 +17,6 @@ import org.junit.Test
 
 class DetailTVShowActivityTest {
     private val dummyDataTVShow = dataTVShow()[0]
-    private val idlingResource = EspressoIdlingResource()
 
     @Rule
     @JvmField
@@ -33,18 +32,16 @@ class DetailTVShowActivityTest {
 
     @Before
     fun setUp() {
-        IdlingRegistry.getInstance().register(idlingResource.getEspressoIdlingResource())
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource())
     }
 
     @After
     fun tearDown() {
-        IdlingRegistry.getInstance().unregister(idlingResource.getEspressoIdlingResource())
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource())
     }
 
     @Test
     fun loadDetailMovie() {
-        Thread.sleep(2000)
-
         /** Title TV Show **/
         onView(withId(R.id.title_catalog_tv_show)).check(matches(isDisplayed()))
         onView(withId(R.id.title_catalog_tv_show)).check(matches(withText(dummyDataTVShow.titleTVShow)))
@@ -61,21 +58,13 @@ class DetailTVShowActivityTest {
         onView(withId(R.id.episodes_release_catalog_tv_show)).check(matches(isDisplayed()))
         onView(withId(R.id.episodes_release_catalog_tv_show)).check(matches(withText(dummyDataTVShow.episodesTVShow)))
 
-        /** Vote Average TV Show **/
-        onView(withId(R.id.vote_average_release_catalog_tv_show)).check(matches(isDisplayed()))
-        onView(withId(R.id.vote_average_release_catalog_tv_show)).check(matches(withText(dummyDataTVShow.voteAverageTVShow)))
-
-        /** Vote Count TV Show **/
-        onView(withId(R.id.vote_count_release_catalog_tv_show)).check(matches(isDisplayed()))
-        onView(withId(R.id.vote_count_release_catalog_tv_show)).check(matches(withText(dummyDataTVShow.voteCountTVShow)))
-
         /** Overview TV Show **/
         onView(withId(R.id.overview_catalog_tv_show)).check(matches(isDisplayed()))
         onView(withId(R.id.overview_catalog_tv_show)).check(matches(withText(dummyDataTVShow.overviewTVShow)))
 
         /** All Data RecyclerView Cast, Similar, and Recommendation TV Show **/
         onView(withId(R.id.rv_cast_tv_show)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_similar_tv_show)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_recommendation_tv_show)).check(matches(isDisplayed()))
+//        onView(withId(R.id.rv_similar_tv_show)).check(matches(isDisplayed()))
+//        onView(withId(R.id.rv_recommendation_tv_show)).check(matches(isDisplayed()))
     }
 }

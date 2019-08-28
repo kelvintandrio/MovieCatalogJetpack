@@ -5,4 +5,8 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="colorTabLayout">#ed3936</color>
+    <color name="background01">#EEC6C6</color>
+    <color name="background02">#B4F0F5</color>
+    <color name="background03">@android:color/white</color>
+
 </resources>

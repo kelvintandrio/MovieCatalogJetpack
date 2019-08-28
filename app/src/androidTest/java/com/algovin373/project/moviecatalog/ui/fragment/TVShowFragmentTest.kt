@@ -23,8 +23,6 @@ Scenario Instrumentation Testing :
  */
 
 class TVShowFragmentTest {
-    private val idlingResource = EspressoIdlingResource()
-
     @Rule
     @JvmField
     var fragmentTVShowRule: ActivityTestRule<AlternativeFragmentActivity> = ActivityTestRule(AlternativeFragmentActivity::class.java)
@@ -32,19 +30,18 @@ class TVShowFragmentTest {
 
     @Before
     fun setUp() {
-        IdlingRegistry.getInstance().register(idlingResource.getEspressoIdlingResource())
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource())
         fragmentTVShowRule.activity.setFragment(tvShowFragment)
     }
 
     @After
     fun tearDown() {
-        IdlingRegistry.getInstance().unregister(idlingResource.getEspressoIdlingResource())
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource())
     }
 
     @Test
     fun loadCourses() {
         /** Data TVShow Airing Today in Banner Poster TVShow **/
-        Thread.sleep(2500)
         Espresso.onView(withId(R.id.viewpager_tvshow_banner)).check(matches(isDisplayed()))
         Espresso.onView(withId(R.id.worm_dots_indicator_tvshow)).check(matches(isDisplayed()))
 

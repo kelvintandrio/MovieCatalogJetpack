@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.tvshow.BannerTVShowAdapter
 import com.algovin373.project.moviecatalog.adapter.tvshow.TVShowAdapter
-import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.repository.TVShowRepository
 import com.algovin373.project.moviecatalog.ui.activity.DetailTVShowActivity
@@ -25,8 +24,6 @@ import org.jetbrains.anko.startActivity
 import java.util.*
 
 class TVShowFragment : Fragment() {
-    private val idlingResource = EspressoIdlingResource()
-
     private val tvShowViewModel by lazy {
         ViewModelProviders.of(this,
             TVShowViewModelFactory(tvShowRepository = TVShowRepository(), compositeDisposable = CompositeDisposable()))
@@ -46,12 +43,10 @@ class TVShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        idlingResource.increment()
         tvShowViewModel.getDataTVShowAiringToday().observe(this, Observer {
             viewpager_tvshow_banner.adapter = BannerTVShowAdapter(requireContext(), it)
             worm_dots_indicator_tvshow.setViewPager(viewpager_tvshow_banner)
         })
-        idlingResource.decrement()
 
         setTVShow(getString(R.string.tvShow_airing_today).toLowerCase(Locale.getDefault()))
         tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_airing_today))
@@ -72,7 +67,6 @@ class TVShowFragment : Fragment() {
     }
 
     private fun setTVShow(type: String) {
-        idlingResource.increment()
         tvShowViewModel.getDataTVShow(type).observe(this, Observer {
             progress_content_tvShow.visibility = statusGone
             rv_tvShow.apply {
@@ -86,6 +80,5 @@ class TVShowFragment : Fragment() {
                 adapter?.notifyDataSetChanged()
             }
         })
-        idlingResource.decrement()
     }
 }

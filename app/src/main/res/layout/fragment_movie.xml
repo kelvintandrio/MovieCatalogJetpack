@@ -5,7 +5,7 @@
              android:id="@+id/container_movie"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="#EEC6C6"
+             android:background="@color/background01"
              tools:context=".ui.fragment.MovieFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

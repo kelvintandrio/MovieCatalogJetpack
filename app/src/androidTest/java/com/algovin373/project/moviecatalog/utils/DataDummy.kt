@@ -25,7 +25,7 @@ fun dataTVShow() : ArrayList<SampleDataTVShow> {
         "The Outpost",
         "2018-07-10",
         "2",
-        "19",
+        "20",
         "6.0",
         "34",
         "Talon, the lone survivor of a race called the Blackbloods, sets off to the edge of civilisation to track her family's killers. On her journey she discovers she has supernatural powers which she must learn to harness in order to achieve her goals."

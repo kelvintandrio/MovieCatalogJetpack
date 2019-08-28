@@ -23,26 +23,23 @@ Scenario Instrumentation Testing :
  */
 
 class MovieFragmentTest {
-    private val idlingResource = EspressoIdlingResource()
-
     @Rule @JvmField
     var fragmentMovieRule: ActivityTestRule<AlternativeFragmentActivity> = ActivityTestRule(AlternativeFragmentActivity::class.java)
     private val movieFragment = MovieFragment()
 
     @Before
     fun setUp() {
-        IdlingRegistry.getInstance().register(idlingResource.getEspressoIdlingResource())
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource())
         fragmentMovieRule.activity.setFragment(movieFragment)
     }
 
     @After
     fun tearDown() {
-        IdlingRegistry.getInstance().unregister(idlingResource.getEspressoIdlingResource())
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource())
     }
 
     @Test
     fun loadCourses() {
-
         /** Data Movie Now Playing in Banner Poster Movie **/
         onView(withId(R.id.rv_movie_now_playing)).check(matches(isDisplayed())) // Point No. 1
         onView(withId(R.id.rv_movie_now_playing)).check(RVItemCountAssertion(7)) // Point No. 2

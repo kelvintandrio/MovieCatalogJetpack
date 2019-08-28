@@ -16,7 +16,6 @@ import org.junit.Rule
 import org.junit.Test
 
 class DetailMovieActivityTest {
-    private val idlingResource = EspressoIdlingResource()
     private val dummyData = dataMovie()[0]
 
     @Rule @JvmField
@@ -32,12 +31,12 @@ class DetailMovieActivityTest {
 
     @Before
     fun setUp() {
-        IdlingRegistry.getInstance().register(idlingResource.getEspressoIdlingResource())
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource())
     }
 
     @After
     fun tearDown() {
-        IdlingRegistry.getInstance().unregister(idlingResource.getEspressoIdlingResource())
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource())
     }
 
     @Test
@@ -62,10 +61,6 @@ class DetailMovieActivityTest {
         /** Vote Average Movie **/
         onView(withId(R.id.vote_average_release_catalog_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.vote_average_release_catalog_movie)).check(matches(withText(dummyData.voteAverageMovie)))
-
-        /** Vote Count Release Movie **/
-        onView(withId(R.id.vote_count_release_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.vote_count_release_catalog_movie)).check(matches(withText(dummyData.voteCountMovie)))
 
         /** Overview Movie **/
         onView(withId(R.id.overview_catalog_movie)).check(matches(isDisplayed()))

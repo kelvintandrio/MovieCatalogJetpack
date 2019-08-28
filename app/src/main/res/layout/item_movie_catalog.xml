@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:orientation="horizontal"
-              android:background="@android:color/white"
+              android:background="@color/background03"
               android:layout_marginStart="@dimen/_8sdp"
               android:layout_marginEnd="@dimen/_8sdp"
               android:layout_marginTop="@dimen/_4sdp"
