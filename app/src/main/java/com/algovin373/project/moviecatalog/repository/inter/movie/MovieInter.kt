@@ -1,6 +1,7 @@
 package com.algovin373.project.moviecatalog.repository.inter.movie
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import com.algovin373.project.moviecatalog.model.DataCast
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.model.DetailMovie
@@ -12,13 +13,13 @@ interface MovieInter {
     fun getMovieNowPlaying(
         compositeDisposable: CompositeDisposable,
         statusResponseMovie: StatusResponseMovie
-    ): LiveData<List<DataMovie>>
+    ): LiveData<PagedList<DataMovie>>
 
     fun getDataMovie(
         type: String,
         compositeDisposable: CompositeDisposable,
         statusResponseMovie: StatusResponseMovie
-    ): LiveData<List<DataMovie>>
+    ): LiveData<PagedList<DataMovie>>
 
     fun getDetailMovie(
         idMovie: Int?,

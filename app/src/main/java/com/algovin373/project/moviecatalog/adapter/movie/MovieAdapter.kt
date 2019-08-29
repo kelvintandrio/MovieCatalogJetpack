@@ -3,9 +3,12 @@ package com.algovin373.project.moviecatalog.adapter.movie
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.BuildConfig
 import com.algovin373.project.moviecatalog.R
+import com.algovin373.project.moviecatalog.db.movie.MovieEntity
 import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.viewholder.MovieCatalogViewHolder
@@ -13,10 +16,8 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_movie_banner.view.*
 import kotlinx.android.synthetic.main.item_movie_catalog.view.*
 
-class MovieAdapter(private val dataMovie: List<DataMovie>,
-                   private val fragmentActivity: FragmentActivity?,
-                   private val type: Int,
-                   private val catalogClickListener: CatalogClickListener) : RecyclerView.Adapter<MovieCatalogViewHolder>() {
+class MovieAdapter(private val type: Int, private val catalogClickListener: CatalogClickListener)
+        : PagedListAdapter<DataMovie, MovieCatalogViewHolder>(MovieDiffUtil()) {
 
     private var typeLayout = 0
 
@@ -25,31 +26,30 @@ class MovieAdapter(private val dataMovie: List<DataMovie>,
             1 -> typeLayout = R.layout.item_movie_catalog
             2 -> typeLayout = R.layout.item_movie_banner
         }
-        return MovieCatalogViewHolder(LayoutInflater.from(fragmentActivity).inflate(typeLayout, parent, false))
+        return MovieCatalogViewHolder(LayoutInflater.from(parent.context).inflate(typeLayout, parent, false))
     }
 
     override fun onBindViewHolder(holder: MovieCatalogViewHolder, position: Int) {
         when (type) {
             1 -> {
-                if (fragmentActivity != null) {
-                    Glide.with(fragmentActivity).load("${BuildConfig.URL_IMAGE}${dataMovie[position].posterMovie}")
-                        .into(holder.itemView.image_movie_catalog)
-                }
-                holder.itemView.title_movie_catalog.text = dataMovie[position].titleMovie
-                holder.itemView.date_movie_catalog.text = dataMovie[position].releaseDateMovie
+                Glide.with(holder.itemView.context).load("${BuildConfig.URL_IMAGE}${getItem(position)?.posterMovie}")
+                    .into(holder.itemView.image_movie_catalog)
+                holder.itemView.title_movie_catalog.text = getItem(position)?.titleMovie
+                holder.itemView.date_movie_catalog.text = getItem(position)?.releaseDateMovie
             }
             2 -> {
-                if (fragmentActivity != null) {
-                    Glide.with(fragmentActivity).load("${BuildConfig.URL_IMAGE}${dataMovie[position].posterMovie}")
-                        .into(holder.itemView.poster_movie_now_playing)
-                }
-                holder.itemView.title_movie_now_playing.text = dataMovie[position].titleMovie
+                Glide.with(holder.itemView.context).load("${BuildConfig.URL_IMAGE}${getItem(position)?.posterMovie}")
+                    .into(holder.itemView.poster_movie_now_playing)
+                holder.itemView.title_movie_now_playing.text = getItem(position)?.titleMovie
             }
         }
         holder.itemView.setOnClickListener {
-            catalogClickListener.itemCatalogClick(dataMovie[position].idMovie)
+            catalogClickListener.itemCatalogClick(getItem(position)?.idMovie)
         }
     }
+}
 
-    override fun getItemCount(): Int = dataMovie.size
+class MovieDiffUtil : DiffUtil.ItemCallback<DataMovie>() {
+    override fun areItemsTheSame(oldItem: DataMovie, newItem: DataMovie): Boolean = oldItem.idMovie == newItem.idMovie
+    override fun areContentsTheSame(oldItem: DataMovie, newItem: DataMovie): Boolean = oldItem == newItem
 }

@@ -2,6 +2,9 @@ package com.algovin373.project.moviecatalog.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.algovin373.project.moviecatalog.datasource.factory.DataSourceFactoryMovie
 import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.model.*
 import com.algovin373.project.moviecatalog.repository.inter.StatusResponseDataCast
@@ -19,53 +22,23 @@ class MovieRepository : MovieInter {
     private val apiService = MyRetrofit.iniRetrofitMovie()
 
     override fun getMovieNowPlaying(compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie)
-            : LiveData<List<DataMovie>> {
-        EspressoIdlingResource.increment()
-        val myDataMovieNowPlaying = MutableLiveData<List<DataMovie>>()
-        compositeDisposable.add(
-            apiService.getDataMovieNowPlaying()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { it.dataMovie?.take(7) }
-            .subscribe(
-                {
-                    statusResponseMovie.onSuccess(it!!)
-                    myDataMovieNowPlaying.postValue(it)
-                    EspressoIdlingResource.decrement()
-                },
-                {
-                    statusResponseMovie.onFailed()
-                }
-            ))
-        return myDataMovieNowPlaying
-    }
+            : LiveData<PagedList<DataMovie>> = LivePagedListBuilder(DataSourceFactoryMovie(
+                compositeDisposable, statusResponseMovie, apiService.getDataMovieNowPlaying(), 0), 5).build()
 
-    override fun getDataMovie(type: String, compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie) : LiveData<List<DataMovie>> {
-        EspressoIdlingResource.increment()
-        val myDataMovie : MutableLiveData<List<DataMovie>> = MutableLiveData()
-        var observable : Observable<Movie> = apiService.getDataMovieNowPlaying()
-        when(type) {
-            "now playing" -> observable = apiService.getDataMovieNowPlaying()
-            "popular" -> observable = apiService.getDataMoviePopular()
-            "top related" -> observable = apiService.getDataMovieTopRated()
-            "upcoming" -> observable = apiService.getDataMovieUpComing()
+    override fun getDataMovie(type: String, compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie)
+            : LiveData<PagedList<DataMovie>> {
+        return when(type) {
+            "now playing" -> LivePagedListBuilder(DataSourceFactoryMovie(
+                compositeDisposable, statusResponseMovie, apiService.getDataMovieNowPlaying(), 1),5).build()
+            "popular" -> LivePagedListBuilder(DataSourceFactoryMovie(
+                compositeDisposable, statusResponseMovie, apiService.getDataMoviePopular(), 1),5).build()
+            "top related" -> LivePagedListBuilder(DataSourceFactoryMovie(
+                compositeDisposable, statusResponseMovie, apiService.getDataMovieTopRated(), 1),5).build()
+            "upcoming" -> LivePagedListBuilder(DataSourceFactoryMovie(
+                compositeDisposable, statusResponseMovie, apiService.getDataMovieUpComing(), 1),5).build()
+            else -> LivePagedListBuilder(DataSourceFactoryMovie(
+                compositeDisposable, statusResponseMovie, apiService.getDataMovieNowPlaying(), 1),5).build()
         }
-
-        compositeDisposable.add(observable.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { it.dataMovie }
-            .subscribe(
-                {
-                    statusResponseMovie.onSuccess(it!!)
-                    myDataMovie.postValue(it)
-                    EspressoIdlingResource.decrement()
-                },
-                {
-                    statusResponseMovie.onFailed()
-                }
-            ))
-
-        return myDataMovie
     }
 
     override fun getDetailMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseDetailMovie: StatusResponseDetailMovie): LiveData<DetailMovie> {

@@ -12,6 +12,7 @@ import io.reactivex.schedulers.Schedulers
 
 const val DATA_MOVIE_CATALOG = "MOVIE_CATALOG"
 const val statusGone = View.GONE
+const val statusVisible = View.VISIBLE
 
 fun loadMovie() : LiveData<List<DataMovie>> {
     val myDataMovieNowPlaying = MutableLiveData<List<DataMovie>>()
