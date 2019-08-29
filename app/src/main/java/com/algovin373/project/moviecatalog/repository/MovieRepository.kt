@@ -17,11 +17,11 @@ import io.reactivex.schedulers.Schedulers
 
 class MovieRepository : MovieInter {
     private val apiService = MyRetrofit.iniRetrofitMovie()
-    private val idlingResource = EspressoIdlingResource()
 
-    override fun getMovieNowPlaying(compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie) : LiveData<List<DataMovie>> {
+    override fun getMovieNowPlaying(compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie)
+            : LiveData<List<DataMovie>> {
+        EspressoIdlingResource.increment()
         val myDataMovieNowPlaying = MutableLiveData<List<DataMovie>>()
-
         compositeDisposable.add(
             apiService.getDataMovieNowPlaying()
             .subscribeOn(Schedulers.io())
@@ -31,6 +31,7 @@ class MovieRepository : MovieInter {
                 {
                     statusResponseMovie.onSuccess(it!!)
                     myDataMovieNowPlaying.postValue(it)
+                    EspressoIdlingResource.decrement()
                 },
                 {
                     statusResponseMovie.onFailed()
@@ -40,6 +41,7 @@ class MovieRepository : MovieInter {
     }
 
     override fun getDataMovie(type: String, compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie) : LiveData<List<DataMovie>> {
+        EspressoIdlingResource.increment()
         val myDataMovie : MutableLiveData<List<DataMovie>> = MutableLiveData()
         var observable : Observable<Movie> = apiService.getDataMovieNowPlaying()
         when(type) {
@@ -56,6 +58,7 @@ class MovieRepository : MovieInter {
                 {
                     statusResponseMovie.onSuccess(it!!)
                     myDataMovie.postValue(it)
+                    EspressoIdlingResource.decrement()
                 },
                 {
                     statusResponseMovie.onFailed()
@@ -66,6 +69,7 @@ class MovieRepository : MovieInter {
     }
 
     override fun getDetailMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseDetailMovie: StatusResponseDetailMovie): LiveData<DetailMovie> {
+        EspressoIdlingResource.increment()
         val myDetailMovie: MutableLiveData<DetailMovie> = MutableLiveData()
         disposable.add(apiService.getDetailMovie(idMovie.toString())
             .subscribeOn(Schedulers.io())
@@ -74,6 +78,7 @@ class MovieRepository : MovieInter {
                 {
                     statusResponseDetailMovie.onSuccess(it!!)
                     myDetailMovie.postValue(it)
+                    EspressoIdlingResource.decrement()
                 },
                 {
                     statusResponseDetailMovie.onFailed()
@@ -83,6 +88,7 @@ class MovieRepository : MovieInter {
     }
 
     override fun getKeywordMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseKeywordMovie: StatusResponseKeywordMovie): LiveData<ArrayList<Keyword>> {
+        EspressoIdlingResource.increment()
         val myKeywordMovie: MutableLiveData<ArrayList<Keyword>> = MutableLiveData()
         disposable.add(apiService.getKeywordMovie(idMovie.toString())
             .subscribeOn(Schedulers.io())
@@ -92,6 +98,7 @@ class MovieRepository : MovieInter {
                 {
                     statusResponseKeywordMovie.onSuccess(it!!)
                     myKeywordMovie.postValue(it)
+                    EspressoIdlingResource.decrement()
                 },
                 {
                     statusResponseKeywordMovie.onFailed()
@@ -102,6 +109,7 @@ class MovieRepository : MovieInter {
     }
 
     override fun getCastMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseDataCast: StatusResponseDataCast): LiveData<List<DataCast>> {
+        EspressoIdlingResource.increment()
         val myCastMovie: MutableLiveData<List<DataCast>> = MutableLiveData()
         disposable.add(apiService.getCastMovie(idMovie.toString())
             .subscribeOn(Schedulers.io())
@@ -111,6 +119,7 @@ class MovieRepository : MovieInter {
                 {
                     statusResponseDataCast.onSuccess(it!!)
                     myCastMovie.postValue(it)
+                    EspressoIdlingResource.decrement()
                 },
                 {
                     statusResponseDataCast.onFailed()
@@ -121,6 +130,7 @@ class MovieRepository : MovieInter {
     }
 
     override fun getSimilarMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie): LiveData<List<DataMovie>> {
+        EspressoIdlingResource.increment()
         val mySimilarMovie: MutableLiveData<List<DataMovie>> = MutableLiveData()
         disposable.add(apiService.getSimilarMovie(idMovie.toString())
             .subscribeOn(Schedulers.io())
@@ -130,6 +140,7 @@ class MovieRepository : MovieInter {
                 {
                     statusResponseMovie.onSuccess(it!!)
                     mySimilarMovie.postValue(it)
+                    EspressoIdlingResource.decrement()
                 },
                 {
                     statusResponseMovie.onFailed()
@@ -140,6 +151,7 @@ class MovieRepository : MovieInter {
     }
 
     override fun getRecommendationMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie): LiveData<List<DataMovie>> {
+        EspressoIdlingResource.increment()
         val mySimilarMovie: MutableLiveData<List<DataMovie>> = MutableLiveData()
         disposable.add(apiService.getRecommendtionMovie(idMovie.toString())
             .subscribeOn(Schedulers.io())
@@ -149,6 +161,7 @@ class MovieRepository : MovieInter {
                 {
                     statusResponseMovie.onSuccess(it!!)
                     mySimilarMovie.postValue(it)
+                    EspressoIdlingResource.decrement()
                 },
                 {
                     statusResponseMovie.onFailed()

@@ -31,21 +31,20 @@ class MovieFavoriteViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var movieFavoriteViewModel: MovieFavoriteViewModel
-    private lateinit var userDao: MovieDao
-    private lateinit var db: MovieDatabase
+    private val movieFavoriteFragment = MovieFavoriteFragment()
 
     @Before
     fun setUp() {
         movieFavoriteViewModel = MovieFavoriteViewModel()
-        val context = ApplicationProvider.getApplicationContext<Context>()
-//        db = Room.inMemoryDatabaseBuilder(context, MovieDatabase::class.java).build()
-//        userDao = db.movieDao()
     }
 
     @Test
     fun setMovieFavorite() {
         val sampleData = MutableLiveData<PagedList<MovieEntity>>()
         val pagedList = mock(PagedList::class.java) as PagedList<MovieEntity>
+//        sampleData.value = pagedList
+//
+//        `when`(movieFavoriteViewModel.setMovieFavorite(ApplicationProvider.getApplicationContext())).thenReturn(sampleData)
 
 //        val observer = mock(Observer::class.java) as Observer<MovieEntity>
 //        val observer = mock(Observer::class.java) as Observer<List<DataMovie>>

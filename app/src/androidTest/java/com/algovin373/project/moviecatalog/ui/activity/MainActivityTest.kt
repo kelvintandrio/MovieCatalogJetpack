@@ -31,7 +31,6 @@ Note : For detail data can testing in DetailMovieActivity and DetailTVShowActivi
 **/
 
 class MainActivityTest {
-    private val idlingResource = EspressoIdlingResource()
     private var apiService = MyRetrofit.iniRetrofitMovie()
     private var apiServiceTVShow = MyRetrofit.iniRetrofitTVShow()
 
@@ -40,21 +39,18 @@ class MainActivityTest {
 
     @Before
     fun setUp() {
-        IdlingRegistry.getInstance().register(idlingResource.getEspressoIdlingResource())
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource())
     }
 
     @After
     fun tearDown() {
-        IdlingRegistry.getInstance().unregister(idlingResource.getEspressoIdlingResource())
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource())
     }
 
     /* This is section to testing Data Movie */
     @Test
     fun toMovieActivityTest() {
         // Testing 1 :
-        onView(withId(R.id.progress_content_movie_now_playing)).check(matches(isDisplayed()))
-        onView(withId(R.id.progress_content_movie)).check(matches(isDisplayed()))
-        Thread.sleep(2500)
         onView(withId(R.id.rv_movie_now_playing)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
         onView(allOf(withText(R.string.movie_popular), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(click())
@@ -147,7 +143,6 @@ class MainActivityTest {
     @Test
     fun toTVShowActivityTest() {
         // Testing 1 :
-        Thread.sleep(2500)
         onView(withId(R.id.main_viewpager)).perform(ViewPagerActions.scrollToPage(1))
         onView(withId(R.id.viewpager_tvshow_banner)).check(matches(isDisplayed()))
         onView(withId(R.id.worm_dots_indicator_tvshow)).check(matches(isDisplayed()))

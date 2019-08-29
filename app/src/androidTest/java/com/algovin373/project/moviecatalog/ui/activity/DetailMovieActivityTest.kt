@@ -2,12 +2,16 @@ package com.algovin373.project.moviecatalog.ui.activity
 
 import android.content.Intent
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.algovin373.project.moviecatalog.R
+import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.utils.dataMovie
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -26,10 +30,18 @@ class DetailMovieActivityTest {
             }
     }
 
+    @Before
+    fun setUp() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource())
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource())
+    }
+
     @Test
     fun loadDetailMovie() {
-        Thread.sleep(2000)
-
         /** Title Movie **/
         onView(withId(R.id.title_catalog_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.title_catalog_movie)).check(matches(withText(dummyData.titleMovie)))
@@ -60,8 +72,6 @@ class DetailMovieActivityTest {
 
         /** All Data RecyclerView Cast, Similar, and Recommendation Movie **/
         onView(withId(R.id.rv_cast_movie)).check(matches(isDisplayed()))
-//        onView(withId(R.id.rv_similar_movie)).check(matches(isDisplayed()))
-//        onView(withId(R.id.rv_recommendation_movie)).check(matches(isDisplayed()))
 
     }
 }

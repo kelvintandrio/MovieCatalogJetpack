@@ -3,16 +3,18 @@ package com.algovin373.project.moviecatalog.idleresource
 import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.idling.CountingIdlingResource
 
-class EspressoIdlingResource {
-    private val resource = "GLOBAL"
-    private val espressoTestIdlingResource = CountingIdlingResource(resource)
+object EspressoIdlingResource {
+    private const val resource = "GLOBAL"
+    @JvmField val espressoTestIdlingResource = CountingIdlingResource(resource)
 
     fun increment() {
         espressoTestIdlingResource.increment()
     }
 
     fun decrement() {
-        espressoTestIdlingResource.decrement()
+        if (!espressoTestIdlingResource.isIdleNow) {
+            espressoTestIdlingResource.decrement()
+        }
     }
 
     fun getEspressoIdlingResource(): IdlingResource {
