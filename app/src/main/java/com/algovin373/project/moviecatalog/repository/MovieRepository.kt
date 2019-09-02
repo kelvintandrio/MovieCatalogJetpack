@@ -22,8 +22,13 @@ class MovieRepository : MovieInter {
     private val apiService = MyRetrofit.iniRetrofitMovie()
 
     override fun getMovieNowPlaying(compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie)
-            : LiveData<PagedList<DataMovie>> = LivePagedListBuilder(DataSourceFactoryMovie(
-                compositeDisposable, statusResponseMovie, apiService.getDataMovieNowPlaying(), 0), 5).build()
+            : LiveData<PagedList<DataMovie>> {
+
+        val data = LivePagedListBuilder(DataSourceFactoryMovie(
+            compositeDisposable, statusResponseMovie, apiService.getDataMovieNowPlaying(), 0), 5).build()
+
+        return data
+    }
 
     override fun getDataMovie(type: String, compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie)
             : LiveData<PagedList<DataMovie>> {

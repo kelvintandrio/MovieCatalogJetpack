@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.movie.MovieAdapter
+import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.repository.MovieRepository
 import com.algovin373.project.moviecatalog.ui.activity.DetailMovieActivity
@@ -51,14 +52,13 @@ class MovieFragment : Fragment() {
             adapterBannerMovie.submitList(it)
         })
         setRecyclerViewMovie(rv_movie_now_playing, 2, adapterBannerMovie)
-        progress_content_movie_now_playing.visibility = statusGone
 
-        setMovie(getString(R.string.now_playing).toLowerCase(Locale.getDefault()))
+        /*setMovie(getString(R.string.now_playing).toLowerCase(Locale.getDefault()))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_now_playing))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_popular))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_top_related))
         tab_layout_movie.addTab(tab_layout_movie.newTab().setText(R.string.movie_upcoming))
-        tabMovieCatalogOnClick(tab_layout_movie)
+        tabMovieCatalogOnClick(tab_layout_movie)*/
     }
 
     private fun tabMovieCatalogOnClick(tabLayout: TabLayout) {

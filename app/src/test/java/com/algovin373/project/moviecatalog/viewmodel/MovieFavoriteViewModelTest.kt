@@ -23,15 +23,12 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 
-import org.hamcrest.CoreMatchers.`is` as Is
-
 class MovieFavoriteViewModelTest {
 
     @Rule @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var movieFavoriteViewModel: MovieFavoriteViewModel
-    private val movieFavoriteFragment = MovieFavoriteFragment()
 
     @Before
     fun setUp() {
