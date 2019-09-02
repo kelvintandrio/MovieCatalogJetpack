@@ -62,10 +62,6 @@ class DetailMovieActivityTest {
         onView(withId(R.id.vote_average_release_catalog_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.vote_average_release_catalog_movie)).check(matches(withText(dummyData.voteAverageMovie)))
 
-        /** Vote Count Release Movie **/
-        onView(withId(R.id.vote_count_release_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.vote_count_release_catalog_movie)).check(matches(withText(dummyData.voteCountMovie)))
-
         /** Overview Movie **/
         onView(withId(R.id.overview_catalog_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.overview_catalog_movie)).check(matches(withText(dummyData.overviewMovie)))

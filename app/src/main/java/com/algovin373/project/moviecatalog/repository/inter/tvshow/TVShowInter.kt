@@ -1,6 +1,7 @@
 package com.algovin373.project.moviecatalog.repository.inter.tvshow
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import com.algovin373.project.moviecatalog.model.DataCast
 import com.algovin373.project.moviecatalog.model.DataTVShow
 import com.algovin373.project.moviecatalog.model.DetailTVShow
@@ -17,7 +18,7 @@ interface TVShowInter {
         type: String,
         disposable: CompositeDisposable,
         statusResponseTVShow: StatusResponseTVShow
-    ): LiveData<List<DataTVShow>>
+    ): LiveData<PagedList<DataTVShow>>
 
     fun getDetailTVShow(
         idTVShow: Int?,

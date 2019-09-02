@@ -1,4 +1,4 @@
-#Thu Aug 29 18:21:08 WIB 2019
+#Mon Sep 02 16:03:21 WIB 2019
 base.0=/Users/mbp/Kelvin/ProjectKU/Android/Jetpack Dicoding/MovieCatalog03/app/build/intermediates/dex/debugAndroidTest/mergeExtDexDebugAndroidTest/out/classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex

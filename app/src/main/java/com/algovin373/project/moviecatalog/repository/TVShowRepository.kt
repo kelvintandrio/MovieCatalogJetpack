@@ -2,6 +2,9 @@ package com.algovin373.project.moviecatalog.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.algovin373.project.moviecatalog.datasource.factory.DataSourceFactoryTVShow
 import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
 import com.algovin373.project.moviecatalog.model.DataCast
 import com.algovin373.project.moviecatalog.model.DataTVShow
@@ -22,7 +25,7 @@ class TVShowRepository : TVShowInter {
 
     override fun getTVShowAiringToday(disposable: CompositeDisposable, statusResponseTVShow: StatusResponseTVShow): LiveData<List<DataTVShow>> {
         EspressoIdlingResource.increment()
-        val myTVShowAiringToday = MutableLiveData<List<DataTVShow>>()
+        val dataBanner = MutableLiveData<List<DataTVShow>>()
         disposable.add(
             apiService.getDataTVShowAiringToday()
                 .subscribeOn(Schedulers.io())
@@ -31,40 +34,31 @@ class TVShowRepository : TVShowInter {
                 .subscribe(
                     {
                         statusResponseTVShow.onSuccess(it!!)
-                        myTVShowAiringToday.postValue(it)
+                        dataBanner.postValue(it)
                         EspressoIdlingResource.decrement()
                     },
                     {
                         statusResponseTVShow.onFailed()
                     }
-                ))
-        return myTVShowAiringToday
+                )
+        )
+        return dataBanner
     }
 
-    override fun getDataTVShow(type: String, disposable: CompositeDisposable, statusResponseTVShow: StatusResponseTVShow): LiveData<List<DataTVShow>> {
-        EspressoIdlingResource.increment()
-        val myDataTVShow : MutableLiveData<List<DataTVShow>> = MutableLiveData()
-        var observable : Observable<TVShow> = apiService.getDataTVShowAiringToday()
-        when(type) {
-            "airing today" -> observable = apiService.getDataTVShowAiringToday()
-            "popular" -> observable = apiService.getDataTVShowPopularToday()
-            "top related" -> observable = apiService.getDataTVShowTopRatedToday()
-            "on the air" -> observable = apiService.getDataTVShowOnTheAirToday()
+    override fun getDataTVShow(type: String, disposable: CompositeDisposable, statusResponseTVShow: StatusResponseTVShow)
+            : LiveData<PagedList<DataTVShow>> {
+        return when(type) {
+            "airing today" -> LivePagedListBuilder(DataSourceFactoryTVShow(
+                disposable, statusResponseTVShow, apiService.getDataTVShowAiringToday(), 1), 5).build()
+            "popular" -> LivePagedListBuilder(DataSourceFactoryTVShow(
+                disposable, statusResponseTVShow, apiService.getDataTVShowPopularToday(), 1), 5).build()
+            "top related" -> LivePagedListBuilder(DataSourceFactoryTVShow(
+                disposable, statusResponseTVShow, apiService.getDataTVShowTopRatedToday(), 1), 5).build()
+            "on the air" -> LivePagedListBuilder(DataSourceFactoryTVShow(
+                disposable, statusResponseTVShow, apiService.getDataTVShowOnTheAirToday(), 1), 5).build()
+            else -> LivePagedListBuilder(DataSourceFactoryTVShow(
+                disposable, statusResponseTVShow, apiService.getDataTVShowAiringToday(), 1), 5).build()
         }
-        disposable.add(observable.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { it.dataTVShow }
-            .subscribe(
-                {
-                    statusResponseTVShow.onSuccess(it!!)
-                    myDataTVShow.postValue(it)
-                    EspressoIdlingResource.decrement()
-                },
-                {
-                    statusResponseTVShow.onFailed()
-                }
-            ))
-        return myDataTVShow
     }
 
     override fun getDetailTVShow(idTVShow: Int?, disposable: CompositeDisposable, statusResponseDetailTVShow: StatusResponseDetailTVShow): LiveData<DetailTVShow> {

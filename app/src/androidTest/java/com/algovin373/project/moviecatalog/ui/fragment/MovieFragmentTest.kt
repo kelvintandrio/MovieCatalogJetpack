@@ -46,22 +46,22 @@ class MovieFragmentTest {
         onView(withId(R.id.rv_movie_now_playing)).check(RVItemCountAssertion(7)) // Point No. 2
 
         /** Data Movie Now Playing **/
-//        onView(withId(R.id.rv_movie)).check(matches(isDisplayed())) // Point No. 1
-//        onView(withId(R.id.rv_movie)).check(RVItemCountAssertion(20)) // Point No. 2
+        onView(withId(R.id.rv_movie)).check(matches(isDisplayed())) // Point No. 1
+        onView(withId(R.id.rv_movie)).check(RVItemCountAssertion(20)) // Point No. 2
 
         /** Data Movie Popular **/
-//        onView(Matchers.allOf(withText(R.string.movie_popular), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(ViewActions.click())
-//        onView(withId(R.id.rv_movie)).check(matches(isDisplayed())) // Point No. 1
-//        onView(withId(R.id.rv_movie)).check(RVItemCountAssertion(20)) // Point No. 2
+        onView(Matchers.allOf(withText(R.string.movie_popular), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(ViewActions.click())
+        onView(withId(R.id.rv_movie)).check(matches(isDisplayed())) // Point No. 1
+        onView(withId(R.id.rv_movie)).check(RVItemCountAssertion(20)) // Point No. 2
 
         /** Data Movie Top Related **/
-//        onView(Matchers.allOf(withText(R.string.movie_top_related), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(ViewActions.click())
-//        onView(withId(R.id.rv_movie)).check(matches(isDisplayed())) // Point No. 1
-//        onView(withId(R.id.rv_movie)).check(RVItemCountAssertion(20)) // Point No. 2
+        onView(Matchers.allOf(withText(R.string.movie_top_related), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(ViewActions.click())
+        onView(withId(R.id.rv_movie)).check(matches(isDisplayed())) // Point No. 1
+        onView(withId(R.id.rv_movie)).check(RVItemCountAssertion(20)) // Point No. 2
 
         /** Data Movie Up Coming **/
-//        onView(Matchers.allOf(withText(R.string.movie_upcoming), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(ViewActions.click())
-//        onView(withId(R.id.rv_movie)).check(matches(isDisplayed())) // Point No. 1
-//        onView(withId(R.id.rv_movie)).check(RVItemCountAssertion(20)) // Point No. 2
+        onView(Matchers.allOf(withText(R.string.movie_upcoming), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(ViewActions.click())
+        onView(withId(R.id.rv_movie)).check(matches(isDisplayed())) // Point No. 1
+        onView(withId(R.id.rv_movie)).check(RVItemCountAssertion(20)) // Point No. 2
     }
 }

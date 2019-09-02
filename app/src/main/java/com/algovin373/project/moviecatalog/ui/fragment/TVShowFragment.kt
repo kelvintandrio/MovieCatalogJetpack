@@ -21,6 +21,7 @@ import com.google.android.material.tabs.TabLayout
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_tvshow.*
 import org.jetbrains.anko.startActivity
+import java.util.*
 
 class TVShowFragment : Fragment() {
 
@@ -36,6 +37,8 @@ class TVShowFragment : Fragment() {
         }
     }
 
+    private val tvShowAdapter = TVShowAdapter(catalogClickListener)
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_tvshow, container, false)
     }
@@ -48,7 +51,7 @@ class TVShowFragment : Fragment() {
             worm_dots_indicator_tvshow.setViewPager(viewpager_tvshow_banner)
         })
 
-        setTVShow(getString(R.string.tvShow_airing_today).toLowerCase())
+        setTVShow(getString(R.string.tvShow_airing_today).toLowerCase(Locale.getDefault()))
         tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_airing_today))
         tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_on_the_air))
         tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_popular))
@@ -61,24 +64,20 @@ class TVShowFragment : Fragment() {
             override fun onTabReselected(p0: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                setTVShow(tab?.text.toString().toLowerCase())
+                setTVShow(tab?.text.toString().toLowerCase(Locale.getDefault()))
             }
         })
     }
 
     private fun setTVShow(type: String) {
+        progress_content_tvShow.visibility = statusGone
         tvShowViewModel.getDataTVShow(type).observe(this, Observer {
-            progress_content_tvShow.visibility = statusGone
-            rv_tvShow.apply {
-                layoutManager = LinearLayoutManager(requireContext())
-                setHasFixedSize(true)
-                adapter = TVShowAdapter(
-                    it,
-                    requireActivity(),
-                    catalogClickListener
-                )
-                adapter?.notifyDataSetChanged()
-            }
+            tvShowAdapter.submitList(it)
         })
+        rv_tvShow.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(false)
+            adapter = tvShowAdapter
+        }
     }
 }

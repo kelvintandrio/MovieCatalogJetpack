@@ -54,10 +54,6 @@ class DetailTVShowActivityTest {
         onView(withId(R.id.seasons_catalog_tv_show)).check(matches(isDisplayed()))
         onView(withId(R.id.seasons_catalog_tv_show)).check(matches(withText(dummyDataTVShow.seasonsTVShow)))
 
-        /** Total Episodes TV Show **/
-        onView(withId(R.id.episodes_release_catalog_tv_show)).check(matches(isDisplayed()))
-        onView(withId(R.id.episodes_release_catalog_tv_show)).check(matches(withText(dummyDataTVShow.episodesTVShow)))
-
         /** Overview TV Show **/
         onView(withId(R.id.overview_catalog_tv_show)).check(matches(isDisplayed()))
         onView(withId(R.id.overview_catalog_tv_show)).check(matches(withText(dummyDataTVShow.overviewTVShow)))

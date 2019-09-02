@@ -24,9 +24,9 @@ class MovieViewModel(private val movieRepository: MovieRepository,
 
     fun getDataMovie(type: String) : LiveData<PagedList<DataMovie>> {
         return movieRepository.getDataMovie(type, compositeDisposable, object : StatusResponseMovie {
-            override fun onSuccess(list: List<DataMovie>) { }
+            override fun onSuccess(list: List<DataMovie>) { Log.i("TESSUKSESDATA","Sukses") }
             override fun onFailed() {
-                Log.i("TES","Failed")
+                Log.i("TESGAGALDATA","Failed")
             }
         })
     }

@@ -35,6 +35,7 @@ class DataSourceMovie(private val compositeDisposable: CompositeDisposable,
                 .subscribe(
                     {
                         statusResponseMovie.onSuccess(it!!)
+                        Log.i("TESSUKSESDATA",it.toString())
                         callback.onResult(it)
                         EspressoIdlingResource.decrement()
                     },
