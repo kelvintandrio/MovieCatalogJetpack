@@ -11,8 +11,6 @@ import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.CastAdapter
 import com.algovin373.project.moviecatalog.adapter.movie.OtherAdapterMovie
 import com.algovin373.project.moviecatalog.db.movie.MovieEntity
-import com.algovin373.project.moviecatalog.model.DataCast
-import com.algovin373.project.moviecatalog.model.DataMovie
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.repository.MovieRepository
 import com.algovin373.project.moviecatalog.viewmodel.DetailMovieViewModel
@@ -38,6 +36,9 @@ class DetailMovieActivity : AppCompatActivity() {
             startActivity<DetailMovieActivity>("ID" to id)
         }
     }
+
+    private val castAdapter = CastAdapter()
+    private val otherAdapterMovie = OtherAdapterMovie(catalogClickListener)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,16 +73,19 @@ class DetailMovieActivity : AppCompatActivity() {
         })
 
         detailMovieViewModel.setCastMovie(id).observe(this, Observer {
-            setMovieRecyclerView(rv_cast_movie, 1, it, emptyList())
+            castAdapter.submitList(it)
         })
+        setMovieRecyclerView(rv_cast_movie, 1)
 
         detailMovieViewModel.setSimilarMovie(id).observe(this, Observer {
-            setMovieRecyclerView(rv_similar_movie, 2, emptyList(), it)
+            otherAdapterMovie.submitList(it)
         })
+        setMovieRecyclerView(rv_similar_movie, 2)
 
         detailMovieViewModel.setRecommendationMovie(id).observe(this, Observer {
-            setMovieRecyclerView(rv_recommendation_movie, 2, emptyList(), it)
+            otherAdapterMovie.submitList(it)
         })
+        setMovieRecyclerView(rv_recommendation_movie, 2)
 
         btn_back_to_menu.setOnClickListener {
             super.onBackPressed()
@@ -109,21 +113,18 @@ class DetailMovieActivity : AppCompatActivity() {
         }
     }
 
-    private fun setMovieRecyclerView(rv: RecyclerView, type: Int, listCast: List<DataCast>, listMovie: List<DataMovie>) {
+    private fun setMovieRecyclerView(rv: RecyclerView, type: Int) {
         rv.apply {
-            setHasFixedSize(true)
             when(type) {
                 1 -> {
                     layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter = CastAdapter(listCast, context)
+                    setHasFixedSize(true)
+                    adapter = castAdapter
                 }
                 2 -> {
                     layoutManager = LinearLayoutManager(context)
-                    adapter = OtherAdapterMovie(
-                        listMovie,
-                        context,
-                        catalogClickListener
-                    )
+                    setHasFixedSize(false)
+                    adapter = otherAdapterMovie
                 }
             }
             adapter?.notifyDataSetChanged()

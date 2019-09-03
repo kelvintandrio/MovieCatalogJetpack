@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagedList
 import com.algovin373.project.moviecatalog.db.tvshow.TVShowDatabase
 import com.algovin373.project.moviecatalog.db.tvshow.TVShowEntity
 import com.algovin373.project.moviecatalog.model.DataCast
@@ -20,9 +21,6 @@ import org.jetbrains.anko.toast
 class DetailTVShowViewModel(private val tvShowRepository: TVShowRepository,
                             private val compositeDisposable: CompositeDisposable) : ViewModel() {
     private val myDetailTVShow = MutableLiveData<DetailTVShow>()
-    private val myCastTVShow = MutableLiveData<List<DataCast>>()
-    private val mySimilarTVShow = MutableLiveData<List<DataTVShow>>()
-    private val myRecommendationTVShow = MutableLiveData<List<DataTVShow>>()
 
     fun setDetailTVShow(id: Int?) : LiveData<DetailTVShow> {
         tvShowRepository.getDetailTVShow(id, compositeDisposable, object : StatusResponseDetailTVShow {
@@ -34,35 +32,32 @@ class DetailTVShowViewModel(private val tvShowRepository: TVShowRepository,
         return myDetailTVShow
     }
 
-    fun setCastTVShow(id: Int?) : LiveData<List<DataCast>> {
-        tvShowRepository.getCastTVShow(id, compositeDisposable, object :
+    fun setCastTVShow(id: Int?) : LiveData<PagedList<DataCast>> {
+        return tvShowRepository.getCastTVShow(id, compositeDisposable, object :
             StatusResponseDataCast {
-            override fun onSuccess(data: List<DataCast>) = myCastTVShow.postValue(data)
+            override fun onSuccess(data: List<DataCast>) { }
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return myCastTVShow
     }
 
-    fun setSimilarTVShow(id: Int?) : LiveData<List<DataTVShow>> {
-        tvShowRepository.getSimilarTVShow(id, compositeDisposable, object : StatusResponseTVShow {
-            override fun onSuccess(list: List<DataTVShow>) = mySimilarTVShow.postValue(list)
+    fun setSimilarTVShow(id: Int?) : LiveData<PagedList<DataTVShow>> {
+        return tvShowRepository.getSimilarTVShow(id, compositeDisposable, object : StatusResponseTVShow {
+            override fun onSuccess(list: List<DataTVShow>) { }
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return mySimilarTVShow
     }
 
-    fun setRecommendationTVShow(id: Int?) : LiveData<List<DataTVShow>> {
-        tvShowRepository.getRecommendationTVShow(id, compositeDisposable, object :StatusResponseTVShow {
-            override fun onSuccess(list: List<DataTVShow>) = myRecommendationTVShow.postValue(list)
+    fun setRecommendationTVShow(id: Int?) : LiveData<PagedList<DataTVShow>> {
+        return tvShowRepository.getRecommendationTVShow(id, compositeDisposable, object :StatusResponseTVShow {
+            override fun onSuccess(list: List<DataTVShow>) { }
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return myRecommendationTVShow
     }
 
     fun setInsertTVShowFavorite(context: Context, tvShowEntity: TVShowEntity) {

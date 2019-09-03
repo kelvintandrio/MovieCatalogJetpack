@@ -8,6 +8,8 @@ import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
 import androidx.room.SharedSQLiteStatement;
 import androidx.room.paging.LimitOffsetDataSource;
+import androidx.room.util.CursorUtil;
+import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
 import java.lang.Integer;
 import java.lang.Override;
@@ -16,11 +18,11 @@ import java.lang.SuppressWarnings;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("unchecked")
-public class MovieDao_Impl implements MovieDao {
+@SuppressWarnings({"unchecked", "deprecation"})
+public final class MovieDao_Impl implements MovieDao {
   private final RoomDatabase __db;
 
-  private final EntityInsertionAdapter __insertionAdapterOfMovieEntity;
+  private final EntityInsertionAdapter<MovieEntity> __insertionAdapterOfMovieEntity;
 
   private final SharedSQLiteStatement __preparedStmtOfDeleteMovieFavorite;
 
@@ -29,7 +31,7 @@ public class MovieDao_Impl implements MovieDao {
     this.__insertionAdapterOfMovieEntity = new EntityInsertionAdapter<MovieEntity>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR ABORT INTO `MovieEntity`(`idMovie`,`posterMovie`,`titleMovie`,`releaseDateMovie`) VALUES (nullif(?, 0),?,?,?)";
+        return "INSERT OR ABORT INTO `MovieEntity` (`idMovie`,`posterMovie`,`titleMovie`,`releaseDateMovie`) VALUES (nullif(?, 0),?,?,?)";
       }
 
       @Override
@@ -62,7 +64,8 @@ public class MovieDao_Impl implements MovieDao {
   }
 
   @Override
-  public void insertMovieFavorite(MovieEntity movieFavorite) {
+  public void insertMovieFavorite(final MovieEntity movieFavorite) {
+    __db.assertNotSuspendingTransaction();
     __db.beginTransaction();
     try {
       __insertionAdapterOfMovieEntity.insert(movieFavorite);
@@ -73,12 +76,13 @@ public class MovieDao_Impl implements MovieDao {
   }
 
   @Override
-  public void deleteMovieFavorite(int id) {
+  public void deleteMovieFavorite(final int id) {
+    __db.assertNotSuspendingTransaction();
     final SupportSQLiteStatement _stmt = __preparedStmtOfDeleteMovieFavorite.acquire();
+    int _argIndex = 1;
+    _stmt.bindLong(_argIndex, id);
     __db.beginTransaction();
     try {
-      int _argIndex = 1;
-      _stmt.bindLong(_argIndex, id);
       _stmt.executeUpdateDelete();
       __db.setTransactionSuccessful();
     } finally {
@@ -97,10 +101,10 @@ public class MovieDao_Impl implements MovieDao {
         return new LimitOffsetDataSource<MovieEntity>(__db, _statement, false , "movieentity") {
           @Override
           protected List<MovieEntity> convertRows(Cursor cursor) {
-            final int _cursorIndexOfMovieId = cursor.getColumnIndexOrThrow("idMovie");
-            final int _cursorIndexOfMoviePoster = cursor.getColumnIndexOrThrow("posterMovie");
-            final int _cursorIndexOfMovieTitle = cursor.getColumnIndexOrThrow("titleMovie");
-            final int _cursorIndexOfMovieReleaseDate = cursor.getColumnIndexOrThrow("releaseDateMovie");
+            final int _cursorIndexOfMovieId = CursorUtil.getColumnIndexOrThrow(cursor, "idMovie");
+            final int _cursorIndexOfMoviePoster = CursorUtil.getColumnIndexOrThrow(cursor, "posterMovie");
+            final int _cursorIndexOfMovieTitle = CursorUtil.getColumnIndexOrThrow(cursor, "titleMovie");
+            final int _cursorIndexOfMovieReleaseDate = CursorUtil.getColumnIndexOrThrow(cursor, "releaseDateMovie");
             final List<MovieEntity> _res = new ArrayList<MovieEntity>(cursor.getCount());
             while(cursor.moveToNext()) {
               final MovieEntity _item;
@@ -123,17 +127,18 @@ public class MovieDao_Impl implements MovieDao {
   }
 
   @Override
-  public List<MovieEntity> checkDataMovieFavorite(int id) {
+  public List<MovieEntity> checkDataMovieFavorite(final int id) {
     final String _sql = "SELECT * FROM movieentity WHERE idMovie = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     _statement.bindLong(_argIndex, id);
-    final Cursor _cursor = __db.query(_statement);
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
     try {
-      final int _cursorIndexOfMovieId = _cursor.getColumnIndexOrThrow("idMovie");
-      final int _cursorIndexOfMoviePoster = _cursor.getColumnIndexOrThrow("posterMovie");
-      final int _cursorIndexOfMovieTitle = _cursor.getColumnIndexOrThrow("titleMovie");
-      final int _cursorIndexOfMovieReleaseDate = _cursor.getColumnIndexOrThrow("releaseDateMovie");
+      final int _cursorIndexOfMovieId = CursorUtil.getColumnIndexOrThrow(_cursor, "idMovie");
+      final int _cursorIndexOfMoviePoster = CursorUtil.getColumnIndexOrThrow(_cursor, "posterMovie");
+      final int _cursorIndexOfMovieTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "titleMovie");
+      final int _cursorIndexOfMovieReleaseDate = CursorUtil.getColumnIndexOrThrow(_cursor, "releaseDateMovie");
       final List<MovieEntity> _result = new ArrayList<MovieEntity>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final MovieEntity _item;

@@ -4,7 +4,7 @@
             "outputFile": "/Users/mbp/Kelvin/ProjectKU/Android/Jetpack Dicoding/MovieCatalog03/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-sk/values-sk.xml",
             "map": [
                 {
-                    "source": "/Users/mbp/.gradle/caches/transforms-2/files-2.1/0ce66f28f15d428e7cb22ee7b459b6ef/core-1.0.1/res/values-sk/values-sk.xml",
+                    "source": "/Users/mbp/.gradle/caches/transforms-2/files-2.1/adb0bbb93aa7d1487aaf6e3618b24732/core-1.1.0-rc01/res/values-sk/values-sk.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

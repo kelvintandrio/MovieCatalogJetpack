@@ -4,16 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.algovin373.project.moviecatalog.datasource.factory.DataSourceFactoryCast
 import com.algovin373.project.moviecatalog.datasource.factory.DataSourceFactoryMovie
 import com.algovin373.project.moviecatalog.idleresource.EspressoIdlingResource
-import com.algovin373.project.moviecatalog.model.*
+import com.algovin373.project.moviecatalog.model.DataCast
+import com.algovin373.project.moviecatalog.model.DataMovie
+import com.algovin373.project.moviecatalog.model.DetailMovie
+import com.algovin373.project.moviecatalog.model.Keyword
 import com.algovin373.project.moviecatalog.repository.inter.StatusResponseDataCast
 import com.algovin373.project.moviecatalog.repository.inter.movie.MovieInter
 import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseDetailMovie
 import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseKeywordMovie
 import com.algovin373.project.moviecatalog.repository.inter.movie.StatusResponseMovie
 import com.algovin373.project.moviecatalog.retrofit.MyRetrofit
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -81,66 +84,15 @@ class MovieRepository : MovieInter {
         return myKeywordMovie
     }
 
-    override fun getCastMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseDataCast: StatusResponseDataCast): LiveData<List<DataCast>> {
-        EspressoIdlingResource.increment()
-        val myCastMovie: MutableLiveData<List<DataCast>> = MutableLiveData()
-        disposable.add(apiService.getCastMovie(idMovie.toString())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { it.dataCast }
-            .subscribe(
-                {
-                    statusResponseDataCast.onSuccess(it!!)
-                    myCastMovie.postValue(it)
-                    EspressoIdlingResource.decrement()
-                },
-                {
-                    statusResponseDataCast.onFailed()
-                }
-            )
-        )
-        return myCastMovie
-    }
+    override fun getCastMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseDataCast: StatusResponseDataCast)
+            : LiveData<PagedList<DataCast>> = LivePagedListBuilder(DataSourceFactoryCast(
+                disposable, statusResponseDataCast, apiService.getCastMovie(idMovie.toString())), 5).build()
 
-    override fun getSimilarMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie): LiveData<List<DataMovie>> {
-        EspressoIdlingResource.increment()
-        val mySimilarMovie: MutableLiveData<List<DataMovie>> = MutableLiveData()
-        disposable.add(apiService.getSimilarMovie(idMovie.toString())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { it.dataMovie?.take(8) }
-            .subscribe(
-                {
-                    statusResponseMovie.onSuccess(it!!)
-                    mySimilarMovie.postValue(it)
-                    EspressoIdlingResource.decrement()
-                },
-                {
-                    statusResponseMovie.onFailed()
-                }
-            )
-        )
-        return mySimilarMovie
-    }
+    override fun getSimilarMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie)
+            : LiveData<PagedList<DataMovie>> = LivePagedListBuilder(DataSourceFactoryMovie(
+                disposable, statusResponseMovie, apiService.getSimilarMovie(idMovie.toString()), 1), 5).build()
 
-    override fun getRecommendationMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie): LiveData<List<DataMovie>> {
-        EspressoIdlingResource.increment()
-        val mySimilarMovie: MutableLiveData<List<DataMovie>> = MutableLiveData()
-        disposable.add(apiService.getRecommendtionMovie(idMovie.toString())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { it.dataMovie?.take(8) }
-            .subscribe(
-                {
-                    statusResponseMovie.onSuccess(it!!)
-                    mySimilarMovie.postValue(it)
-                    EspressoIdlingResource.decrement()
-                },
-                {
-                    statusResponseMovie.onFailed()
-                }
-            )
-        )
-        return mySimilarMovie
-    }
+    override fun getRecommendationMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie)
+            : LiveData<PagedList<DataMovie>> = LivePagedListBuilder(DataSourceFactoryMovie(
+                disposable, statusResponseMovie, apiService.getRecommendtionMovie(idMovie.toString()), 1), 5).build()
 }

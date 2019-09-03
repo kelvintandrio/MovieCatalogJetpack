@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagedList
 import com.algovin373.project.moviecatalog.db.movie.MovieDatabase
 import com.algovin373.project.moviecatalog.db.movie.MovieEntity
 import com.algovin373.project.moviecatalog.model.DataCast
@@ -23,9 +24,6 @@ class DetailMovieViewModel(private val movieRepository: MovieRepository,
                            private val compositeDisposable: CompositeDisposable) : ViewModel() {
     private val myDetailMovie = MutableLiveData<DetailMovie>()
     private val myKeywordMovie = MutableLiveData<ArrayList<Keyword>>()
-    private val myCastMovie = MutableLiveData<List<DataCast>>()
-    private val mySimilarMovie = MutableLiveData<List<DataMovie>>()
-    private val myRecommendationMovie = MutableLiveData<List<DataMovie>>()
 
     fun setDetailMovie(id: Int?) : LiveData<DetailMovie> {
         movieRepository.getDetailMovie(id, compositeDisposable, object : StatusResponseDetailMovie {
@@ -47,35 +45,32 @@ class DetailMovieViewModel(private val movieRepository: MovieRepository,
         return myKeywordMovie
     }
 
-    fun setCastMovie(id: Int?) : LiveData<List<DataCast>> {
-        movieRepository.getCastMovie(id, compositeDisposable, object :
+    fun setCastMovie(id: Int?) : LiveData<PagedList<DataCast>> {
+        return movieRepository.getCastMovie(id, compositeDisposable, object :
             StatusResponseDataCast {
-            override fun onSuccess(data: List<DataCast>) = myCastMovie.postValue(data)
+            override fun onSuccess(data: List<DataCast>) { }
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return myCastMovie
     }
 
-    fun setSimilarMovie(id: Int?) : LiveData<List<DataMovie>> {
-        movieRepository.getSimilarMovie(id, compositeDisposable, object : StatusResponseMovie {
-            override fun onSuccess(list: List<DataMovie>) = mySimilarMovie.postValue(list)
+    fun setSimilarMovie(id: Int?) : LiveData<PagedList<DataMovie>> {
+        return movieRepository.getSimilarMovie(id, compositeDisposable, object : StatusResponseMovie {
+            override fun onSuccess(list: List<DataMovie>) { }
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return mySimilarMovie
     }
 
-    fun setRecommendationMovie(id: Int?) : LiveData<List<DataMovie>> {
-        movieRepository.getRecommendationMovie(id, compositeDisposable, object :StatusResponseMovie {
-            override fun onSuccess(list: List<DataMovie>) = myRecommendationMovie.postValue(list)
+    fun setRecommendationMovie(id: Int?) : LiveData<PagedList<DataMovie>> {
+        return movieRepository.getRecommendationMovie(id, compositeDisposable, object :StatusResponseMovie {
+            override fun onSuccess(list: List<DataMovie>) { }
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return myRecommendationMovie
     }
 
     fun setInsertMovieFavorite(context: Context, movieFavorite: MovieEntity) {

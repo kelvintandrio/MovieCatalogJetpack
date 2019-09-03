@@ -37,17 +37,17 @@ interface MovieInter {
         idMovie: Int?,
         disposable: CompositeDisposable,
         statusResponseDataCast: StatusResponseDataCast
-    ): LiveData<List<DataCast>>
+    ): LiveData<PagedList<DataCast>>
 
     fun getSimilarMovie(
         idMovie: Int?,
         disposable: CompositeDisposable,
         statusResponseMovie: StatusResponseMovie
-    ): LiveData<List<DataMovie>>
+    ): LiveData<PagedList<DataMovie>>
 
     fun getRecommendationMovie(
         idMovie: Int?,
         disposable: CompositeDisposable,
         statusResponseMovie: StatusResponseMovie
-    ): LiveData<List<DataMovie>>
+    ): LiveData<PagedList<DataMovie>>
 }

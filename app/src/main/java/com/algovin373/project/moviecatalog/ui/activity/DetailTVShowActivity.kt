@@ -11,8 +11,6 @@ import com.algovin373.project.moviecatalog.R
 import com.algovin373.project.moviecatalog.adapter.CastAdapter
 import com.algovin373.project.moviecatalog.adapter.tvshow.OtherAdapterTVShow
 import com.algovin373.project.moviecatalog.db.tvshow.TVShowEntity
-import com.algovin373.project.moviecatalog.model.DataCast
-import com.algovin373.project.moviecatalog.model.DataTVShow
 import com.algovin373.project.moviecatalog.onclicklisterner.CatalogClickListener
 import com.algovin373.project.moviecatalog.repository.TVShowRepository
 import com.algovin373.project.moviecatalog.viewmodel.DetailTVShowViewModel
@@ -37,6 +35,9 @@ class DetailTVShowActivity : AppCompatActivity() {
             startActivity<DetailTVShowActivity>("ID" to id)
         }
     }
+
+    private val castAdapter = CastAdapter()
+    private val otherAdapterTVShow = OtherAdapterTVShow(catalogClickListener)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,16 +64,19 @@ class DetailTVShowActivity : AppCompatActivity() {
         })
 
         detailTVShowViewModel.setCastTVShow(id).observe(this, Observer {
-            setTVShowRecyclerView(rv_cast_tv_show, 1, it, emptyList())
+            castAdapter.submitList(it)
         })
+        setTVShowRecyclerView(rv_cast_tv_show, 1)
 
         detailTVShowViewModel.setSimilarTVShow(id).observe(this, Observer {
-            setTVShowRecyclerView(rv_similar_tv_show, 2, emptyList(), it)
+            otherAdapterTVShow.submitList(it)
         })
+        setTVShowRecyclerView(rv_similar_tv_show, 2)
 
         detailTVShowViewModel.setRecommendationTVShow(id).observe(this, Observer {
-            setTVShowRecyclerView(rv_recommendation_tv_show, 2, emptyList(), it)
+            otherAdapterTVShow.submitList(it)
         })
+        setTVShowRecyclerView(rv_recommendation_tv_show, 2)
 
         btn_back_to_menu.setOnClickListener {
             super.onBackPressed()
@@ -100,24 +104,20 @@ class DetailTVShowActivity : AppCompatActivity() {
         }
     }
 
-    private fun setTVShowRecyclerView(rv: RecyclerView, type: Int, listCast: List<DataCast>, listTVShow: List<DataTVShow>) {
+    private fun setTVShowRecyclerView(rv: RecyclerView, type: Int) {
         rv.apply {
-            setHasFixedSize(true)
             when(type) {
                 1 -> {
                     layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter = CastAdapter(listCast, context)
+                    setHasFixedSize(true)
+                    adapter = castAdapter
                 }
                 2 -> {
                     layoutManager = LinearLayoutManager(context)
-                    adapter = OtherAdapterTVShow(
-                        listTVShow,
-                        context,
-                        catalogClickListener
-                    )
+                    setHasFixedSize(false)
+                    adapter = otherAdapterTVShow
                 }
             }
-            adapter?.notifyDataSetChanged()
         }
     }
 }

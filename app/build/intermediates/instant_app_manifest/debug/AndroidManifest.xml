@@ -38,6 +38,10 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <service
+            android:name="androidx.room.MultiInstanceInvalidationService"
+            android:exported="false" />
+
         <provider
             android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
             android:authorities="com.algovin373.project.moviecatalog.debug.lifecycle-process"

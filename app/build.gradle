@@ -53,8 +53,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     // ViewModel
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
-    kapt "androidx.lifecycle:lifecycle-compiler:2.0.0-alpha1"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha03'
+    kapt "androidx.lifecycle:lifecycle-compiler:2.2.0-alpha03"
 
     // Library SDK and Commons
     implementation "org.jetbrains.anko:anko-commons:0.10.8"
@@ -82,8 +82,8 @@ dependencies {
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3'
 
     // Room
-    implementation "androidx.room:room-runtime:2.0.0-alpha1"
-    kapt "androidx.room:room-compiler:2.0.0-alpha1"
+    implementation "androidx.room:room-runtime:2.2.0-beta01"
+    kapt "androidx.room:room-compiler:2.2.0-beta01"
 
     // Idle Resource
     implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'

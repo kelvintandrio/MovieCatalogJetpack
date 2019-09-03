@@ -8,6 +8,8 @@ import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
 import androidx.room.SharedSQLiteStatement;
 import androidx.room.paging.LimitOffsetDataSource;
+import androidx.room.util.CursorUtil;
+import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
 import java.lang.Integer;
 import java.lang.Override;
@@ -16,11 +18,11 @@ import java.lang.SuppressWarnings;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("unchecked")
-public class TVShowDao_Impl implements TVShowDao {
+@SuppressWarnings({"unchecked", "deprecation"})
+public final class TVShowDao_Impl implements TVShowDao {
   private final RoomDatabase __db;
 
-  private final EntityInsertionAdapter __insertionAdapterOfTVShowEntity;
+  private final EntityInsertionAdapter<TVShowEntity> __insertionAdapterOfTVShowEntity;
 
   private final SharedSQLiteStatement __preparedStmtOfDeleteTVShowFavorite;
 
@@ -29,7 +31,7 @@ public class TVShowDao_Impl implements TVShowDao {
     this.__insertionAdapterOfTVShowEntity = new EntityInsertionAdapter<TVShowEntity>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR ABORT INTO `TVShowEntity`(`idTVShow`,`posterTVShow`,`titleTVShow`,`releaseDateTVShow`) VALUES (nullif(?, 0),?,?,?)";
+        return "INSERT OR ABORT INTO `TVShowEntity` (`idTVShow`,`posterTVShow`,`titleTVShow`,`releaseDateTVShow`) VALUES (nullif(?, 0),?,?,?)";
       }
 
       @Override
@@ -62,7 +64,8 @@ public class TVShowDao_Impl implements TVShowDao {
   }
 
   @Override
-  public void insertTVShowFavorite(TVShowEntity tvShowEntity) {
+  public void insertTVShowFavorite(final TVShowEntity tvShowEntity) {
+    __db.assertNotSuspendingTransaction();
     __db.beginTransaction();
     try {
       __insertionAdapterOfTVShowEntity.insert(tvShowEntity);
@@ -73,12 +76,13 @@ public class TVShowDao_Impl implements TVShowDao {
   }
 
   @Override
-  public void deleteTVShowFavorite(int id) {
+  public void deleteTVShowFavorite(final int id) {
+    __db.assertNotSuspendingTransaction();
     final SupportSQLiteStatement _stmt = __preparedStmtOfDeleteTVShowFavorite.acquire();
+    int _argIndex = 1;
+    _stmt.bindLong(_argIndex, id);
     __db.beginTransaction();
     try {
-      int _argIndex = 1;
-      _stmt.bindLong(_argIndex, id);
       _stmt.executeUpdateDelete();
       __db.setTransactionSuccessful();
     } finally {
@@ -97,10 +101,10 @@ public class TVShowDao_Impl implements TVShowDao {
         return new LimitOffsetDataSource<TVShowEntity>(__db, _statement, false , "tvshowentity") {
           @Override
           protected List<TVShowEntity> convertRows(Cursor cursor) {
-            final int _cursorIndexOfTvShowId = cursor.getColumnIndexOrThrow("idTVShow");
-            final int _cursorIndexOfTvShowPoster = cursor.getColumnIndexOrThrow("posterTVShow");
-            final int _cursorIndexOfTvShowTitle = cursor.getColumnIndexOrThrow("titleTVShow");
-            final int _cursorIndexOfTvShowReleaseDate = cursor.getColumnIndexOrThrow("releaseDateTVShow");
+            final int _cursorIndexOfTvShowId = CursorUtil.getColumnIndexOrThrow(cursor, "idTVShow");
+            final int _cursorIndexOfTvShowPoster = CursorUtil.getColumnIndexOrThrow(cursor, "posterTVShow");
+            final int _cursorIndexOfTvShowTitle = CursorUtil.getColumnIndexOrThrow(cursor, "titleTVShow");
+            final int _cursorIndexOfTvShowReleaseDate = CursorUtil.getColumnIndexOrThrow(cursor, "releaseDateTVShow");
             final List<TVShowEntity> _res = new ArrayList<TVShowEntity>(cursor.getCount());
             while(cursor.moveToNext()) {
               final TVShowEntity _item;
@@ -123,17 +127,18 @@ public class TVShowDao_Impl implements TVShowDao {
   }
 
   @Override
-  public List<TVShowEntity> checkDataTVShowFavorite(int id) {
+  public List<TVShowEntity> checkDataTVShowFavorite(final int id) {
     final String _sql = "SELECT * FROM tvshowentity WHERE idTVShow = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     _statement.bindLong(_argIndex, id);
-    final Cursor _cursor = __db.query(_statement);
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
     try {
-      final int _cursorIndexOfTvShowId = _cursor.getColumnIndexOrThrow("idTVShow");
-      final int _cursorIndexOfTvShowPoster = _cursor.getColumnIndexOrThrow("posterTVShow");
-      final int _cursorIndexOfTvShowTitle = _cursor.getColumnIndexOrThrow("titleTVShow");
-      final int _cursorIndexOfTvShowReleaseDate = _cursor.getColumnIndexOrThrow("releaseDateTVShow");
+      final int _cursorIndexOfTvShowId = CursorUtil.getColumnIndexOrThrow(_cursor, "idTVShow");
+      final int _cursorIndexOfTvShowPoster = CursorUtil.getColumnIndexOrThrow(_cursor, "posterTVShow");
+      final int _cursorIndexOfTvShowTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "titleTVShow");
+      final int _cursorIndexOfTvShowReleaseDate = CursorUtil.getColumnIndexOrThrow(_cursor, "releaseDateTVShow");
       final List<TVShowEntity> _result = new ArrayList<TVShowEntity>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final TVShowEntity _item;

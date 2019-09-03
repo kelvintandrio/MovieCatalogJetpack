@@ -30,17 +30,17 @@ interface TVShowInter {
         idMovie: Int?,
         disposable: CompositeDisposable,
         statusResponseTVShow: StatusResponseTVShow
-    ): LiveData<List<DataTVShow>>
+    ): LiveData<PagedList<DataTVShow>>
 
     fun getSimilarTVShow(
         idMovie: Int?,
         disposable: CompositeDisposable,
         statusResponseTVShow: StatusResponseTVShow
-    ): LiveData<List<DataTVShow>>
+    ): LiveData<PagedList<DataTVShow>>
 
     fun getCastTVShow(
         idMovie: Int?,
         disposable: CompositeDisposable,
         statusResponseDataCast: StatusResponseDataCast
-    ): LiveData<List<DataCast>>
+    ): LiveData<PagedList<DataCast>>
 }

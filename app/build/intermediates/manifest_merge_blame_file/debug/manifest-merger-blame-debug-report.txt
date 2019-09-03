@@ -19,7 +19,7 @@
 14        android:allowBackup="true"
 14-->/Users/mbp/Kelvin/ProjectKU/Android/Jetpack Dicoding/MovieCatalog03/app/src/main/AndroidManifest.xml:8:13-39
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-15-->[androidx.core:core:1.0.1] /Users/mbp/.gradle/caches/transforms-2/files-2.1/0ce66f28f15d428e7cb22ee7b459b6ef/core-1.0.1/AndroidManifest.xml:22:18-86
+15-->[androidx.core:core:1.1.0-rc01] /Users/mbp/.gradle/caches/transforms-2/files-2.1/adb0bbb93aa7d1487aaf6e3618b24732/core-1.1.0-rc01/AndroidManifest.xml:24:18-86
 16        android:debuggable="true"
 17        android:icon="@mipmap/ic_launcher"
 17-->/Users/mbp/Kelvin/ProjectKU/Android/Jetpack Dicoding/MovieCatalog03/app/src/main/AndroidManifest.xml:9:13-47
@@ -65,16 +65,23 @@
 38            android:resource="@array/preloaded_fonts" />
 38-->/Users/mbp/Kelvin/ProjectKU/Android/Jetpack Dicoding/MovieCatalog03/app/src/main/AndroidManifest.xml:30:17-58
 39
-40        <provider
-40-->[androidx.lifecycle:lifecycle-process:2.0.0-alpha1] /Users/mbp/.gradle/caches/transforms-2/files-2.1/86a7f79863ef84a26abe500df79c8e01/lifecycle-process-2.0.0-alpha1/AndroidManifest.xml:23:9-27:43
-41            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-41-->[androidx.lifecycle:lifecycle-process:2.0.0-alpha1] /Users/mbp/.gradle/caches/transforms-2/files-2.1/86a7f79863ef84a26abe500df79c8e01/lifecycle-process-2.0.0-alpha1/AndroidManifest.xml:24:13-79
-42            android:authorities="com.algovin373.project.moviecatalog.debug.lifecycle-process"
-42-->[androidx.lifecycle:lifecycle-process:2.0.0-alpha1] /Users/mbp/.gradle/caches/transforms-2/files-2.1/86a7f79863ef84a26abe500df79c8e01/lifecycle-process-2.0.0-alpha1/AndroidManifest.xml:25:13-69
-43            android:exported="false"
-43-->[androidx.lifecycle:lifecycle-process:2.0.0-alpha1] /Users/mbp/.gradle/caches/transforms-2/files-2.1/86a7f79863ef84a26abe500df79c8e01/lifecycle-process-2.0.0-alpha1/AndroidManifest.xml:26:13-37
-44            android:multiprocess="true" />
-44-->[androidx.lifecycle:lifecycle-process:2.0.0-alpha1] /Users/mbp/.gradle/caches/transforms-2/files-2.1/86a7f79863ef84a26abe500df79c8e01/lifecycle-process-2.0.0-alpha1/AndroidManifest.xml:27:13-40
-45    </application>
-46
-47</manifest>
+40        <service
+40-->[androidx.room:room-runtime:2.2.0-beta01] /Users/mbp/.gradle/caches/transforms-2/files-2.1/d3403a3c17de375bb314194ee0554be2/room-runtime-2.2.0-beta01/AndroidManifest.xml:25:9-27:40
+41            android:name="androidx.room.MultiInstanceInvalidationService"
+41-->[androidx.room:room-runtime:2.2.0-beta01] /Users/mbp/.gradle/caches/transforms-2/files-2.1/d3403a3c17de375bb314194ee0554be2/room-runtime-2.2.0-beta01/AndroidManifest.xml:26:13-74
+42            android:exported="false" />
+42-->[androidx.room:room-runtime:2.2.0-beta01] /Users/mbp/.gradle/caches/transforms-2/files-2.1/d3403a3c17de375bb314194ee0554be2/room-runtime-2.2.0-beta01/AndroidManifest.xml:27:13-37
+43
+44        <provider
+44-->[androidx.lifecycle:lifecycle-process:2.2.0-alpha03] /Users/mbp/.gradle/caches/transforms-2/files-2.1/a6ec3687218a68eec421523a38cade77/lifecycle-process-2.2.0-alpha03/AndroidManifest.xml:25:9-29:43
+45            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+45-->[androidx.lifecycle:lifecycle-process:2.2.0-alpha03] /Users/mbp/.gradle/caches/transforms-2/files-2.1/a6ec3687218a68eec421523a38cade77/lifecycle-process-2.2.0-alpha03/AndroidManifest.xml:26:13-79
+46            android:authorities="com.algovin373.project.moviecatalog.debug.lifecycle-process"
+46-->[androidx.lifecycle:lifecycle-process:2.2.0-alpha03] /Users/mbp/.gradle/caches/transforms-2/files-2.1/a6ec3687218a68eec421523a38cade77/lifecycle-process-2.2.0-alpha03/AndroidManifest.xml:27:13-69
+47            android:exported="false"
+47-->[androidx.lifecycle:lifecycle-process:2.2.0-alpha03] /Users/mbp/.gradle/caches/transforms-2/files-2.1/a6ec3687218a68eec421523a38cade77/lifecycle-process-2.2.0-alpha03/AndroidManifest.xml:28:13-37
+48            android:multiprocess="true" />
+48-->[androidx.lifecycle:lifecycle-process:2.2.0-alpha03] /Users/mbp/.gradle/caches/transforms-2/files-2.1/a6ec3687218a68eec421523a38cade77/lifecycle-process-2.2.0-alpha03/AndroidManifest.xml:29:13-40
+49    </application>
+50
+51</manifest>
